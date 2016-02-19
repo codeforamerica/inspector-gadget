@@ -12,7 +12,8 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @assignment = Assignment.new(inspection_id: params["inspection_id"])
+    @inspection = Inspection.find(params["inspection_id"])
+    @assignment = Assignment.new(inspection_id: @inspection.id)
   end
 
   # GET /assignments/1/edit

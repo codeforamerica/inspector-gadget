@@ -4,7 +4,8 @@
   %thead
     %tr
       %th Inspector
-      %th Inspection
+      %th Inspection type
+      %th Business name
       %th Scheduled for
       %th
       %th
@@ -13,8 +14,9 @@
   %tbody
     - @assignments.each do |assignment|
       %tr
-        %td= assignment.inspector_id
-        %td= assignment.inspection_id
+        %td= assignment.inspector.name
+        %td= assignment.inspection.inspection_type
+        %td= assignment.inspection.business_name
         %td= assignment.scheduled_for
         %td= link_to 'Show', assignment
         %td= link_to 'Edit', edit_assignment_path(assignment)

@@ -6,24 +6,27 @@
         - @inspection.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :business_name
-    = f.text_field :business_name
-  .field
-    = f.label :contact_name
-    = f.text_field :contact_name
-  .field
-    = f.label :contact_phone
-    = f.text_field :contact_phone
-  .field
-    = f.label :contact_email
-    = f.text_field :contact_email
-  .field
-    = f.label :inspection_type
-    = f.text_field :inspection_type
-  .field
-    = f.label :requested_for
-    = f.datetime_select :requested_for
+  .row
+    .field.columns.medium-6
+      = f.label :business_name
+      = f.text_field :business_name
+    .field.columns.medium-6
+      = f.label :contact_name
+      = f.text_field :contact_name
+  .row
+    .field.columns.medium-6
+      = f.label :contact_phone
+      = f.text_field :contact_phone
+    .field.columns.medium-6
+      = f.label :contact_email
+      = f.text_field :contact_email
+  .row
+    .field.columns.medium-6
+      = f.label :inspection_type
+      = f.text_field :inspection_type
+    .field.columns.medium-6
+      = f.label :requested_for
+      = f.date_select(:requested_for, {start_year: Time.now.year}, {class: 'select-date'} )
   %h5 Address
   .field
     = f.fields_for :address do |addr|
