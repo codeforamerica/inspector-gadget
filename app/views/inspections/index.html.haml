@@ -1,0 +1,33 @@
+%h1 Listing inspections
+
+%table
+  %thead
+    %tr
+      %th Business name
+      %th Contact name
+      %th Contact phone
+      %th Contact email
+      %th Inspection type
+      %th Scheduled for
+      %th Address
+      %th
+      %th
+      %th
+
+  %tbody
+    - @inspections.each do |inspection|
+      %tr
+        %td= inspection.business_name
+        %td= inspection.contact_name
+        %td= inspection.contact_phone
+        %td= inspection.contact_email
+        %td= inspection.inspection_type
+        %td= inspection.scheduled_for
+        %td= inspection.address_id
+        %td= link_to 'Show', inspection
+        %td= link_to 'Edit', edit_inspection_path(inspection)
+        %td= link_to 'Destroy', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Inspection', new_inspection_path

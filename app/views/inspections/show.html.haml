@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Business name:
+  = @inspection.business_name
+%p
+  %b Contact name:
+  = @inspection.contact_name
+%p
+  %b Contact phone:
+  = @inspection.contact_phone
+%p
+  %b Contact email:
+  = @inspection.contact_email
+%p
+  %b Inspection type:
+  = @inspection.inspection_type
+%p
+  %b Scheduled for:
+  = @inspection.scheduled_for
+%p
+  %b Address:
+  = @inspection.address
+
+= link_to 'Edit', edit_inspection_path(@inspection)
+\|
+= link_to 'Back', inspections_path
