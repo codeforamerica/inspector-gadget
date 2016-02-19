@@ -10,6 +10,7 @@
       %th Inspection type
       %th Scheduled for
       %th Address
+      %th Assigned to
       %th
       %th
       %th
@@ -22,11 +23,12 @@
         %td= inspection.contact_phone
         %td= inspection.contact_email
         %td= inspection.inspection_type
-        %td= inspection.scheduled_for
+        %td= inspection.requested_for
         %td= inspection.address
+        %td= inspection.assignments.first.inspector.name
         %td= link_to 'Show', inspection
         %td= link_to 'Edit', edit_inspection_path(inspection)
-        %td= link_to 'Destroy', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Assign', new_assignment_path(inspection_id: inspection.id)
 
 %br
 

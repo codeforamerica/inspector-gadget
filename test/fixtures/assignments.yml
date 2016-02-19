@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inspector_id: 1
+  inspection_id: 1
+  scheduled_for: 2016-02-19 08:32:36
+
+two:
+  inspector_id: 1
+  inspection_id: 1
+  scheduled_for: 2016-02-19 08:32:36

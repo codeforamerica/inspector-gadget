@@ -14,4 +14,3 @@ User.create(name: "Steven Valdez", email: "steven@longbeach.gov", role: "inspect
 User.create(name: "Mark Rossetti", email: "markrossetti@codeforamerica.org", role: "requester")
 User.create(name: "Patrick McDonnell", email: "patrick@codeforamerica.org", role: "requester")
 User.create(name: "Lisa Ratner", email: "lisa@codeforamerica.org", role: "requester")
-
