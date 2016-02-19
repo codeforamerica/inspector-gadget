@@ -22,8 +22,8 @@
     = f.label :inspection_type
     = f.text_field :inspection_type
   .field
-    = f.label :scheduled_for
-    = f.datetime_select :scheduled_for
+    = f.label :requested_for
+    = f.datetime_select :requested_for
   %h5 Address
   .field
     = f.fields_for :address do |addr|
