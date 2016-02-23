@@ -1,42 +1,51 @@
-= form_for @inspection do |f|
-  - if @inspection.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@inspection.errors.count, "error")} prohibited this inspection from being saved:"
-      %ul
-        - @inspection.errors.full_messages.each do |msg|
-          %li= msg
+.row
+  = form_for @inspection do |f|
+    - if @inspection.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@inspection.errors.count, "error")} prohibited this inspection from being saved:"
+        %ul
+          - @inspection.errors.full_messages.each do |msg|
+            %li= msg
 
-  .row
-    .field.columns.medium-6
-      = f.label :business_name
-      = f.text_field :business_name
-    .field.columns.medium-6
-      = f.label :contact_name
-      = f.text_field :contact_name
-  .row
-    .field.columns.medium-6
-      = f.label :contact_phone
-      = f.text_field :contact_phone
-    .field.columns.medium-6
-      = f.label :contact_email
-      = f.text_field :contact_email
-  .row
-    .field.columns.medium-6
-      = f.label :inspection_type
-      = f.text_field :inspection_type
-    .field.columns.medium-6
-      = f.label :requested_for
-      = f.date_select(:requested_for, {start_year: Time.now.year}, {class: 'select-date'} )
-  %h5 Address
-  .field
-    = f.fields_for :address do |addr|
-      = addr.label :line_1
-      = addr.text_field :line_1
-      = addr.label :line_2
-      = addr.text_field :line_2
-      = addr.label :city
-      = addr.text_field :city
-      = addr.label :zip
-      = addr.text_field :zip
-  .actions
-    = f.submit 'Save'
+    .row
+      Let's fill in some contact info:
+    .row
+      .field.columns.small-12
+        = f.label :business_name
+        = f.text_field :business_name, required: true
+    .row
+      .field.columns.small-12
+        = f.label :contact_name
+        = f.text_field :contact_name, required: true
+    .row
+      .field.columns.small-12
+        = f.label :contact_phone
+        = f.text_field :contact_phone, required: true
+    .row
+      .field.columns.small-12
+        = f.label :contact_email
+        = f.text_field :contact_email, required: true
+    .row
+      What is the inspection type?
+      .field.columns.small-12
+        = f.select(:inspection_type, options_for_select({'Fire' => 'fire', 'Health' => 'health'}), { include_blank: true })
+    .row
+      .field.columns.small-12
+        = f.label :requested_for
+        = f.date_select(:requested_for, {start_year: Time.now.year}, {class: 'select-date'} )
+    .row
+      Where will the inspection take place?
+    .field
+      = f.fields_for :address do |addr|
+        = addr.label :line_1
+        = addr.text_field :line_1, required: true
+        = addr.label :line_2
+        = addr.text_field :line_2, required: true
+        = addr.label :city
+        = addr.text_field :city, required: true
+        = addr.label :state
+        %input{ type:'text', value:'CA', disabled: true }
+        = addr.label :zip
+        = addr.text_field :zip, required: true
+    .actions
+      %button.button{ type: 'submit' } Submit
