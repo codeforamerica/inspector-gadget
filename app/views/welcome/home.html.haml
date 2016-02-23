@@ -1,6 +1,12 @@
-.columns.small-12
-  %a{ href: new_inspection_path } Request an inspection
-.columns.small-12
-  OR
-.columns.small-12
-  %a{ href: inspections_path } View and assign inspections
+.home
+  .columns.small-4.small-offset-4
+    .row.text-center.bottom-10
+      Hello, would you like to...
+    .row
+      %a.expanded.button.button-schedule{ href: new_inspection_path } Schedule
+    .row.text-center.bottom-10
+      or
+    .row
+      %a.expanded.button.button-view{ href: inspections_path } View
+    .row.text-center
+      an inspection
