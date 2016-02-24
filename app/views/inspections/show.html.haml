@@ -1,27 +1,34 @@
-%p#notice= notice
+.columns.small-12.medium-6.medium-offset-3
+  %p Thank you! Your inspection request has been made for:
+  %p#notice= notice
 
-%p
-  %b Business name:
-  = @inspection.business_name
-%p
-  %b Contact name:
-  = @inspection.contact_name
-%p
-  %b Contact phone:
-  = @inspection.contact_phone
-%p
-  %b Contact email:
-  = @inspection.contact_email
-%p
-  %b Inspection type:
-  = @inspection.inspection_type
-%p
-  %b Scheduled for:
-  = @inspection.requested_for
-%p
-  %b Address:
-  = @inspection.address
+  .callout
+    %p
+      %b Business name:
+      = @inspection.business_name
+    %p
+      %b Contact name:
+      = @inspection.contact_name
+    %p
+      %b Contact phone:
+      = @inspection.contact_phone
+    %p
+      %b Contact email:
+      = @inspection.contact_email
+    %p
+      %b Inspection type:
+      = @inspection.inspection_type.titlecase
+    %p
+      %b Requested for:
+      = @inspection.requested_for
+    %p
+      %b Address:
+      = @inspection.address
 
-= link_to 'Edit', edit_inspection_path(@inspection)
-\|
-= link_to 'Back', inspections_path
+  .callout.primary
+    %strong Your inspection request number is #{@inspection.id}
+    %p You will be notified by email when your inspection is scheduled.
+  .row
+    = link_to 'Request Another Inspection', new_inspection_path
+  .row
+    = link_to 'View Inspection Requests', inspections_path
