@@ -14,3 +14,19 @@ User.create(name: "Steven Valdez", email: "steven@longbeach.gov", role: "inspect
 User.create(name: "Mark Rossetti", email: "markrossetti@codeforamerica.org", role: "requester")
 User.create(name: "Patrick McDonnell", email: "patrick@codeforamerica.org", role: "requester")
 User.create(name: "Lisa Ratner", email: "lisa@codeforamerica.org", role: "requester")
+
+
+
+Inspection.create(
+  business_name: "Mark's Tacos", 
+  inspection_type: "fire",
+  requested_for: Date.tomorrow,
+  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", zip: '12345')
+)
+
+Inspection.create(
+  business_name: "Mark's Tacos", 
+  inspection_type: "health",
+  requested_for: Date.tomorrow,
+  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", zip: '12345')
+)

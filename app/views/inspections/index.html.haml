@@ -1,35 +1,38 @@
 %h1 Listing inspections
 
-%table
-  %thead
-    %tr
-      %th Business name
-      %th Contact name
-      %th Contact phone
-      %th Contact email
-      %th Inspection type
-      %th Scheduled for
-      %th Address
-      %th Assigned to
-      %th
-      %th
-      %th
-
-  %tbody
-    - @inspections.each do |inspection|
+- Inspection.pluck(:inspection_type).uniq.each do |type|
+  - inspections = Inspection.where(inspection_type: type)
+  %h2=type.titleize
+  %table
+    %thead
       %tr
-        %td= inspection.business_name
-        %td= inspection.contact_name
-        %td= inspection.contact_phone
-        %td= inspection.contact_email
-        %td= inspection.inspection_type
-        %td= inspection.requested_for
-        %td= inspection.address
-        %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
-        %td= link_to 'Show', inspection
-        %td= link_to 'Edit', edit_inspection_path(inspection)
-        %td= link_to 'Assign', new_assignment_path(inspection_id: inspection.id)
+        %th Business name
+        %th Contact name
+        %th Contact phone
+        %th Contact email
+        %th Inspection type
+        %th Requested for
+        %th Address
+        %th Assigned to
+        %th
+        %th
+        %th
 
-%br
+    %tbody
+      - inspections.each do |inspection|
+        %tr
+          %td= inspection.business_name
+          %td= inspection.contact_name
+          %td= inspection.contact_phone
+          %td= inspection.contact_email
+          %td= inspection.inspection_type.titleize
+          %td= inspection.requested_for
+          %td= inspection.address
+          %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
+          %td= link_to 'Show', inspection
+          %td= link_to 'Edit', edit_inspection_path(inspection)
+          %td= link_to 'Assign', new_assignment_path(inspection_id: inspection.id)
+
+  %br
 
 = link_to 'New Inspection', new_inspection_path
