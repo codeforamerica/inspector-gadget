@@ -1,0 +1,27 @@
+.print
+  - @inspections.each do |inspection|
+    .row
+      %strong Address:
+      = inspection.address
+    .row
+      %strong Date:
+      = inspection.created_at.to_date
+    .row
+      %strong Permit/App #:
+      = inspection.permit_number
+    .row
+      %strong Contact Name:
+      = inspection.contact_name
+    .row
+      %strong Contact #:
+      = inspection.contact_phone
+    .row
+      %strong Inspection Type:
+      = inspection.inspection_type
+    .row
+      %strong Requested For Date:
+      = inspection.requested_for_date.to_date
+      %i= inspection.requested_for_time
+    .row
+      %strong Notes:
+      = inspection.notes

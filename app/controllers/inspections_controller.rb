@@ -6,6 +6,10 @@ class InspectionsController < ApplicationController
     @inspections = Inspection.all
   end
 
+  def print
+    @inspections = Inspection.all
+  end
+
   # GET /inspections/1
   def show
   end

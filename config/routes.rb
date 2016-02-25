@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :inspections do
   end
 
+  get 'inspections_print' => 'inspections#print'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
