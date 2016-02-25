@@ -27,8 +27,8 @@
   .row
     .bottom-10 What is the inspection type?
     .field.columns.small-12
-      - types = InspectionType.select(:inspection_category, :inspection_name).map{|type| [[type.inspection_category.titleize, type.inspection_name.titleize].join(' - '), type.id] }
-      = f.select(:inspection_type, options_for_select(types), { include_blank: true })
+      - types = InspectionType.select(:id, :inspection_category, :inspection_name).map{|type| [type.to_s, type.id] }
+      = f.select(:inspection_type_id, options_for_select(types), { include_blank: true })
   .row
     .bottom-10 When would you like to schedule your inspection?
     .field.columns.small-12

@@ -6,7 +6,7 @@
   %table
     %thead
       %tr
-        %th Business name
+        %th Permit number
         %th Contact name
         %th Contact phone
         %th Contact email
@@ -21,7 +21,7 @@
     %tbody
       - inspections.each do |inspection|
         %tr
-          %td= inspection.business_name
+          %td= inspection.permit_number
           %td= inspection.contact_name
           %td= inspection.contact_phone
           %td= inspection.contact_email

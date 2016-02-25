@@ -5,7 +5,7 @@
     %tr
       %th Inspector
       %th Inspection type
-      %th Business name
+      %th Permit number
       %th Scheduled for
       %th
       %th
@@ -16,7 +16,7 @@
       %tr
         %td= assignment.inspector.name
         %td= assignment.inspection.inspection_type
-        %td= assignment.inspection.business_name
+        %td= assignment.inspection.permit_number
         %td= assignment.scheduled_for
         %td= link_to 'Show', assignment
         %td= link_to 'Edit', edit_assignment_path(assignment)

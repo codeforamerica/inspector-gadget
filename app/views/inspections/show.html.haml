@@ -4,8 +4,8 @@
 
   .callout
     %p
-      %b Business name:
-      = @inspection.business_name
+      %b Permit number:
+      = @inspection.permit_number
     %p
       %b Contact name:
       = @inspection.contact_name
@@ -17,10 +17,10 @@
       = @inspection.contact_email
     %p
       %b Inspection type:
-      = @inspection.inspection_type.titlecase
+      = @inspection.inspection_type.to_s
     %p
       %b Requested for:
-      = @inspection.requested_for
+      = @inspection.requested_for_date
     %p
       %b Address:
       = @inspection.address
