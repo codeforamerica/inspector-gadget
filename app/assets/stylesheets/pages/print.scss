@@ -1,0 +1,10 @@
+@media print {
+  .print .inspection {
+    height: 500px;
+    width: 700px;
+
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+}

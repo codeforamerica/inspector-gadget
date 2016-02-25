@@ -1,4 +1,6 @@
-%h1 Listing inspections
+%h1 Inspections
+%div
+  %a{ href: inspections_print_path } Print Inspections
 
 - Inspection.pluck(:inspection_type_id).uniq.each do |type_id|
   - inspections = Inspection.where(inspection_type_id: type_id)
