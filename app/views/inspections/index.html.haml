@@ -1,8 +1,9 @@
 %h1 Listing inspections
 
-- Inspection.pluck(:inspection_type).uniq.each do |type|
-  - inspections = Inspection.where(inspection_type: type)
-  %h2=type.titleize
+- Inspection.pluck(:inspection_type_id).uniq.each do |type_id|
+  - inspections = Inspection.where(inspection_type_id: type_id)
+  - inspection_type = InspectionType.find(type_id)
+  %h2=inspection_type.to_s
   %table
     %thead
       %tr
@@ -25,8 +26,8 @@
           %td= inspection.contact_name
           %td= inspection.contact_phone
           %td= inspection.contact_email
-          %td= inspection.inspection_type.titleize
-          %td= inspection.requested_for
+          %td= inspection.inspection_type.to_s
+          %td= inspection.requested_for_date
           %td= inspection.address
           %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
           %td= link_to 'Show', inspection
