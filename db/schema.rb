@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219163236) do
+ActiveRecord::Schema.define(version: 20160225021401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "addresses", force: :cascade do |t|
     t.string   "line_1"
@@ -34,15 +35,23 @@ ActiveRecord::Schema.define(version: 20160219163236) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "inspection_types", force: :cascade do |t|
+    t.string "inspection_category"
+    t.string "inspection_name"
+  end
+
   create_table "inspections", force: :cascade do |t|
-    t.string   "business_name"
     t.string   "contact_name"
     t.string   "contact_phone"
     t.string   "contact_email"
     t.string   "inspection_type"
-    t.datetime "requested_for"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "requested_for_date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "permit_number"
+    t.string   "property_type"
+    t.string   "requested_for_time"
+    t.text     "notes"
   end
 
   create_table "users", force: :cascade do |t|
