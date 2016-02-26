@@ -47,17 +47,22 @@ end
 
 Inspection.create(
   permit_number: '123456',
+  contact_name: 'Harry',
+  contact_phone: '408-555-1234',
   inspection_type_id: InspectionType.find_by(inspection_category: 'building', inspection_name: 'footing').id,
   requested_for_date: Date.tomorrow,
-  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345')
+  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+  notes: 'Site is next to rear parking lot behind main building.'
 )
 
 Inspection.create(
   permit_number: '123456',
+  contact_name: 'Sally',
+  contact_phone: '408-555-1234',
   inspection_type_id: InspectionType.find_by(inspection_category: 'mechanical', inspection_name: 'final').id,
   requested_for_date: Date.tomorrow,
   requested_for_time: 'am',
-  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345')
+  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
 )
 
 # Inspectors
