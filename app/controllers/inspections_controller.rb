@@ -8,6 +8,7 @@ class InspectionsController < ApplicationController
 
   def print
     @inspections = Inspection.all
+    render layout: 'print'
   end
 
   # GET /inspections/1

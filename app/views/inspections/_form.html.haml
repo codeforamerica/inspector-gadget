@@ -32,7 +32,7 @@
   .row
     .bottom-10 When would you like to schedule your inspection?
     .field.columns.small-12
-      = f.date_select(:requested_for_date, {start_year: Time.now.year, default: Date.tomorrow}, {class: 'select-date'} )
+      = f.date_select(:requested_for_date, {start_year: Time.now.year, end_year: Time.now.year+1, default: Date.tomorrow}, {class: 'select-date'} )
   .row
     .bottom-10 Where will the inspection take place?
   .field

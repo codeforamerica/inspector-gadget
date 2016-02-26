@@ -1,3 +1,11 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "Untitled"
+    = stylesheet_link_tag    "application", media: "screen, print"
 .print
   - @inspections.each_slice(2) do |inspections|
     - inspections.each do |inspection|
