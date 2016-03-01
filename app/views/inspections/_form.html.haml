@@ -21,10 +21,6 @@
       = f.label :contact_phone
       = f.text_field :contact_phone, required: true
   .row
-    .field.columns.small-12
-      = f.label :contact_email
-      = f.text_field :contact_email
-  .row
     .bottom-10 What is the inspection type?
     .field.columns.small-12
       - types = InspectionType.select(:id, :inspection_category, :inspection_name).map{|type| [type.to_s, type.id] }
@@ -32,7 +28,7 @@
   .row
     .bottom-10 When would you like to schedule your inspection?
     .field.columns.small-12
-      = f.date_select(:requested_for_date, {start_year: Time.now.year, end_year: Time.now.year+1, default: Date.tomorrow}, {class: 'select-date'} )
+      = f.date_select(:requested_for_date, {start_year: DateTime.now.year, end_year: DateTime.now.year+1, default: DateTime.now.tomorrow}, {class: 'select-date'} )
   .row
     .bottom-10 Where will the inspection take place?
   .field
@@ -47,5 +43,10 @@
       %input{ type:'text', value:'CA', disabled: true }
       = addr.label :zip
       = addr.text_field :zip, required: true
+  .row
+    .bottom-10 Any other notes or instructions for when the inspector arrives?
+    .field.columns.small-12
+      = f.label :notes
+      = f.text_field :notes
   .actions
     %button.button{ type: 'submit' } Submit

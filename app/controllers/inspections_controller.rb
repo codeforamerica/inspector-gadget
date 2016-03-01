@@ -60,7 +60,7 @@ class InspectionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def inspection_params
-      params.require(:inspection).permit(:permit_number, :contact_name, :contact_phone, :contact_email, :inspection_type_id, :requested_for_date,
+      params.require(:inspection).permit(:permit_number, :contact_name, :contact_phone, :contact_email, :inspection_type_id, :requested_for_date, :notes,
         {address_attributes: [:line_1, :line_2, :city, :state, :zip]}
       )
     end
