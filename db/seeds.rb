@@ -1,3 +1,4 @@
+#### INSPECTION TYPES
 InspectionType.delete_all
 [
   {category: 'building', name: 'footing' },
@@ -45,25 +46,53 @@ InspectionType.delete_all
   InspectionType.create(inspection_category: it[:category], inspection_name: it[:name])
 end
 
-Inspection.create(
-  permit_number: '123456',
-  contact_name: 'Harry',
-  contact_phone: '408-555-1234',
-  inspection_type_id: InspectionType.find_by(inspection_category: 'building', inspection_name: 'footing').id,
-  requested_for_date: Date.tomorrow,
-  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
-  notes: 'Site is next to rear parking lot behind main building.'
-)
 
-Inspection.create(
-  permit_number: '123456',
-  contact_name: 'Sally',
-  contact_phone: '408-555-1234',
-  inspection_type_id: InspectionType.find_by(inspection_category: 'mechanical', inspection_name: 'final').id,
-  requested_for_date: Date.tomorrow,
-  requested_for_time: 'am',
-  address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
-)
+#### INSPECTIONS
+
+Inspection.delete_all
+
+# today
+150.times do 
+  Inspection.create(
+    permit_number: '123456',
+    contact_name: Faker::Name.name,
+    contact_phone: Faker::PhoneNumber.phone_number,
+    inspection_type: InspectionType.order('random()').take,
+    requested_for_date: Date.today,
+    requested_for_time: 'am',
+    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    notes: Faker::Lorem.sentence,
+  )
+end
+
+# tomorrow
+100.times do
+  Inspection.create(
+    permit_number: '123456',
+    contact_name: Faker::Name.name,
+    contact_phone: Faker::PhoneNumber.phone_number,
+    inspection_type: InspectionType.order('random()').take,
+    requested_for_date: Date.tomorrow,
+    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    notes: Faker::Lorem.sentence,
+  )
+end
+
+# future
+50.times do
+  Inspection.create(
+    permit_number: '123456',
+    contact_name: Faker::Name.name,
+    contact_phone: Faker::PhoneNumber.phone_number,
+    inspection_type: InspectionType.order('random()').take,
+    requested_for_date: Faker::Date.forward(30),
+    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    notes: Faker::Lorem.sentence,
+  )
+end
+
+
+##### USERS
 
 # Inspectors
 # User.create(name: "Dale Wiersma", email: "dale@longbeach.gov", role: "inspector")
