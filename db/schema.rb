@@ -11,21 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303001700) do
+ActiveRecord::Schema.define(version: 20160303174705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "line_1"
-    t.string   "line_2"
-    t.string   "city"
-    t.string   "zip"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "inspection_id"
-    t.string   "state"
+    t.string    "line_1"
+    t.string    "line_2"
+    t.string    "city"
+    t.string    "zip"
+    t.datetime  "created_at",                                                             null: false
+    t.datetime  "updated_at",                                                             null: false
+    t.integer   "inspection_id"
+    t.string    "state"
+    t.geography "geo_location",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -58,10 +59,10 @@ ActiveRecord::Schema.define(version: 20160303001700) do
   create_table "inspector_profiles", force: :cascade do |t|
     t.integer   "inspector_id"
     t.string    "inspector_type"
-    t.text      "inspection_categories",                                                             default: [],              array: true
-    t.geography "inspection_region",     limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
-    t.datetime  "created_at",                                                                                     null: false
-    t.datetime  "updated_at",                                                                                     null: false
+    t.text      "inspection_categories",                                                            default: [],              array: true
+    t.datetime  "created_at",                                                                                    null: false
+    t.datetime  "updated_at",                                                                                    null: false
+    t.geography "inspection_region",     limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
   end
 
   create_table "users", force: :cascade do |t|
