@@ -18,3 +18,5 @@
 
 # Ignore raw data folder
 /data
+
+.DS_Store
