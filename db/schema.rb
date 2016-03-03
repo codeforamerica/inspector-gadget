@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225035050) do
+ActiveRecord::Schema.define(version: 20160303001700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,12 +55,22 @@ ActiveRecord::Schema.define(version: 20160225035050) do
     t.integer  "inspection_type_id"
   end
 
+  create_table "inspector_profiles", force: :cascade do |t|
+    t.integer   "inspector_id"
+    t.string    "inspector_type"
+    t.text      "inspection_categories",                                                             default: [],              array: true
+    t.geography "inspection_region",     limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
+    t.datetime  "created_at",                                                                                     null: false
+    t.datetime  "updated_at",                                                                                     null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "type"
   end
 
 end

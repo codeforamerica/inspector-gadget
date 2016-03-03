@@ -25,10 +25,10 @@ InspectionType.delete_all
   {category: 'electric', name: 'ground work' },
   {category: 'electric', name: 'rough' },
   {category: 'electric', name: 'service upgrade' },
-  {category: 'electric', name: 'photovoltaic' },
   {category: 'electric', name: 'sign' },
   {category: 'electric', name: 'car charger' },
   {category: 'electric', name: 'final' },
+  {category: 'photovoltaic', name: 'photovoltaic' },
   {category: 'plumbing', name: 'ground work' },
   {category: 'plumbing', name: 'rough' },
   {category: 'plumbing', name: 'water heater' },
@@ -93,12 +93,27 @@ end
 
 
 ##### USERS
+User.delete_all
 
 # Inspectors
-# User.create(name: "Dale Wiersma", email: "dale@longbeach.gov", role: "inspector")
-# User.create(name: "Steven Valdez", email: "steven@longbeach.gov", role: "inspector")
+Inspector.create(name: "Engler", inspector_type: 'residential')
+Inspector.create(name: "Lloyd", inspector_type: 'residential')
+Inspector.create(name: "Morey", inspector_type: 'residential')
+Inspector.create(name: "Ciarrelli", inspector_type: 'residential')
+Inspector.create(name: "Reza", inspector_type: 'residential')
+Inspector.create(name: "Flacks", inspector_type: 'residential')
+Inspector.create(name: "Mann", inspector_type: 'residential')
 
-# Test users
-# User.create(name: "Mark Rossetti", email: "markrossetti@codeforamerica.org", role: "requester")
-# User.create(name: "Patrick McDonnell", email: "patrick@codeforamerica.org", role: "requester")
-# User.create(name: "Lisa Ratner", email: "lisa@codeforamerica.org", role: "requester")
+Inspector.create(name: "Aaker").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['photovoltaic'])
+Inspector.create(name: "Ingram").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['electric'])
+Inspector.create(name: "Varnes").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['electric'])
+Inspector.create(name: "Mechanical").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['mechanical'])
+Inspector.create(name: "Marquez").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['building'])
+Inspector.create(name: "Nicholls").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['building'])
+Inspector.create(name: "Plumbing").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['plumbing'])
+Inspector.create(name: "Joe").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['fire'])
+
+# Customers
+# Customer.create(name: "Mark Rossetti", email: "markrossetti@codeforamerica.org")
+# Customer.create(name: "Patrick McDonnell", email: "patrick@codeforamerica.org")
+# Customer.create(name: "Lisa Ratner", email: "lisa@codeforamerica.org")
