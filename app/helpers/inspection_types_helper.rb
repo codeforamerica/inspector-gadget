@@ -1,0 +1,2 @@
+module InspectionTypesHelper
+end
