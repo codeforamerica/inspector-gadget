@@ -186,7 +186,7 @@ end
 Inspection.delete_all
 
 # today
-150.times do 
+10.times do 
   Inspection.create(
     permit_number: '123456',
     contact_name: Faker::Name.name,
@@ -200,7 +200,7 @@ Inspection.delete_all
 end
 
 # tomorrow
-100.times do
+10.times do
   Inspection.create(
     permit_number: '123456',
     contact_name: Faker::Name.name,
@@ -214,7 +214,7 @@ end
 end
 
 # future
-50.times do
+10.times do
   Inspection.create(
     permit_number: '123456',
     contact_name: Faker::Name.name,
