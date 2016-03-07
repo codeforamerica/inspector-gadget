@@ -16,8 +16,8 @@ gem 'haml-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 
-# Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'lodash-rails'
 
 gem 'faker'
 
