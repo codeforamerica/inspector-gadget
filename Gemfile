@@ -23,6 +23,8 @@ gem 'faker'
 
 gem 'rubyzip'
 
+gem 'geocoder'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -35,4 +37,3 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-
