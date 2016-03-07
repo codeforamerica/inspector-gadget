@@ -21,6 +21,8 @@ gem 'lodash-rails'
 
 gem 'faker'
 
+gem 'rubyzip'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
