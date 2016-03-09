@@ -18,5 +18,6 @@ class Inspection < ActiveRecord::Base
     Inspector.joins(:inspector_profile)
       .where(inspector_profiles: {inspector_type: self.inspection_type.inspection_supercategory})
       .where("ST_Covers(inspector_profiles.inspection_region, ?)", self.address.geo_location)
+      .first
   end
 end
