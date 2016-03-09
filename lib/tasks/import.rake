@@ -9,15 +9,23 @@ end
 def import_inspector_regions
   require 'zip'
 
+  @log = []
+
   gis_files_path = './data/gis/'
   zipfiles = Dir.entries(gis_files_path).select{|name| name.match('zip')}
   zipfiles.each do |zipfile|
+    # unzip files into directory
     Zip::File.open(gis_files_path+zipfile) do |contents|
       contents.each{|file| file.extract(gis_files_path+file.name){ true } }
     end
-    shp_path = gis_files_path + Dir.entries(gis_files_path).find{|f| f.match('shp(?!\.xml)')}
-    handle_shapefile(shp_path)
   end
+
+  # scan directory for .shp files and import
+  Dir.entries(gis_files_path).select{|f| f.match('shp(?!\.xml)')}.each do |file|
+    handle_shapefile(gis_files_path+file)
+  end
+
+  puts @log
 end
 
 
@@ -42,8 +50,8 @@ def assign_inspector_region(inspector_name, region)
   if inspector.present?
     profile = inspector.inspector_profile || inspector.create_inspector_profile
     profile.update_attributes(inspection_region: region)
-    puts "Found region for #{inspector_name}. Assigned to #{inspector.name}."
+    @log << "Found region for #{inspector_name}. Assigned to #{inspector.name}."
   else
-    puts "No inspector found in DB for name #{inspector_name}."
+    @log << "No inspector found in DB for name #{inspector_name}."
   end
 end
