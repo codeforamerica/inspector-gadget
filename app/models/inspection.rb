@@ -5,7 +5,16 @@ class Inspection < ActiveRecord::Base
   has_many :inspectors, through: :assignments
   accepts_nested_attributes_for :address
 
+  scope :residential, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }
+  scope :commercial, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }
+
   def current_assignment
     self.assignments.first || nil
+  end
+
+  def inspector
+    Inspector.joins(:inspector_profile)
+      .where(inspector_profiles: {inspector_type: self.inspection_type.inspection_supercategory})
+      .where("ST_Covers(inspector_profiles.inspection_region, ?)", self.address.geo_location)
   end
 end

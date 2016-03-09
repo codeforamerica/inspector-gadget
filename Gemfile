@@ -18,12 +18,14 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'jquery-rails'
 gem 'lodash-rails'
+gem 'leaflet-rails'
 
 gem 'faker'
 
 gem 'rubyzip'
 
 gem 'geocoder'
+gem 'rgeo-geojson'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

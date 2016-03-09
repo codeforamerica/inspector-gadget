@@ -1,43 +1,45 @@
 %h1 Inspections
-- inspections_tomorrow = Inspection.where("DATE_TRUNC('day', requested_for_date) = ?", DateTime.now.tomorrow.to_date)
-%h2 Tomorrow's Inspections (#{inspections_tomorrow.count})
-%div
-  %a{ href: inspections_print_path } Print Inspections
 
-%table
-  %thead
-    %tr
-      %th Permit number
-      %th Contact name
-      %th Contact phone
-      %th Contact email
-      %th Inspection type
-      %th Requested for
-      %th Address
-      %th Assigned to
-      %th
-      %th
-      %th
+/ #map{style: "width:80%; height:500px;"}
 
-  %tbody
-    - inspections_tomorrow.each do |inspection|
+%h2 Inspections by Inspector
+%a{ href: inspections_print_path } Print Inspections
+- Inspector.joins(:inspector_profile).each do |inspector|
+  %div= inspector.name
+
+  %table
+    %thead
       %tr
-        %td= inspection.permit_number
-        %td= inspection.contact_name
-        %td= inspection.contact_phone
-        %td= inspection.contact_email
-        %td= inspection.inspection_type.to_s
-        %td= inspection.requested_for_date
-        %td= inspection.address
-        %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
-        %td= link_to 'Show', inspection
-        %td= link_to 'Edit', edit_inspection_path(inspection)
-        %td= link_to 'Assign', new_assignment_path(inspection_id: inspection.id)
+        %th Permit number
+        %th Contact name
+        %th Contact phone
+        %th Contact email
+        %th Inspection type
+        %th Requested for
+        %th Address
+        %th Assigned to
+        %th
+        %th
+        %th
+
+    %tbody
+      - inspector.inspections.each do |inspection|
+        %tr
+          %td= inspection.permit_number
+          %td= inspection.contact_name
+          %td= inspection.contact_phone
+          %td= inspection.contact_email
+          %td= inspection.inspection_type.to_s
+          %td= inspection.requested_for_date
+          %td= inspection.address
+          %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
+          %td= link_to 'Show', inspection
+          %td= link_to 'Edit', edit_inspection_path(inspection)
 
 %br
 
 
-- inspections_today = Inspection.where("DATE_TRUNC('day', requested_for_date) = ?", DateTime.now.to_date)
+- inspections_today = Inspection.all
 %h2 Today's Inspections (#{inspections_today.count})
 %div
   %a{ href: inspections_print_path } Print Inspections
@@ -69,7 +71,6 @@
         %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
         %td= link_to 'Show', inspection
         %td= link_to 'Edit', edit_inspection_path(inspection)
-        %td= link_to 'Assign', new_assignment_path(inspection_id: inspection.id)
 
 %br
 

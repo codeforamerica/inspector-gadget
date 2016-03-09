@@ -53,9 +53,11 @@
       .row
         .columns.small-8
           = addr.label :city
+          = addr.hidden_field :city, value: 'Long Beach'
           %input{ type:'text', value:'Long Beach', disabled: true }
         .columns.small-4
           = addr.label :state
+          = addr.hidden_field :state, value: 'CA'
           %input{ type:'text', value:'CA', disabled: true }
       = addr.label :zip
       = addr.text_field :zip, required: true

@@ -4,6 +4,12 @@ class InspectionsController < ApplicationController
   # GET /inspections
   def index
     @inspections = Inspection.all
+    @inspection_locations = Inspection.joins(:address)
+      .where.not(addresses: { geo_location: nil } )
+      .map{|i| [i.address.geo_location.y, i.address.geo_location.x]}
+    @inspector_regions = Inspector.joins(:inspector_profile).map do |inspector|
+      RGeo::GeoJSON.encode(inspector.inspector_profile.inspection_region).to_json
+    end.reject!{|r| r == "null"}
   end
 
   def print

@@ -5,6 +5,9 @@ $(document).ready(function () {
   if ( $('.inspection-new').length > 0 ) {
     enableInspectionDropdowns()
   }
+  if ( $('#map').length > 0 ) {
+    launchMap();
+  }
 });
 
 function enableInspectionDropdowns () {
@@ -38,4 +41,45 @@ function enableInspectionDropdowns () {
     $('#inspection_inspection_type_id').val(this.value);
   })
 
+}
+
+
+// MAP (LEAFLET.JS)
+function launchMap () {
+
+  // set in .html.haml when ready to launch this feature
+  // var inspectionLocations = #{ @inspection_locations }
+  // var inspectorRegions = #{ @inspector_regions }
+
+  var customIcon = L.icon({
+    iconUrl: "#{image_path('marker-icon.png')}",
+    iconRetinaUrl: "#{image_path('marker-icon-2x.png')}",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [-3, -76],
+    shadowUrl: "#{image_path('marker-shadow.png')}",
+    shadowRetinaUrl: "#{image_path('marker-shadow.png')}",
+    shadowSize: [41, 41],
+    shadowAnchor: [20, 41]
+  });
+
+  var map = L.map('map').setView([33.7683, -118.1956], 12);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.mapbox-streets-v6',
+    accessToken: "pk.eyJ1IjoiY29kZWZvcmFtZXJpY2EiLCJhIjoiSTZlTTZTcyJ9.3aSlHLNzvsTwK-CYfZsG_Q",
+  }).addTo(map);
+
+
+  inspectionLocations.forEach(function (location) {
+    L.marker(location, {icon: customIcon}).addTo(map)
+  })
+
+  inspectorRegions.forEach(function (region) {
+    var poly = L.polygon(JSON.parse(region).coordinates)
+    poly.addTo(map)
+    map.fitBounds(poly.getBounds());
+  })
 }
