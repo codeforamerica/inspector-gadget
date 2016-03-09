@@ -34,7 +34,6 @@ private
 def handle_shapefile(shapefile_path)
   RGeo::Shapefile::Reader.open(shapefile_path) do |file|
     file.each do |record|
-      region_latlong_text = ActiveRecord::Base.connection.execute("SELECT ST_AsText(ST_Transform(ST_GeomFromText('#{record.geometry.as_text}',102645),4326)) As region;").first['region']
       inspector_name = record.attributes['INSPECTOR']
       
       fixed_names = {
@@ -45,20 +44,16 @@ def handle_shapefile(shapefile_path)
         inspector_name = fixed_names[inspector_name]
       end
       
-      assign_inspector_region(inspector_name, region_latlong_text)
+      assign_inspector_region(inspector_name, record.geometry.as_text)
     end
-    file.rewind
-    record = file.next
   end
-  # to transform from state plane to WGR 4326
-  # "SELECT ST_AsText(ST_Transform(ST_GeomFromText('POLYGON((743238 2967416,743238 2967450,743265 2967450,743265.625 2967416,743238 2967416))',102645),4326)) As wgs_geom;"
 end
 
-def assign_inspector_region(inspector_name, region)
+def assign_inspector_region(inspector_name, region_text)
   inspector = Inspector.find_by('name ILIKE ?', inspector_name.split(' ').last)
   if inspector.present?
     profile = inspector.inspector_profile || inspector.create_inspector_profile
-    profile.update_attributes(inspection_region: region)
+    ActiveRecord::Base.connection.execute("UPDATE inspector_profiles SET inspection_region = ST_Transform(ST_GeomFromText('#{region_text}',102645),4326) WHERE id = #{profile.id}")
     @log << "Found region for #{inspector_name}. Assigned to #{inspector.name}."
   else
     @log << "No inspector found in DB for name #{inspector_name}."
