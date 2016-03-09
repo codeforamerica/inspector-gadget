@@ -32,13 +32,14 @@ function enableInspectionDropdowns () {
       // set up subsequent dropdown (names) with options
       $('.inspection-names').show().html( $("<option>") ) // start with a blank
       $(inspection_types).each(function (index, type) {
-        $('.inspection-names').append( $("<option>", { value: type.id, html: type.inspection_name }) )
+        $('.inspection-names').append( $("<option>", { value: type.id, html: type.inspection_name, "data-comments": type.comments }) )
       })
     })
   })
   
   $('.inspection-names').on('change', function () {
     $('#inspection_inspection_type_id').val(this.value);
+    $('.inspection-type-comments').empty().text($(this).find(':selected').data('comments'))
   })
 
 }

@@ -7,7 +7,7 @@ class Api::V1::InspectionTypesController < ApplicationController
         filters.merge!({ inspection_supercategory: params[:supercategory] }) if params[:supercategory].present?
         filters.merge!({ inspection_category: params[:category] }) if params[:category].present?
 
-        inspection_types = InspectionType.where(filters).select(:id, :inspection_category, :inspection_name)
+        inspection_types = InspectionType.where(filters).select(:id, :inspection_category, :inspection_name, :comments)
 
         render json: inspection_types.to_json
       end

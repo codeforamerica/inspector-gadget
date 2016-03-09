@@ -175,7 +175,8 @@ InspectionType.delete_all
   InspectionType.create(
     inspection_supercategory: it[:supercategory],
     inspection_category: it[:category],
-    inspection_name: it[:name]
+    inspection_name: it[:name],
+    comments: it[:comments],
   )
 end
 
