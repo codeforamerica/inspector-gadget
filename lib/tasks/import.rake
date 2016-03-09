@@ -36,6 +36,15 @@ def handle_shapefile(shapefile_path)
     file.each do |record|
       region_latlong_text = ActiveRecord::Base.connection.execute("SELECT ST_AsText(ST_Transform(ST_GeomFromText('#{record.geometry.as_text}',102645),4326)) As region;").first['region']
       inspector_name = record.attributes['INSPECTOR']
+      
+      fixed_names = {
+        "KEN CIARELLI" => "KEN CIARRELLI"
+      }
+
+      if fixed_names[inspector_name].present?
+        inspector_name = fixed_names[inspector_name]
+      end
+      
       assign_inspector_region(inspector_name, region_latlong_text)
     end
     file.rewind
