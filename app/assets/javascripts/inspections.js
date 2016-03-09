@@ -20,7 +20,7 @@ function enableInspectionDropdowns () {
       $('.inspection-categories').show().html( $("<option>") ) // start with a blank
       $('.inspection-names').html( $("<option>") ) // start with a blank
       $(uniq_types).each(function (index, type) {
-        $('.inspection-categories').append( $("<option>", { value: type.inspection_category, html: type.inspection_category }) )
+        $('.inspection-categories').append( $("<option>", { value: type.inspection_category, html: type.inspection_category_name }) )
       })
     })
   })
