@@ -13,9 +13,6 @@
       %b Contact phone:
       = @inspection.contact_phone
     %p
-      %b Contact email:
-      = @inspection.contact_email
-    %p
       %b Inspection type:
       = @inspection.inspection_type.to_s
     %p
@@ -25,10 +22,5 @@
       %b Address:
       = @inspection.address
 
-  .callout.primary
-    %strong Your inspection request number is #{@inspection.id}
-    %p You will be notified by email when your inspection is scheduled.
   .row
     = link_to 'Request Another Inspection', new_inspection_path
-  .row
-    = link_to 'View Inspection Requests', inspections_path
