@@ -10,6 +10,12 @@
   - @inspections.each_slice(2) do |inspections|
     - inspections.each do |inspection|
       .inspection
+        - if inspection.inspector.present?
+          .columns.small-12
+            .row
+              %div{style: "text-align:right;"}
+                %strong Inspector:
+                = inspection.inspector.name
         .columns.small-8
           .row
             %div
