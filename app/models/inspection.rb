@@ -5,6 +5,8 @@ class Inspection < ActiveRecord::Base
   has_many :inspectors, through: :assignments
   accepts_nested_attributes_for :address
 
+  validates :inspection_type_id, presence: true
+
   scope :residential, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }
   scope :commercial, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }
 

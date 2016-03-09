@@ -1,5 +1,6 @@
 ##### USERS
 User.delete_all
+InspectorProfile.delete_all
 
 # Inspectors
 Inspector.create(name: "Engler").create_inspector_profile(inspector_type: 'residential')

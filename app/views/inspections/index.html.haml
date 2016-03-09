@@ -39,7 +39,7 @@
 %br
 
 
-- inspections_today = Inspection.all
+- inspections_today = Inspection.where("DATE_TRUNC('day', requested_for_date) = ?", DateTime.now.to_date)
 %h2 Today's Inspections (#{inspections_today.count})
 %div
   %a{ href: inspections_print_path } Print Inspections
