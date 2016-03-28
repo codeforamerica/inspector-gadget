@@ -10,15 +10,15 @@
     .bottom-10 Let's fill in some contact info:
   .row
     .field.columns.small-12
-      = f.label 'Project Number'
+      = f.label :permit_number
       = f.text_field :permit_number, required: true, placeholder: 'BRMD123456'
   .row
     .field.columns.small-12
-      = f.label :contact_name
+      = f.label 'Name'
       = f.text_field :contact_name, required: true
   .row
     .field.columns.small-12
-      = f.label :contact_phone
+      = f.label 'Phone number'
       = f.text_field :contact_phone, required: true
   .row
     .bottom-10 What is the inspection type?
@@ -48,10 +48,12 @@
     .bottom-10 Where will the inspection take place?
   .field
     = f.fields_for :address do |addr|
-      = addr.label :line_1
-      = addr.text_field :line_1, required: true
-      = addr.label :line_2
-      = addr.text_field :line_2
+      .field.columns.small-12
+        = addr.label :line_1
+        = addr.text_field :line_1, required: true
+      .field.columns.small-12
+        = addr.label :line_2
+        = addr.text_field :line_2
       .row
         .columns.small-8
           = addr.label :city
@@ -61,8 +63,9 @@
           = addr.label :state
           = addr.hidden_field :state, value: 'CA'
           %input{ type:'text', value:'CA', disabled: true }
-      = addr.label :zip
-      = addr.text_field :zip, required: true
+      .field.columns.small-12
+        = addr.label :zip
+        = addr.text_field :zip, required: true
   .row
     .bottom-10 Any other notes or instructions for when the inspector arrives?
     .field.columns.small-12
