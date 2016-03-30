@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require lodash
 //= require foundation
 //= require_tree .

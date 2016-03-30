@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 
-gem 'rails'
+gem 'rails', '4.2.6'
 gem 'rails_12factor'
 
 gem 'pg'
@@ -18,6 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 
 gem 'jquery-rails'
+gem 'jquery-ui-sass-rails'
 gem 'lodash-rails'
 gem 'leaflet-rails'
 
