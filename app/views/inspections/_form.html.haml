@@ -44,15 +44,15 @@
   .row
     .bottom-10 For which date would you like to schedule your inspection?
     .field.columns.small-12
+      %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]' }
+      :javascript
+        $('.datepicker').datepicker({
+          minDate: #{Time.now.hour < 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
+          beforeShowDay: $.datepicker.noWeekends,
+        });
       .row
-        %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]' }
-        :javascript
-          $('.datepicker').datepicker({
-            minDate: #{Time.now.hour < 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
-            beforeShowDay: $.datepicker.noWeekends,
-          });
-      %small
-        Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
+        %small
+          Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
     .bottom-10 What time of day?
     .field.columns.small-12
       = f.select(:requested_for_time, options_for_select([['Anytime', nil], ['Morning', 'am'], ['Afternoon', 'pm']]))
@@ -83,5 +83,5 @@
     .field.columns.small-12
       = f.label :notes
       = f.text_field :notes
-  .actions
-    %button.button{ type: 'submit' } Submit
+  .actions.columns.small-12
+    %button.button.expanded{ type: 'submit' } Submit
