@@ -66,8 +66,7 @@ class InspectionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def inspection_params
-      byebug
-      params.require(:inspection).permit(:permit_number, :contact_name, :contact_phone, :contact_email, :inspection_type_id, :requested_for_date, :notes,
+      params.require(:inspection).permit(:permit_number, :contact_name, :contact_phone, :contact_email, :inspection_type_id, :requested_for_date, :requested_for_time, :notes,
         {address_attributes: [:line_1, :line_2, :city, :state, :zip]}
       ).tap do |whitelisted|
         whitelisted[:requested_for_date] = Date.strptime(params["inspection"]["requested_for_date"], '%m/%d/%Y')
