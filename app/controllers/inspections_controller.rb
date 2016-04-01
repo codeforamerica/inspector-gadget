@@ -1,5 +1,6 @@
 class InspectionsController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
+  before_action :allow_iframing, only: [:show, :new]
 
   # GET /inspections
   def index
@@ -71,5 +72,9 @@ class InspectionsController < ApplicationController
       ).tap do |whitelisted|
         whitelisted[:requested_for_date] = Date.strptime(params["inspection"]["requested_for_date"], '%m/%d/%Y')
       end
+    end
+
+    def allow_iframing
+      response.headers.delete "X-Frame-Options"
     end
 end

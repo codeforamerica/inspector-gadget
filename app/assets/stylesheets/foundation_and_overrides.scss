@@ -50,3 +50,13 @@
 //
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
+
+select,
+input[type='text'] {
+  box-shadow: none;
+  border-color: black;
+  height: 1.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-width: 400px;
+}
