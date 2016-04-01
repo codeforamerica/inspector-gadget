@@ -7,6 +7,7 @@
     %title= content_for?(:title) ? yield(:title) : "Untitled"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
+    = javascript_include_tag "https://www.google.com/jsapi", "chartkick"
     = csrf_meta_tags
   %body
     .content-container

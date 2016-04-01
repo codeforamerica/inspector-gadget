@@ -1,10 +1,35 @@
 .home
-  .row
+  .row.margin-top-30
     .columns.small-10.small-offset-1.medium-8.medium-offset-2.large-10.large-offset-1
-      .columns.small-12.medium-6
+      .columns.small-12.medium-6.medium-offset-3
         %a.expanded.button.button-schedule{ href: new_inspection_path } Schedule an Inspection
-      .columns.small-12.medium-6
-        %a.expanded.button.button-view{ href: inspections_print_path, target:'_blank' } Print Inspections
+      .row
+        .columns.small-12.medium-4
+          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{Date.yesterday}", target:'_blank' }
+            %span Print Yesterday's Inspections
+            %br
+            %small= Date.yesterday.strftime('%b %d, %Y')
+            %br
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.yesterday).count} requests
+        .columns.small-12.medium-4
+          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{Date.today}", target:'_blank' }
+            %span Print Today's Inspections
+            %br
+            %small= Date.today.strftime('%b %d, %Y')
+            %br
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.today).count} requests
+        .columns.small-12.medium-4
+          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{Date.tomorrow}", target:'_blank' }
+            %span Print Tomorrow's Inspections
+            %br
+            %small= Date.tomorrow.strftime('%b %d, %Y')
+            %br
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.tomorrow).count} requests
+
+  .row
+    %h3 # Inspections by Day
+    = line_chart Inspection.where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, Date.tomorrow).group_by_day(:requested_for_date).count
+    / = line_chart Inspection.where("requested_for_date > ?", Date.today-30.days).group_by_day(:requested_for_date).count
 
   / .row
   /   %h2 Inspections by Inspector

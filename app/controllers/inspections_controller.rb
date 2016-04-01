@@ -14,7 +14,7 @@ class InspectionsController < ApplicationController
   end
 
   def print
-    @inspections = Inspection.all
+    @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
     render layout: 'print'
   end
 

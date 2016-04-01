@@ -52,6 +52,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.2)
+    chartkick (1.4.1)
     coderay (1.1.1)
     concurrent-ruby (1.0.1)
     dbf (3.0.5)
@@ -67,6 +68,8 @@ GEM
     geocoder (1.3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    groupdate (2.5.2)
+      activesupport (>= 3)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -93,7 +96,6 @@ GEM
       jquery-ui-rails (= 4.0.3)
       railties (>= 3.1.0)
     json (1.8.3)
-    leaflet-rails (0.7.7)
     libv8 (3.16.14.13)
     lodash-rails (4.5.1)
       railties (>= 3.1)
@@ -194,13 +196,14 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   byebug
+  chartkick
   faker
   foundation-rails
   geocoder
+  groupdate
   haml-rails
   jquery-rails
   jquery-ui-sass-rails
-  leaflet-rails
   lodash-rails
   pg
   rails (= 4.2.6)

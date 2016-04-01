@@ -183,8 +183,36 @@ end
 
 Inspection.delete_all
 
-# today
+# past
 5.times do
+  Inspection.create(
+    permit_number: '123456',
+    contact_name: Faker::Name.name,
+    contact_phone: Faker::PhoneNumber.phone_number,
+    inspection_type: InspectionType.order('random()').take,
+    requested_for_date: Faker::Date.backward(30),
+    requested_for_time: [nil, 'am','pm'].sample,
+    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    notes: Faker::Lorem.sentence,
+  )
+end
+
+# yesterday
+2.times do
+  Inspection.create(
+    permit_number: '123456',
+    contact_name: Faker::Name.name,
+    contact_phone: Faker::PhoneNumber.phone_number,
+    inspection_type: InspectionType.order('random()').take,
+    requested_for_date: Date.yesterday,
+    requested_for_time: [nil, 'am','pm'].sample,
+    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    notes: Faker::Lorem.sentence,
+  )
+end
+
+# today
+3.times do
   Inspection.create(
     permit_number: '123456',
     contact_name: Faker::Name.name,
@@ -198,7 +226,7 @@ Inspection.delete_all
 end
 
 # tomorrow
-5.times do
+4.times do
   Inspection.create(
     permit_number: '123456',
     contact_name: Faker::Name.name,
