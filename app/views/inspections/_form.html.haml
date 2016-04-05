@@ -61,23 +61,27 @@
   .field
     = f.fields_for :address do |addr|
       .field.columns.small-12
-        = addr.label :line_1
-        = addr.text_field :line_1, required: true
-      .field.columns.small-12
-        = addr.label :line_2
-        = addr.text_field :line_2
-      .row
-        .columns.small-8
-          = addr.label :city
-          = addr.hidden_field :city, value: 'Long Beach'
-          %input{ type:'text', value:'Long Beach', disabled: true }
-        .columns.small-4
-          = addr.label :state
-          = addr.hidden_field :state, value: 'CA'
-          %input{ type:'text', value:'CA', disabled: true }
-      .field.columns.small-12
-        = addr.label :zip
-        = addr.text_field :zip, required: true
+        #locationField
+          %input#autocomplete{:onFocus => "geolocate()", :placeholder => "Enter your address", :type => "text"}
+      #address
+        .row
+          .field.columns.small-4.medium-2
+            .label Street number
+            %input#street_number.field{ name:'inspection[address_attributes][street_number]', type:'text', disabled:"true"}
+          .field.columns.small-8.medium-10
+            .label Street name
+            %input#route.field{ name:'inspection[address_attributes][route]', type:'text', disabled:"true"}
+        .row
+          .columns.small-12
+            .label City
+            %input#locality.field{ name:'inspection[address_attributes][city]', type:'text', disabled:"true"}
+        .row
+          .field.columns.small-4.medium-2
+            .label State
+            %input#administrative_area_level_1.field{ name:'inspection[address_attributes][state]', type:'text', disabled:"true"}
+          .field.columns.small-8.medium-10
+            .label Zip code
+            %input#postal_code.field{ name:'inspection[address_attributes][zip]', type:'text', disabled:"true"}
   .row
     .margin-bottom-10 Any other notes or instructions for when the inspector arrives?
     .field.columns.small-12
@@ -85,3 +89,6 @@
       = f.text_field :notes
   .actions.columns.small-12
     %button.button.expanded{ type: 'submit' } Submit
+
+= javascript_include_tag "googleAutocomplete.js"
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCFYd57aJ13qV_PwYZ71xMJirGiKrVXuzs&libraries=places&callback=initAutocomplete"

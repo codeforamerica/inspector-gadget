@@ -17,10 +17,16 @@
       = @inspection.inspection_type.to_s
     %p
       %b Requested for:
-      = @inspection.requested_for_date
+      = @inspection.requested_for_date.strftime('%A, %b %d')
+      %i= @inspection.requested_for_time
     %p
       %b Address:
       = @inspection.address
+
+  .row
+    The building permits department can be reached at 562-570-5237.
+  .row
+    To find out what time of day the inspector will arrive, please call back after 8:30am on the day of your inspection.
 
   .row
     = link_to 'Request Another Inspection', new_inspection_path

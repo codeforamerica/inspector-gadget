@@ -8,7 +8,7 @@ class Address < ActiveRecord::Base
 
   def to_s
     [
-      (line_1 + (line_2 || '')),
+      (street_number+' '+route),
       city,
       state,
       zip,

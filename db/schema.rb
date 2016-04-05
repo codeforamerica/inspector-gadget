@@ -11,15 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309174452) do
+ActiveRecord::Schema.define(version: 20160404232021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "addresses", force: :cascade do |t|
-    t.string    "line_1"
-    t.string    "line_2"
     t.string    "city"
     t.string    "zip"
     t.datetime  "created_at",                                                             null: false
@@ -27,6 +25,8 @@ ActiveRecord::Schema.define(version: 20160309174452) do
     t.integer   "inspection_id"
     t.string    "state"
     t.geography "geo_location",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.string    "street_number"
+    t.string    "route"
   end
 
   create_table "assignments", force: :cascade do |t|
