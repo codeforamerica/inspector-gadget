@@ -27,6 +27,11 @@ class InspectionsController < ApplicationController
     @inspection = Inspection.new
     @inspection.build_address
   end
+  
+  def new_express
+    @inspection = Inspection.new
+    @inspection.build_address
+  end
 
   # GET /inspections/1/edit
   def edit
