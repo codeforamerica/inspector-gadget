@@ -39,6 +39,7 @@ class InspectionsController < ApplicationController
 
   # POST /inspections
   def create
+    puts 'PARAMS: ', inspection_params
     @inspection = Inspection.new(inspection_params)
     @inspection.create_address(inspection_params[:address_attributes])
 
