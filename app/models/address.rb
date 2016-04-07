@@ -8,7 +8,7 @@ class Address < ActiveRecord::Base
 
   def to_s
     [
-      (street_number+' '+route),
+      [street_number, route].join(' '),
       city,
       state,
       zip,
