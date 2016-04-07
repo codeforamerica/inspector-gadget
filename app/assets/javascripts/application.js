@@ -14,6 +14,7 @@
 //= require jquery.ui.datepicker
 //= require lodash
 //= require foundation
+//= require chosen-jquery
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

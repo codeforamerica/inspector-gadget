@@ -20,6 +20,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'jquery-ui-sass-rails'
 gem 'lodash-rails'
+gem 'chosen-rails'
 
 gem 'groupdate'
 gem 'chartkick'
