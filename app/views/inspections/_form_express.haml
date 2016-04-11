@@ -9,83 +9,83 @@
   .row
     .margin-bottom-10 Let's fill in some contact info:
   .row
-    .field.columns.small-12
+    .max-width-px-400
       = f.label :permit_number
       = f.text_field :permit_number, required: true, placeholder: 'BRMD123456'
   .row
-    .field.columns.small-12
+    .max-width-px-400
       = f.label 'Name'
       = f.text_field :contact_name, required: true
   .row
-    .field.columns.small-12
+    .max-width-px-400
       = f.label 'Phone number'
       = f.text_field :contact_phone, required: true
   .row
-    .field.columns.small-12
+    .max-width-px-400
       = f.label 'Email'
       = f.text_field :contact_email
   .row
     .margin-bottom-10 What is the inspection type?
     .field
       = f.hidden_field :inspection_type_id
-    .field.columns.small-12
+    .max-width-px-400
       %fieldset
         - InspectionType.pluck(:inspection_supercategory).uniq.map{|type| [type.titleize, type] }.each do |sc|
           %input{ type:'radio', class:"inspection-supercategories", name:"inspection-supercategories", value:sc[1], id:sc[1] }
           %label{ for:sc[1] } #{sc[0]}
-    .field.columns.small-12
+    .max-width-px-400
       %select.inspection-names{ style: "display:none;" }
         -# options are inserted here by JS
-    .columns.small-12
+    .max-width-px-400
       .inspection-type-comments.margin-bottom-10
   .row
     .margin-bottom-10 For which date would you like to schedule your inspection?
-    .field.columns.small-12
+    .max-width-px-400
       %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
       :javascript
         $('.datepicker').datepicker({
           minDate: #{Time.now.hour < 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
           beforeShowDay: $.datepicker.noWeekends,
         });
-      .row
+      %div.margin-bottom-10
         %small
           Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
     .margin-bottom-10 What time of day?
-    .field.columns.small-12
+    .max-width-px-400
       = f.select(:requested_for_time, options_for_select([['Anytime', nil], ['Morning', 'am'], ['Afternoon', 'pm']]))
   .row
     .margin-bottom-10 Where will the inspection take place?
   .field
     = f.fields_for :address do |addr|
-      .field.columns.small-12
+      .max-width-px-400
         #locationField
           %input#autocomplete{:onFocus => "geolocate()", :placeholder => "Enter your address", :type => "text"}
-      #address
+      #address.max-width-px-400
         .row
-          .field.columns.small-4.medium-2
+          .field.width-20.margin-right-pct-5.float-left
             .label Street number
             %input#street_number.field{ name:'inspection[address_attributes][street_number]', type:'text', disabled:"true"}
-          .field.columns.small-8.medium-10
+          .field.width-75.float-left
             .label Street name
             %input#route.field{ name:'inspection[address_attributes][route]', type:'text', disabled:"true"}
         .row
-          .columns.small-12
-            .label City
-            %input#locality.field{ name:'inspection[address_attributes][city]', type:'text', disabled:"true"}
+          .label City
+          %input#locality.field{ name:'inspection[address_attributes][city]', type:'text', disabled:"true"}
         .row
-          .field.columns.small-4.medium-2
+          .field.width-20.margin-right-pct-5.float-left
             .label State
             %input#administrative_area_level_1.field{ name:'inspection[address_attributes][state]', type:'text', disabled:"true"}
-          .field.columns.small-8.medium-10
+          .field.width-75.float-left
             .label Zip code
             %input#postal_code.field{ name:'inspection[address_attributes][zip]', type:'text', disabled:"true"}
   .row
     .margin-bottom-10 Any other notes or instructions for when the inspector arrives?
-    .field.columns.small-12
+    .max-width-px-400
       = f.label :notes
       = f.text_field :notes
-  .actions.columns.small-12
-    %button.button.expanded{ type: 'submit' } Submit
+  .max-width-px-400
+    .actions
+      %button.button.expanded{ type: 'submit' } Submit
 
 = javascript_include_tag "googleAutocomplete.js"
 = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCFYd57aJ13qV_PwYZ71xMJirGiKrVXuzs&libraries=places&callback=initAutocomplete"
