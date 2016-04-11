@@ -14,11 +14,11 @@
       = f.text_field :permit_number, required: true, placeholder: 'BRMD123456'
   .row
     .max-width-px-400
-      = f.label 'Name'
+      = f.label :contact_name
       = f.text_field :contact_name, required: true
   .row
     .max-width-px-400
-      = f.label 'Phone number'
+      = f.label 'Contact number'
       = f.text_field :contact_phone, required: true
   .row
     .max-width-px-400
@@ -53,11 +53,11 @@
       %div.margin-bottom-10
         %small
           Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
-    .margin-bottom-10 What time of day?
+    .margin-bottom-10 Preferred time of day:
     .max-width-px-400
       = f.select(:requested_for_time, options_for_select([['Anytime', nil], ['Morning', 'am'], ['Afternoon', 'pm']]))
   .row
-    .margin-bottom-10 Where will the inspection take place?
+    .margin-bottom-10 Project address:
   .field
     = f.fields_for :address do |addr|
       .max-width-px-400
