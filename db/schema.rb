@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404232021) do
+ActiveRecord::Schema.define(version: 20160412002053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,8 +55,9 @@ ActiveRecord::Schema.define(version: 20160404232021) do
     t.string   "permit_number"
     t.string   "property_type"
     t.string   "requested_for_time"
-    t.text     "notes"
+    t.text     "address_notes"
     t.integer  "inspection_type_id"
+    t.string   "inspection_notes"
   end
 
   create_table "inspector_profiles", force: :cascade do |t|
