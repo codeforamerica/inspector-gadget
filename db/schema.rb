@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412002053) do
+ActiveRecord::Schema.define(version: 20160412003549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160412002053) do
     t.string "inspection_supercategory"
     t.text   "comments"
     t.string "inspection_category_name"
+    t.string "inspection_supercategory_name"
   end
 
   create_table "inspections", force: :cascade do |t|

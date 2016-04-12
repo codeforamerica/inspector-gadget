@@ -3,7 +3,7 @@
   .field
     = f.hidden_field :inspection_type_id
   .max-width-px-400
-    - supercategories = InspectionType.pluck(:inspection_supercategory).uniq.map{|type| [type.titleize, type] }
+    - supercategories = InspectionType.pluck(:inspection_supercategory_name, :inspection_supercategory).uniq
     %select.inspection-supercategories{ name: 'supercategory' }
       %option
       = options_for_select(supercategories)
