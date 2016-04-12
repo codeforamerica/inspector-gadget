@@ -1,0 +1,30 @@
+.row
+  .margin-bottom-10 Project address:
+.field
+  = f.fields_for :address do |addr|
+    .max-width-px-400
+      #locationField
+        %input#autocomplete{:onFocus => "geolocate()", :placeholder => "Enter your address", :type => "text"}
+    #address.max-width-px-400
+      .row
+        .field.width-20.margin-right-pct-5.float-left
+          .label Street number
+          %input#street_number.field{ name:'inspection[address_attributes][street_number]', type:'text', disabled:"true"}
+        .field.width-75.float-left
+          .label Street name
+          %input#route.field{ name:'inspection[address_attributes][route]', type:'text', disabled:"true"}
+      .row
+        .label City
+        %input#locality.field{ name:'inspection[address_attributes][city]', type:'text', disabled:"true"}
+      .row
+        .field.width-20.margin-right-pct-5.float-left
+          .label State
+          %input#administrative_area_level_1.field{ name:'inspection[address_attributes][state]', type:'text', disabled:"true"}
+        .field.width-75.float-left
+          .label Zip code
+          %input#postal_code.field{ name:'inspection[address_attributes][zip]', type:'text', disabled:"true"}
+.row
+  .margin-bottom-10 Any other notes or instructions for when the inspector arrives?
+  .max-width-px-400
+    = f.label :notes
+    = f.text_field :notes

@@ -1,0 +1,18 @@
+.row
+  .margin-bottom-10 Let's fill in some contact info:
+.row
+  .max-width-px-400
+    = f.label :permit_number
+    = f.text_field :permit_number, required: true, placeholder: 'BRM123456'
+.row
+  .max-width-px-400
+    = f.label :contact_name
+    = f.text_field :contact_name, required: true
+.row
+  .max-width-px-400
+    = f.label 'Contact number'
+    = f.text_field :contact_phone, required: true
+.row
+  .max-width-px-400
+    = f.label 'Email'
+    = f.text_field :contact_email

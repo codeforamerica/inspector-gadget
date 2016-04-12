@@ -1,0 +1,17 @@
+.row
+  .margin-bottom-10 What is the inspection type?
+  .field
+    = f.hidden_field :inspection_type_id
+  .max-width-px-400
+    - supercategories = InspectionType.pluck(:inspection_supercategory).uniq.map{|type| [type.titleize, type] }
+    %select.inspection-supercategories{ name: 'supercategory' }
+      %option
+      = options_for_select(supercategories)
+  .max-width-px-400
+    %select.inspection-categories{ name: 'category', style: "display:none;" }
+      -# options are inserted here by JS
+  .max-width-px-400
+    %select.inspection-names{ style: "display:none;" }
+      -# options are inserted here by JS
+  .columns.small-12
+    .inspection-type-comments.margin-bottom-10
