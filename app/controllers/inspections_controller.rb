@@ -20,6 +20,11 @@ class InspectionsController < ApplicationController
 
   # GET /inspections/1
   def show
+    if params[:express] == "true"
+      render :show_express
+    else
+      render :show
+    end
   end
 
   # GET /inspections/new
@@ -39,12 +44,15 @@ class InspectionsController < ApplicationController
 
   # POST /inspections
   def create
-    puts 'PARAMS: ', inspection_params
     @inspection = Inspection.new(inspection_params)
     @inspection.create_address(inspection_params[:address_attributes])
 
     if @inspection.save
-      redirect_to @inspection, notice: 'Inspection was successfully created.'
+      if URI(request.referer).path == '/inspections/new_express'
+        redirect_to inspection_path(@inspection, express: true), notice: 'Inspection was successfully created.'
+      else
+        redirect_to @inspection, notice: 'Inspection was successfully created.'
+      end
     else
       render :new
     end

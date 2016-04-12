@@ -6,27 +6,29 @@
         - @inspection.errors.full_messages.each do |msg|
           %li= msg
 
-  = render 'form_section_contact', f:f
-  = render 'form_section_type_express', f:f
-  .row
-    .margin-bottom-10 For which date would you like to schedule your inspection?
+  .columns.small-12.medium-6
+    = render 'form_section_contact', f:f
+    = render 'form_section_type_express', f:f
+  .columns.small-12.medium-6
+    .row
+      .margin-bottom-10 For which date would you like to schedule your inspection?
+      .max-width-px-400
+        %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
+        :javascript
+          $('.datepicker').datepicker({
+            minDate: #{Time.now.hour < 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
+            beforeShowDay: $.datepicker.noWeekends,
+          });
+        %div.margin-bottom-10
+          %small
+            Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
+      .margin-bottom-10 Preferred time of day:
+      .max-width-px-400
+        = f.select(:requested_for_time, options_for_select([['Anytime', nil], ['Morning', 'am'], ['Afternoon', 'pm']]))
+    = render 'form_section_address', f:f
     .max-width-px-400
-      %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
-      :javascript
-        $('.datepicker').datepicker({
-          minDate: #{Time.now.hour < 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
-          beforeShowDay: $.datepicker.noWeekends,
-        });
-      %div.margin-bottom-10
-        %small
-          Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
-    .margin-bottom-10 Preferred time of day:
-    .max-width-px-400
-      = f.select(:requested_for_time, options_for_select([['Anytime', nil], ['Morning', 'am'], ['Afternoon', 'pm']]))
-  = render 'form_section_address', f:f
-  .max-width-px-400
-    .actions
-      %button.button.expanded{ type: 'submit' } Submit
+      .actions
+        %button.button.expanded{ type: 'submit' } Submit
 
 = javascript_include_tag "googleAutocomplete.js"
 = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCFYd57aJ13qV_PwYZ71xMJirGiKrVXuzs&libraries=places&callback=initAutocomplete"

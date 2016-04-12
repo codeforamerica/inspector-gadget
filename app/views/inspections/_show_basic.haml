@@ -1,0 +1,28 @@
+%p#notice= notice
+%p Thank you! Your inspection request has been made for:
+
+.callout
+  %p
+    %b Permit number:
+    = @inspection.permit_number
+  %p
+    %b Contact name:
+    = @inspection.contact_name
+  %p
+    %b Contact phone:
+    = @inspection.contact_phone
+  %p
+    %b Inspection type:
+    = @inspection.inspection_type.to_s
+  %p
+    %b Requested for:
+    = @inspection.requested_for_date.strftime('%A, %b %d')
+    %i= @inspection.requested_for_time
+  %p
+    %b Address:
+    = @inspection.address
+
+.row
+  The building permits department can be reached at 562-570-5237.
+.row
+  To find out what time of day the inspector will arrive, please call back after 8:30am on the day of your inspection.
