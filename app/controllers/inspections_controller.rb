@@ -18,6 +18,10 @@ class InspectionsController < ApplicationController
     render layout: 'print'
   end
 
+  def report
+    @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:report_date])
+  end
+
   # GET /inspections/1
   def show
     if params[:express] == "true"

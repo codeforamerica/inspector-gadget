@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#home'
 
+  get 'inspections/report' => 'inspections#report'
   get 'inspections/new_express' => 'inspections#new_express'
   resources :inspections do
   end

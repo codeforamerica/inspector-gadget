@@ -1,0 +1,79 @@
+-# inspections | AR Collection
+
+= form_tag("", method: 'get') do
+  = label_tag(:report_date, "Choose Date:")
+  .row
+    %input#inspection_requested_for_date.datepicker{ type:'text', name:'report_date', required:'true' }
+    :javascript
+      $('.datepicker').datepicker({
+        minDate: #{Time.zone.now.hour <= 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
+        beforeShowDay: $.datepicker.noWeekends,
+      });
+
+  = submit_tag("View")
+
+.row
+  %h2 Inspections by Inspector
+  - Inspector.joins(:inspector_profile).each do |inspector|
+    %div= inspector.name
+
+    %table
+      %thead
+        %tr
+          %th Permit number
+          %th Contact name
+          %th Contact phone
+          %th Contact email
+          %th Inspection type
+          %th Requested for
+          %th Address
+          %th Assigned to
+          %th
+          %th
+          %th
+
+      %tbody
+        - inspector.inspections.each do |inspection|
+          %tr
+            %td= inspection.permit_number
+            %td= inspection.contact_name
+            %td= inspection.contact_phone
+            %td= inspection.contact_email
+            %td= inspection.inspection_type.to_s
+            %td= inspection.requested_for_date
+            %td= inspection.address
+            %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
+            %td= link_to 'Show', inspection
+            %td= link_to 'Edit', edit_inspection_path(inspection)
+
+  %br
+
+  %h2 Today's Inspections (#{@inspections.count})
+  %table
+    %thead
+      %tr
+        %th Permit number
+        %th Contact name
+        %th Contact phone
+        %th Contact email
+        %th Inspection type
+        %th Requested for
+        %th Address
+        %th Assigned to
+        %th
+        %th
+        %th
+
+    %tbody
+      - @inspections.each do |inspection|
+        %tr
+          %td= inspection.permit_number
+          %td= inspection.contact_name
+          %td= inspection.contact_phone
+          %td= inspection.contact_email
+          %td= inspection.inspection_type.to_s
+          %td= inspection.requested_for_date
+          %td= inspection.address
+          %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
+          %td= link_to 'Show', inspection
+          %td= link_to 'Edit', edit_inspection_path(inspection)
