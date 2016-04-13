@@ -14,7 +14,9 @@
 
 .row
   %h2 Inspections by Inspector
-  - Inspector.joins(:inspector_profile).each do |inspector|
+  - @inspection_assignments.each do |assignment|
+    - inspector = assignment[0]
+    - inspections = assignment[1]
     %div= inspector.name
 
     %table
@@ -33,7 +35,7 @@
           %th
 
       %tbody
-        - inspector.inspections.each do |inspection|
+        - inspections.each do |inspection|
           %tr
             %td= inspection.permit_number
             %td= inspection.contact_name
