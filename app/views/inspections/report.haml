@@ -42,7 +42,7 @@
             %td= inspection.inspection_type.to_s
             %td= inspection.requested_for_date
             %td= inspection.address
-            %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
+            %td= inspection.inspector.present? ? inspection.inspector.name : nil
             %td= link_to 'Show', inspection
             %td= link_to 'Edit', edit_inspection_path(inspection)
 
@@ -74,6 +74,6 @@
           %td= inspection.inspection_type.to_s
           %td= inspection.requested_for_date
           %td= inspection.address
-          %td= inspection.current_assignment.present? ? inspection.current_assignment.inspector.name : nil
+          %td= inspection.inspector.present? ? inspection.inspector.name : nil
           %td= link_to 'Show', inspection
           %td= link_to 'Edit', edit_inspection_path(inspection)
