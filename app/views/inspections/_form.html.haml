@@ -14,7 +14,7 @@
       %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
       :javascript
         $('.datepicker').datepicker({
-          minDate: #{Time.now.hour < 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
+          minDate: #{Time.zone.now.hour <= 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
           beforeShowDay: $.datepicker.noWeekends,
         });
       %div.margin-bottom-10
