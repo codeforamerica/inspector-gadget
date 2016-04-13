@@ -7,12 +7,12 @@
 .row
   .max-width-px-400
     %label Contact name *
-    = f.text_field :contact_name, required: true
+    = f.text_field :contact_name, required: true, placeholder: 'Firstname Lastname'
 .row
   .max-width-px-400
     %label Contact number *
-    = f.text_field :contact_phone, required: true
+    = f.text_field :contact_phone, required: true, placeholder: '(562) 555-1234'
 .row
   .max-width-px-400
     %label Email
-    = f.text_field :contact_email
+    = f.text_field :contact_email, placeholder: 'example@example.com'
