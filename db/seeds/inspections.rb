@@ -201,7 +201,7 @@ Inspection.delete_all
     inspection_notes: 'Test',
     requested_for_date: Faker::Date.backward(30),
     requested_for_time: [nil, 'am','pm'].sample,
-    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    address: Address.create(street_number: "1234", route: "Karen Avenue", city: "Long Beach", state: 'CA', zip: '90808'),
     address_notes: Faker::Lorem.sentence,
   )
 end
@@ -216,7 +216,7 @@ end
     inspection_notes: 'Test',
     requested_for_date: Date.yesterday,
     requested_for_time: [nil, 'am','pm'].sample,
-    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    address: Address.create(street_number: "1234", route: "Karen Avenue", city: "Long Beach", state: 'CA', zip: '90808'),
     address_notes: Faker::Lorem.sentence,
   )
 end
@@ -231,7 +231,7 @@ end
     inspection_notes: 'Test',
     requested_for_date: Date.today,
     requested_for_time: [nil, 'am','pm'].sample,
-    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    address: Address.create(street_number: "1234", route: "Karen Avenue", city: "Long Beach", state: 'CA', zip: '90808'),
     address_notes: Faker::Lorem.sentence,
   )
 end
@@ -246,7 +246,7 @@ end
     inspection_notes: 'Test',
     requested_for_date: Date.tomorrow,
     requested_for_time: [nil, 'am','pm'].sample,
-    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    address: Address.create(street_number: "1234", route: "Karen Avenue", city: "Long Beach", state: 'CA', zip: '90808'),
     address_notes: Faker::Lorem.sentence,
   )
 end
@@ -261,7 +261,7 @@ end
     inspection_notes: 'Test',
     requested_for_date: Faker::Date.forward(30),
     requested_for_time: [nil, 'am','pm'].sample,
-    address: Address.create(line_1: "1234 Example Lane", city: "Long Beach", state: 'CA', zip: '12345'),
+    address: Address.create(street_number: "1234", route: "Karen Avenue", city: "Long Beach", state: 'CA', zip: '90808'),
     address_notes: Faker::Lorem.sentence,
   )
 end
