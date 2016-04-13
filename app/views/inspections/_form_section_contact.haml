@@ -14,5 +14,9 @@
     = f.text_field :contact_phone, required: true, placeholder: '(562) 555-1234'
 .row
   .max-width-px-400
+    = f.check_box :contact_phone_can_text
+    %label Send me text messages at this number
+.row
+  .max-width-px-400
     %label Email
     = f.text_field :contact_email, placeholder: 'example@example.com'
