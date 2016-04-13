@@ -9,7 +9,7 @@
   = render 'form_section_contact', f:f
   = render 'form_section_type_basic', f:f
   .row
-    .margin-bottom-10 For which date would you like to schedule your inspection?
+    .margin-bottom-10 For which date would you like to schedule your inspection? *
     .max-width-px-400
       %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
       :javascript
