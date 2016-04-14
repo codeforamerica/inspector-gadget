@@ -17,7 +17,7 @@
   - @inspection_assignments.each do |assignment|
     - inspector = assignment[0]
     - inspections = assignment[1]
-    %div= inspector.name
+    %h5= inspector.try(:name) || 'Unassigned'
 
     %table
       %thead
