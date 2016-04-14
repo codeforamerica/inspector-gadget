@@ -35,14 +35,14 @@
             %i= inspection.requested_for_time
         .columns.small-4{style: "text-align:right;"}
           .row
-            %strong Submitted at:
-            = inspection.created_at.strftime('%b %e, %l:%M %p %Z')
-          .row
             %strong Contact Name:
             = inspection.contact_name
           .row
             %strong Contact #:
             = inspection.contact_phone
+          .row
+            %strong Submitted at:
+            = inspection.created_at.strftime('%b %e, %l:%M %p %Z')
         .columns.small-12
           %strong Address notes:
           = inspection.address_notes
