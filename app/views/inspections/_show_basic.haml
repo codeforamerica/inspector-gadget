@@ -15,12 +15,18 @@
     %b Inspection type:
     = @inspection.inspection_type.to_s
   %p
+    %b Inspection notes:
+    = @inspection.inspection_notes
+  %p
     %b Requested for:
     = @inspection.requested_for_date.strftime('%A, %b %d')
     %i= @inspection.requested_for_time
   %p
     %b Address:
     = @inspection.address
+  %p
+    %b Address Notes:
+    = @inspection.address_notes
 
 .row
   The building permits department can be reached at 562-570-5237.
