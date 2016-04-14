@@ -13,7 +13,8 @@
   = submit_tag("View")
 
 .row
-  %h2 Inspections by Inspector
+  %h3 Report for #{@report_date}
+  %h4 Inspections by Inspector
   - @inspection_assignments.each do |assignment|
     - inspector = assignment[0]
     - inspections = assignment[1]
@@ -50,7 +51,7 @@
 
   %br
 
-  %h2 Today's Inspections (#{@inspections.count})
+  %h4 All Inspections (#{@inspections.count})
   %table
     %thead
       %tr

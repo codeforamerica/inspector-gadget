@@ -31,4 +31,4 @@
     = line_chart Inspection.where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, Date.tomorrow).group_by_day(:requested_for_date).count
 
   .row
-    %a.expanded.button.button-schedule{ href: inspections_report_path } View Inspection Report
+    %a.expanded.button.button-schedule{ href: "#{inspections_report_path}?report_date=#{Date.today}" } View Inspection Report
