@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'inspections/report' => 'inspections#report'
   get 'inspections/new_express' => 'inspections#new_express'
+  get 'inspections/confirmation' => 'inspections#confirmation'
   resources :inspections do
   end
 

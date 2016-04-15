@@ -1,4 +1,10 @@
 .columns.small-12.medium-6.medium-offset-3
+  %p#notice= notice
+  %p Thank you! Your inspection request has been made for:
   = render 'show_basic'
+  .row
+    The building permits department can be reached at 562-570-5237.
+  .row
+    To find out what time of day the inspector will arrive, please call back after 8:30am on the day of your inspection.
   .row
     = link_to 'Request Another Inspection', new_inspection_path

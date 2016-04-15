@@ -1,0 +1,7 @@
+-# inspections | Array
+
+%h5 The following inspections were scheduled:
+
+- @inspections.each do |inspection|
+  .columns.small-12.medium-12.large-6
+    = render 'show_basic', inspection: inspection

@@ -35,6 +35,10 @@ class InspectionsController < ApplicationController
     end
   end
 
+  def confirmation
+    @inspections = Inspection.where(id: params[:inspection_ids].split(',')) # 1,2 => [1,2]
+  end
+
   # GET /inspections/new
   def new
     @inspection = Inspection.new
@@ -58,9 +62,9 @@ class InspectionsController < ApplicationController
 
     if form.save
       if URI(request.referer).path == '/inspections/new_express'
-        redirect_to inspection_path(@inspection, express: true), notice: 'Inspection was successfully created.'
+        redirect_to inspections_confirmation_path(inspection_ids: form.inspections.map(&:id).join(','), express: true), notice: 'Inspection was successfully created.'
       else
-        redirect_to inspection_path(@inspection), notice: 'Inspection was successfully created.'
+        redirect_to inspections_confirmation_path(inspection_ids: form.inspections.map(&:id).join(',')), notice: 'Inspection was successfully created.'
       end
     else
       render :new
