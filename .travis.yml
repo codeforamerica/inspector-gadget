@@ -1,3 +1,10 @@
 addons:
     code_climate:
         repo_token: d33ce7aec28c807afa994903170bcc332db875587749a1e8ccfa066c2675213a
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database inspector_gadget_test;' -U postgres
+  - psql -U postgres -c "create extension postgis"
+script: bundle exec rspec

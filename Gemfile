@@ -6,10 +6,6 @@ gem 'rails', '4.2.6'
 gem 'rails_12factor'
 gem 'newrelic_rpm'
 
-gem 'rspec'
-gem 'rspec-rails'
-gem 'factory_girl_rails'
-
 gem 'puma'
 
 gem 'pg'
@@ -46,6 +42,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'faker'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :development do
