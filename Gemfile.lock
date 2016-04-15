@@ -51,6 +51,9 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    business_time (0.7.5)
+      activesupport (>= 3.1.0)
+      tzinfo
     byebug (8.2.2)
     chartkick (1.4.1)
     chosen-rails (1.4.3)
@@ -231,6 +234,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   better_errors
   binding_of_caller
+  business_time
   byebug
   chartkick
   chosen-rails

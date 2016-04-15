@@ -5,12 +5,12 @@
         %a.expanded.button.button-schedule{ href: inspections_new_express_path } Schedule an Inspection
       .row
         .columns.small-12.medium-4
-          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{Date.yesterday}", target:'_blank' }
+          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{1.business_day.ago.to_date}", target:'_blank' }
             %span Print Yesterday's Inspections
             %br
-            %small= Date.yesterday.strftime('%b %d, %Y')
+            %small= 1.business_day.ago.to_date.strftime('%b %d, %Y')
             %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.yesterday).count} requests
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", 1.business_day.ago.to_date).count} requests
         .columns.small-12.medium-4
           %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{Date.today}", target:'_blank' }
             %span Print Today's Inspections
@@ -19,16 +19,16 @@
             %br
             %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.today).count} requests
         .columns.small-12.medium-4
-          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{Date.tomorrow}", target:'_blank' }
+          %a.expanded.button.button-view{ href: "#{inspections_print_path}?date=#{1.business_day.from_now.to_date}", target:'_blank' }
             %span Print Tomorrow's Inspections
             %br
-            %small= Date.tomorrow.strftime('%b %d, %Y')
+            %small= 1.business_day.from_now.to_date.strftime('%b %d, %Y')
             %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.tomorrow).count} requests
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", 1.business_day.from_now.to_date).count} requests
 
   .row
     %h3 # Inspections by Day
-    = line_chart Inspection.where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, Date.tomorrow).group_by_day(:requested_for_date).count
+    = line_chart Inspection.where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, 1.business_day.from_now.to_date).group_by_day(:requested_for_date).count
 
   .row
     %a.expanded.button.button-schedule{ href: "#{inspections_report_path}?report_date=#{Date.today}" } View Inspection Report

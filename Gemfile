@@ -28,7 +28,7 @@ gem 'chosen-rails'
 gem 'groupdate'
 gem 'chartkick'
 
-gem 'faker'
+gem 'business_time'
 
 gem 'rubyzip'
 
@@ -44,6 +44,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'faker'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
