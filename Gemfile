@@ -6,6 +6,9 @@ gem 'rails', '4.2.6'
 gem 'rails_12factor'
 gem 'newrelic_rpm'
 
+gem 'rspec'
+gem 'rspec-rails'
+
 gem 'puma'
 
 gem 'pg'
@@ -41,10 +44,10 @@ gem 'rgeo-geojson'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'faker'
 end
 
 group :development do
-  gem 'faker'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
