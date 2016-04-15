@@ -6,6 +6,7 @@
         - @inspection.errors.full_messages.each do |msg|
           %li= msg
 
+  = render 'form_section_permit', f:f
   = render 'form_section_contact', f:f
   = render 'form_section_type_basic', f:f
   .row
