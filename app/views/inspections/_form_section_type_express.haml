@@ -9,7 +9,7 @@
         %label{ for:sc[1] } #{sc[0]}
         %br
   .max-width-px-400
-    %select.inspection-names{ style: "display:none;" }
+    %select.inspection-names{ style: "display:none;", placeholder: "Type here to choose inspection types", multiple: true }
       -# options are inserted here by JS
   .max-width-px-400
     .inspection-type-comments.margin-bottom-10

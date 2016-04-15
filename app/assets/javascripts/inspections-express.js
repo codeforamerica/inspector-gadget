@@ -31,7 +31,7 @@ function enableExpressInspectionDropdowns () {
   })
 
   $('.inspection-names').on('change', function () {
-    $('#inspection_inspection_type_id').val(this.value);
+    $('#inspection_inspection_type_id').val( $(this).val() );
     $('.inspection-type-comments').empty().text($(this).find(':selected').data('comments'))
   })
 
