@@ -10,6 +10,5 @@ FactoryGirl.define do
     requested_for_date "Wed, 20 Apr 2016"
     requested_for_time ""
     address_notes ""
-    address
   end
 end

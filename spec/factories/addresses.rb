@@ -5,5 +5,6 @@ FactoryGirl.define do
     city "Long Beach"
     state "CA"
     zip "90803"
+    inspection
   end
 end

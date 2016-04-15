@@ -24,34 +24,36 @@ class InspectionForm
   validates :inspection_type_id, presence: true
   validates :requested_for_date, presence: true
 
-  def initialize(*args)
-    super(*args)
+  def initialize(params)
+    super(params)
+    @params = params.with_indifferent_access
     @inspections = []
   end
 
   def save
     if valid?
-      types = self.inspection_type_id.split(',')
-      types.length.times do |i|
-        
-        @inspections << create_inspection_with_address(
-          self.tap do |inspection| 
-            inspection.inspection_type_id = types[i]
-          end.as_json.except("validation_context", "errors")
-        )
-      end
+      build_inspections
+      true
+    else
+      false
     end
   end
 
 
   private
 
+  def build_inspections
+    types = @params[:inspection_type_id].split(',')
+    
+    types.length.times do |i|  
+      @inspections << create_inspection_with_address(@params.merge(inspection_type_id: types[i]))
+    end
+  end
+
   def create_inspection_with_address(attributes)
     inspection = Inspection.create(attributes)
-    address = inspection.create_address(attributes["address_attributes"])
+    address = Address.create(attributes["address_attributes"].merge(inspection: inspection))
     inspection
-  rescue
-    return false
   end
 
 end
