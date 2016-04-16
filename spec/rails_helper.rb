@@ -1,6 +1,6 @@
-# Added to top of file per instructions at https://github.com/colszowka/simplecov
-require 'simplecov'
-SimpleCov.start
+# Added to top of file per instructions on CodeClimate
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
