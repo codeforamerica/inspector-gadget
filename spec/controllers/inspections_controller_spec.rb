@@ -27,7 +27,6 @@ describe InspectionsController do
     type_ids = create_list(:inspection_type, 2).map(&:id).join(",")
     params = inspection_params(type_ids: type_ids)
 
-
     post :create, inspection: params
     expect(response.redirect_url).to match(%r{http://test.host/inspections/confirmation\?inspection\_ids\=})
   end

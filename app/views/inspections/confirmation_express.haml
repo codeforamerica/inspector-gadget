@@ -3,18 +3,16 @@
 %p#notice= notice
 .row
   - if @inspections.count == 1
-    %p Thank you! Your inspection request has been made for:
+    %p An inspection request has been made for:
     .small-12.medium-6.medium-centered
       = render 'show_basic', inspection: @inspections.first
   - else
-    %p Thank you! We've recorded the following inspection requests, one for each type of inspection you need:
+    %p We've recorded the following inspection requests, one for each type of inspection selected:
     - @inspections.each do |inspection|
       .columns.small-12.medium-6
         = render 'show_basic', inspection: inspection
 
 .row
-  The building permits department can be reached at 562-570-5237.
-.row
-  To find out what time of day the inspector will arrive, please call back after 8:30am on the day of your inspection.
-.row
   = link_to 'Request Another Inspection', new_inspection_path
+.row
+  = link_to 'Return to Homepage', root_path

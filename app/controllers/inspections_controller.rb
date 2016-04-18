@@ -37,6 +37,12 @@ class InspectionsController < ApplicationController
 
   def confirmation
     @inspections = Inspection.where(id: params[:inspection_ids].split(',')) # 1,2 => [1,2]
+
+    if params[:express] == "true"
+      render :confirmation_express
+    else
+      render :confirmation
+    end
   end
 
   # GET /inspections/new
