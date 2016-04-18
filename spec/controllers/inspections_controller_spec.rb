@@ -31,6 +31,13 @@ describe InspectionsController do
     expect(response.redirect_url).to match(%r{http://test.host/inspections/confirmation\?inspection\_ids\=})
   end
 
+  it '#create should redirect to the express confirmation page when coming from express form' do
+    allow(request).to receive(:referer).and_return('/inspections/new_express')
+
+    post :create, inspection: inspection_params
+    expect(response.redirect_url).to match(%r{http://test.host/inspections/confirmation\?express\=true\&inspection\_ids\=})
+  end
+
   def inspection_params(type_ids: nil)
     type_ids ||= create(:inspection_type).id
 
@@ -46,11 +53,11 @@ describe InspectionsController do
       "requested_for_time"=>"",
       "address_notes"=>"",
       "address_attributes"=>{
-        "street_number"=>"55",
-        "route"=>"Potomac Trail",
-        "city"=>"Newnan",
-        "state"=>"GA",
-        "zip"=>"30263",
+        "street_number"=>"333",
+        "route"=>"West Ocean Blvd",
+        "city"=>"Long Beach",
+        "state"=>"CA",
+        "zip"=>"90803",
       }
     }
   end
