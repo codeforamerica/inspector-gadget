@@ -5,11 +5,11 @@
   .max-width-px-400
     %fieldset
       - InspectionType.pluck(:inspection_supercategory_name, :inspection_supercategory).uniq.each do |sc|
-        %input{ type:'radio', class:"inspection-supercategories", name:"inspection-supercategories", value:sc[1], id:sc[1] }
-        %label{ for:sc[1] } #{sc[0]}
+        %input{ type:'radio', class:"inspection-supercategories", name:"inspection-supercategories", value:sc[1], id:"inspection-supercategory-#{sc[1]}" }
+        %label{ for:"inspection-supercategory-#{sc[1]}" } #{sc[0]}
         %br
   .max-width-px-400
-    %select.inspection-names{ style: "display:none;", placeholder: "Type here to choose inspection types", multiple: true }
+    %select#inspection-names.inspection-names{ style: "display:none;", placeholder: "Type here to choose inspection types", multiple: true }
       -# options are inserted here by JS
   .max-width-px-400
     .inspection-type-comments.margin-bottom-10
