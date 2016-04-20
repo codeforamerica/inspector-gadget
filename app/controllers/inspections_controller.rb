@@ -1,17 +1,6 @@
 class InspectionsController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
-  before_action :allow_iframing, only: [:show, :new]
-
-  # GET /inspections
-  def index
-    @inspections = Inspection.all
-    @inspection_locations = Inspection.joins(:address)
-      .where.not(addresses: { geo_location: nil } )
-      .map{|i| [i.address.geo_location.y, i.address.geo_location.x]}
-    @inspector_regions = Inspector.joins(:inspector_profile).map do |inspector|
-      RGeo::GeoJSON.encode(inspector.inspector_profile.inspection_region).to_json
-    end.reject!{|r| r == "null"}
-  end
+  before_action :allow_iframing, only: [:confirmation, :new]
 
   def print
     @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
@@ -23,15 +12,6 @@ class InspectionsController < ApplicationController
     @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:report_date])
     @inspection_assignments = @inspections.group_by do |inspection|
       inspection.inspector
-    end
-  end
-
-  # GET /inspections/1
-  def show
-    if params[:express] == "true"
-      render :show_express
-    else
-      render :show
     end
   end
 
@@ -56,13 +36,8 @@ class InspectionsController < ApplicationController
     @inspection.build_address
   end
 
-  # GET /inspections/1/edit
-  def edit
-  end
-
   # POST /inspections
   def create
-
     # create one Inspection for each `inspection_type_id` submitted
     form = InspectionForm.new(inspection_params)
 
@@ -75,21 +50,6 @@ class InspectionsController < ApplicationController
     else
       render :new
     end
-  end
-
-  # PATCH/PUT /inspections/1
-  def update
-    if @inspection.update(inspection_params)
-      redirect_to @inspection, notice: 'Inspection was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /inspections/1
-  def destroy
-    @inspection.destroy
-    redirect_to inspections_url, notice: 'Inspection was successfully destroyed.'
   end
 
   private

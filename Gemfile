@@ -11,7 +11,7 @@ gem 'puma'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 gem 'rgeo-shapefile'
-# Use SCSS for stylesheets
+
 gem 'sass-rails', '~> 5.0'
 gem 'foundation-rails'
 
@@ -23,7 +23,9 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'jquery-ui-sass-rails'
 gem 'lodash-rails'
-gem 'chosen-rails'
+
+gem 'compass-rails' # chosen-rails 1.5.1 seems to have this as an undeclared dependency
+gem 'chosen-rails', '1.5.1'
 
 gem 'groupdate'
 gem 'chartkick'
@@ -42,9 +44,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'faker'
+  gem 'factory_girl_rails'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end
 
 group :development do
