@@ -6,7 +6,6 @@
     %input#inspection_requested_for_date.datepicker{ type:'text', name:'report_date', required:'true' }
     :javascript
       $('.datepicker').datepicker({
-        minDate: #{Time.zone.now.hour <= 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
         beforeShowDay: $.datepicker.noWeekends,
       });
 
