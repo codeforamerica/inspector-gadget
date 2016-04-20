@@ -1,4 +1,5 @@
 class Inspection < ActiveRecord::Base
+  has_paper_trail
   has_one :address
   belongs_to :inspection_type
   accepts_nested_attributes_for :address

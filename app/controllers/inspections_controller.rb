@@ -52,6 +52,25 @@ class InspectionsController < ApplicationController
     end
   end
 
+  # GET /inspections/1/edit
+  def edit
+  end
+
+  # PATCH/PUT /inspections/1
+  def update
+    if @inspection.update(inspection_params)
+      redirect_to @inspection, notice: 'Inspection was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  # DELETE /inspections/1
+  def destroy
+    @inspection.destroy
+    redirect_to inspections_url, notice: 'Inspection was successfully destroyed.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_inspection
