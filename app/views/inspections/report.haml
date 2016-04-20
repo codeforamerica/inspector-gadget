@@ -48,6 +48,7 @@
             %td= inspection.inspector.present? ? inspection.inspector.name : nil
             %td= link_to 'Show', inspection
             %td= link_to 'Edit', edit_inspection_path(inspection)
+            %td= link_to 'Delete', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   %br
 
@@ -80,3 +81,4 @@
           %td= inspection.inspector.present? ? inspection.inspector.name : nil
           %td= link_to 'Show', inspection
           %td= link_to 'Edit', edit_inspection_path(inspection)
+          %td= link_to 'Delete', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -15,6 +15,9 @@ class InspectionsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def confirmation
     @inspections = Inspection.where(id: params[:inspection_ids].split(',')) # 1,2 => [1,2]
 
@@ -68,7 +71,7 @@ class InspectionsController < ApplicationController
   # DELETE /inspections/1
   def destroy
     @inspection.destroy
-    redirect_to inspections_url, notice: 'Inspection was successfully destroyed.'
+    redirect_to :back, notice: 'Inspection was successfully destroyed.'
   end
 
   private
