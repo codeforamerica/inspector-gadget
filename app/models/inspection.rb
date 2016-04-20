@@ -7,7 +7,7 @@ class Inspection < ActiveRecord::Base
   validates :inspection_type_id, presence: true
 
   scope :residential, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }
-  scope :commercial, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }
+  scope :commercial, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'commercial'}) }
 
   def inspector
     supercategory = self.inspection_type.inspection_supercategory
