@@ -11,9 +11,9 @@ function enableExpressInspectionDropdowns () {
 
   $('.inspection-supercategories').on('change', function () {
     $.getJSON('/api/v1/inspection_types?supercategory='+this.value, function (inspection_types) {
-      inspection_types = _.uniqBy(inspection_types, function (i) { return i.inspection_category + i.inspection_name; })
+      var inspection_types = _.uniqBy(inspection_types, function (i) { return i.inspection_category + i.inspection_name; })
 
-      $field = $('.inspection-names')
+      var $field = $('.inspection-names')
 
       if ($('.chosen-container').length) {
         $field.chosen("destroy"); // only do this if the element is present - creates a phantom Chosen box if none exists
