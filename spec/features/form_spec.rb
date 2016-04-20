@@ -16,6 +16,7 @@ describe "submitting an inspection request form", :type => :feature do
 
       select("Commercial", :from => 'supercategory') # should reference inspection type created by fabricator above
       wait_for_ajax
+      print page.html
       select("#{type.inspection_category_name}", :from => 'category')
       wait_for_ajax
       select("#{type.inspection_name}", :from => 'name', :match => :prefer_exact)
