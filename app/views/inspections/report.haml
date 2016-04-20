@@ -27,6 +27,7 @@
           %th Contact phone
           %th Contact email
           %th Inspection type
+          %th Created at
           %th Requested for
           %th Address
           %th Assigned to
@@ -42,7 +43,8 @@
             %td= inspection.contact_phone
             %td= inspection.contact_email
             %td= inspection.inspection_type.to_s
-            %td= inspection.requested_for_date
+            %td= inspection.created_at.strftime('%m-%e-%y %H:%M')
+            %td= inspection.requested_for_date.strftime('%m-%e-%y')
             %td= inspection.address
             %td= inspection.inspector.present? ? inspection.inspector.name : nil
             %td= link_to 'Show', inspection
@@ -60,6 +62,7 @@
         %th Contact phone
         %th Contact email
         %th Inspection type
+        %th Created at
         %th Requested for
         %th Address
         %th Assigned to
@@ -75,7 +78,8 @@
           %td= inspection.contact_phone
           %td= inspection.contact_email
           %td= inspection.inspection_type.to_s
-          %td= inspection.requested_for_date
+          %td= inspection.created_at.strftime('%m-%e-%y %H:%M %Z ')
+          %td= inspection.requested_for_date.strftime('%m-%e-%y')
           %td= inspection.address
           %td= inspection.inspector.present? ? inspection.inspector.name : nil
           %td= link_to 'Show', inspection
