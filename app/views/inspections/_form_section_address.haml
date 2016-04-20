@@ -1,7 +1,7 @@
 .row
   .margin-bottom-10 Project address: *
 .field
-  = f.fields_for :address do |addr|
+  = f.fields_for @inspection.address do |addr|
     .max-width-px-400
       #locationField
         %input#autocomplete{:onFocus => "geolocate()", :placeholder => "Enter your address", :type => "text"}
