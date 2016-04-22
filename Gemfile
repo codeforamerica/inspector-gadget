@@ -10,7 +10,6 @@ gem 'puma'
 
 gem 'pg'
 gem 'activerecord-postgis-adapter'
-gem 'rgeo-shapefile'
 gem 'paper_trail'
 
 gem 'sass-rails', '~> 5.0'
@@ -37,6 +36,7 @@ gem 'rubyzip'
 
 gem 'geocoder'
 gem 'rgeo-geojson'
+gem 'rgeo-shapefile'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

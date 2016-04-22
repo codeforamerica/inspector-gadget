@@ -25,7 +25,7 @@ describe "submitting an inspection request form", :type => :feature do
       page.execute_script("$('#route').val('West Ocean Blvd').removeAttr('disabled');")
       page.execute_script("$('#locality').val('Long Beach').removeAttr('disabled');")
       page.execute_script("$('#administrative_area_level_1').val('CA').removeAttr('disabled');")
-      page.execute_script("$('#postal_code').val('90803').removeAttr('disabled');")
+      page.execute_script("$('#postal_code').val('90802').removeAttr('disabled');")
     end
     click_button 'Submit'
     expect(page).to have_content 'Inspection was successfully created.'
@@ -52,7 +52,7 @@ describe "submitting an inspection request form", :type => :feature do
       page.execute_script("$('#route').val('West Ocean Blvd').removeAttr('disabled');")
       page.execute_script("$('#locality').val('Long Beach').removeAttr('disabled');")
       page.execute_script("$('#administrative_area_level_1').val('CA').removeAttr('disabled');")
-      page.execute_script("$('#postal_code').val('90803').removeAttr('disabled');")
+      page.execute_script("$('#postal_code').val('90802').removeAttr('disabled');")
     end
     click_button 'Submit'
     expect(page).to have_content 'Inspection was successfully created.'

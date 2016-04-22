@@ -41,16 +41,15 @@ describe InspectionForm do
       "contact_email"=>"markrossetti@codeforamerica.org",
       "inspection_type_id"=>type_ids.to_s,
       "inspection_notes"=>"",
-      "requested_for_date"=>"Wed,
-      20 Apr 2016",
+      "requested_for_date"=>"Wed, 20 Apr 2016",
       "requested_for_time"=>"",
       "address_notes"=>"",
       "address_attributes"=>{
-        "street_number"=>"55",
-        "route"=>"Potomac Trail",
-        "city"=>"Newnan",
-        "state"=>"GA",
-        "zip"=>"30263",
+        "street_number"=>"333",
+        "route"=>"West Ocean Blvd",
+        "city"=>"Long Beach",
+        "state"=>"CA",
+        "zip"=>"90802",
       }
     }
   end

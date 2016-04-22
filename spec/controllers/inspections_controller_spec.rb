@@ -57,7 +57,7 @@ describe InspectionsController do
         "route"=>"West Ocean Blvd",
         "city"=>"Long Beach",
         "state"=>"CA",
-        "zip"=>"90803",
+        "zip"=>"90802",
       }
     }
   end
