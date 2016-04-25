@@ -23,7 +23,7 @@
           Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
     .margin-bottom-10 Preferred time of day:
     .max-width-px-400
-      = f.select(:requested_for_time, options_for_select([['Anytime', nil], ['Morning 8-12am', 'am'], ['Afternoon 1-4pm', 'pm']]))
+      = f.select(:requested_for_time, options_for_select([['Anytime 8am-4pm', nil], ['Morning 8-12pm', 'am'], ['Afternoon 1-4pm', 'pm']]))
   = render 'form_section_address', f:f
   .max-width-px-400
     .actions
