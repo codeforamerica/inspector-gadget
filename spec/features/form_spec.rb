@@ -11,7 +11,7 @@ describe "submitting an inspection request form", :type => :feature do
       fill_in 'inspection_contact_name', :with => Faker::Name.name
       fill_in 'inspection_contact_phone', :with => Faker::PhoneNumber.phone_number
       fill_in 'inspection_requested_for_date', :with => '10/23/1987'
-      select 'Morning 8-12am', :from => 'inspection_requested_for_time'
+      select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 
       select("Commercial", :from => 'supercategory') # should reference inspection type created by fabricator above
@@ -40,7 +40,7 @@ describe "submitting an inspection request form", :type => :feature do
       fill_in 'inspection_contact_name', :with => Faker::Name.name
       fill_in 'inspection_contact_phone', :with => Faker::PhoneNumber.phone_number
       fill_in 'inspection_requested_for_date', :with => '10/23/1987'
-      select 'Morning 8-12am', :from => 'inspection_requested_for_time'
+      select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 
       choose("Commercial / Multifamily Residential / Condo") # should reference inspection type created by fabricator above
