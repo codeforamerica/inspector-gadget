@@ -10,7 +10,7 @@ describe "submitting an inspection request form", :type => :feature do
       fill_in 'inspection_contact_email', :with => Faker::Internet.email
       fill_in 'inspection_contact_name', :with => Faker::Name.name
       fill_in 'inspection_contact_phone', :with => Faker::PhoneNumber.phone_number
-      fill_in 'inspection_requested_for_date', :with => '10/23/1987'
+      fill_in 'inspection_requested_for_date', :with => Date.tomorrow.strftime("%m/%d/%Y")
       select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 
@@ -39,7 +39,7 @@ describe "submitting an inspection request form", :type => :feature do
       fill_in 'inspection_contact_email', :with => Faker::Internet.email
       fill_in 'inspection_contact_name', :with => Faker::Name.name
       fill_in 'inspection_contact_phone', :with => Faker::PhoneNumber.phone_number
-      fill_in 'inspection_requested_for_date', :with => '10/23/1987'
+      fill_in 'inspection_requested_for_date', :with => Date.tomorrow.strftime("%m/%d/%Y")
       select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 

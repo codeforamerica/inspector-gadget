@@ -49,7 +49,7 @@ describe InspectionsController do
       "contact_email"=>"markrossetti@codeforamerica.org",
       "inspection_type_id"=>type_ids.to_s,
       "inspection_notes"=>"",
-      "requested_for_date"=>"04/15/2016",
+      "requested_for_date"=>Date.tomorrow.strftime("%m/%d/%Y"),
       "requested_for_time"=>"",
       "address_notes"=>"",
       "address_attributes"=>{
