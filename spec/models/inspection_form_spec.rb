@@ -30,6 +30,12 @@ describe InspectionForm do
     # expect(form.inspections.select{|i| i.address.present?}.count).to eq(2)
   end
 
+  it '#save should return false if requested_for_date is in the past' do
+    params = inspection_params.merge({"requested_for_date" => Date.yesterday})
+    form = InspectionForm.new(params)
+    expect(form.save).to be_falsey
+  end
+
   def inspection_params(type_ids: nil)
     type_ids ||= create(:inspection_type).id
 
@@ -41,7 +47,7 @@ describe InspectionForm do
       "contact_email"=>"markrossetti@codeforamerica.org",
       "inspection_type_id"=>type_ids.to_s,
       "inspection_notes"=>"",
-      "requested_for_date"=>"Wed, 20 Apr 2016",
+      "requested_for_date"=>Date.tomorrow,
       "requested_for_time"=>"",
       "address_notes"=>"",
       "address_attributes"=>{

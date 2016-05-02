@@ -23,6 +23,12 @@ class InspectionForm
   validates :contact_phone_can_text, presence: true
   validates :inspection_type_id, presence: true
   validates :requested_for_date, presence: true
+  validate :requested_for_date_must_be_in_future
+  def requested_for_date_must_be_in_future
+    if requested_for_date.present? && requested_for_date < Date.tomorrow
+      errors.add(:requested_for_date, "must be in the future")
+    end
+  end
 
   def initialize(params)
     super(params)
@@ -44,8 +50,8 @@ class InspectionForm
 
   def build_inspections
     types = @params[:inspection_type_id].split(',')
-    
-    types.length.times do |i|  
+
+    types.length.times do |i|
       @inspections << create_inspection_with_address(@params.merge(inspection_type_id: types[i]))
     end
   end

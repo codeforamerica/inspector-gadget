@@ -47,10 +47,6 @@ group :development, :test do
   gem 'byebug'
   gem 'faker'
   gem 'factory_girl_rails'
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem 'capybara'
-  gem 'capybara-webkit'
 end
 
 group :development do
@@ -59,5 +55,9 @@ group :development do
 end
 
 group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'codeclimate-test-reporter', require: false
 end
