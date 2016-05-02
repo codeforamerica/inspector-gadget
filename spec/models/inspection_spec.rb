@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Inspection do
-  describe '#inspector' do
+  describe '#inspector', :ci_skip do
     
     it "returns the correct inspector" do
       inspection = create(:address, street_number: '2061', route: 'Snowden', city: 'Long Beach', state: 'CA', zip: '').inspection
