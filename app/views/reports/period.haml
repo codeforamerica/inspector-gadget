@@ -1,0 +1,20 @@
+.row
+  %h3 Report for Last 30 Days
+
+.row
+  .columns.small-6
+    %h5 Residential Inspections by Category
+    = pie_chart Inspection.residential.joins(:inspection_type).where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, 1.business_day.from_now.to_date).group('inspection_types.inspection_category').count
+
+  .columns.small-6
+    %h5 Commercial Inspections by Category
+    = pie_chart Inspection.commercial.joins(:inspection_type).where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, 1.business_day.from_now.to_date).group('inspection_types.inspection_category').count
+
+.row
+  .columns.small-6
+    %h5 Residential Inspections by Inspector
+    = pie_chart Inspection.residential.joins(:inspection_type).where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, 1.business_day.from_now.to_date).group_by{|i| i.inspector.try(:name)}.map{|ins| [ins[0], ins[1].count]}
+
+  .columns.small-6
+    %h5 Commercial Inspections by Inspector
+    = pie_chart Inspection.commercial.joins(:inspection_type).where("requested_for_date > ? and requested_for_date < ?", Date.today-30.days, 1.business_day.from_now.to_date).group_by{|i| i.inspector.try(:name)}.map{|ins| [ins[0], ins[1].count]}

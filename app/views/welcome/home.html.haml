@@ -32,4 +32,7 @@
 
   .row
     .columns.small-12.medium-6.medium-offset-3
-      %a.expanded.button.button-schedule{ href: "#{inspections_report_path}?report_date=#{Date.today}" } View Inspection Report
+      %a.expanded.button.button-schedule{ href: "#{reports_daily_path}?report_date=#{Date.today}" } View Daily  Report
+  .row
+    .columns.small-12.medium-6.medium-offset-3
+      %a.expanded.button.button-schedule{ href: "#{reports_period_path}" } View 30-Day Report
