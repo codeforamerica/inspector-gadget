@@ -1,7 +1,5 @@
 .row
   .margin-bottom-10 What is the inspection type? *
-  .field
-    = f.hidden_field :inspection_type_id, required: true
   .max-width-px-400
     %select.inspection-supercategories{ name: 'supercategory' }
       %option{ value:'', disabled: true, selected: true } Select a property type
@@ -12,6 +10,7 @@
   .max-width-px-400
     %select.inspection-names{ name: 'name' }
       -# options are inserted here by JS
+  = f.hidden_field :inspection_type_id, required: true, "data-parsley-error-message" => "Please use all three dropdowns above to choose an inspection type."
   .columns.small-12
     .inspection-type-comments.margin-bottom-10
 .row

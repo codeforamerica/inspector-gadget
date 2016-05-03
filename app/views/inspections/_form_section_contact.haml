@@ -3,12 +3,13 @@
 .row
   .max-width-px-400
     %label Contact name *
-    = f.text_field :contact_name, required: true, placeholder: 'Firstname Lastname'
+    = f.text_field :contact_name, placeholder: 'Firstname Lastname', required: true, "data-parsley-error-message" => "Contact name is required."
 .row
   .max-width-px-400
     %label Contact number *
-    = f.text_field :contact_phone, required: true, placeholder: '(562) 555-1234'
-  .max-width-px-400{ style:"margin-top: -10px;" }
+    = f.text_field :contact_phone, placeholder: '(562) 555-1234', required: true, "data-parsley-error-message" => "Phone number is required."
+.row
+  .max-width-px-400
     = f.check_box :contact_phone_can_text
     %label{ for: :contact_phone_can_text } Send me text messages at this number
 .row

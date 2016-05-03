@@ -13,15 +13,15 @@
   .row
     .margin-bottom-10 For which date would you like to schedule your inspection? *
     .max-width-px-400
-      %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
+      - min_days_from_now = Time.zone.now.hour <= 15 ? 1 : 2 # cutoff to schedule next-day inspections is 3pm
+      %input#inspection_requested_for_date.datepicker{ type: 'text', name: 'inspection[requested_for_date]', required: true, "data-parsley-mindate" => (Date.today+min_days_from_now).strftime("%m/%d/%Y") }
       :javascript
         $('.datepicker').datepicker({
-          minDate: #{Time.zone.now.hour <= 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
+          minDate: #{min_days_from_now},
           beforeShowDay: $.datepicker.noWeekends,
         });
       %div.margin-bottom-10
-        %small
-          Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days. No inspections are performed on weekends.
+        Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days.
     .margin-bottom-10 Preferred time of day:
     .max-width-px-400
       = f.select(:requested_for_time, options_for_select([['Anytime 8am-4pm', nil], ['Morning 8-12pm', 'am'], ['Afternoon 1-4pm', 'pm']]))

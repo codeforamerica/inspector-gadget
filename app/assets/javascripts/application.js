@@ -17,15 +17,7 @@
 //= require foundation
 //= require chosen-jquery
 //= require parsley
+//= require parsley-config
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-
-$(document).ready(function () {
-
-  $('#new_inspection').parsley({
-    excluded: 'input[type=button], input[type=submit], input[type=reset]',
-    inputs: 'input, textarea, select, input[type=hidden], :hidden',
-  })
-
-})
