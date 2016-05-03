@@ -10,20 +10,20 @@
       .row
         .field.width-20.margin-right-pct-5.float-left
           .label Street no.
-          %input#street_number.field{ name:'inspection[address_attributes][street_number]', type:'text', disabled:"true"}
+          %input#street_number.field{ name: 'inspection[address_attributes][street_number]', type: 'text', disabled: true, required: true }
         .field.width-75.float-left
           .label Street name
-          %input#route.field{ name:'inspection[address_attributes][route]', type:'text', disabled:"true"}
+          %input#route.field{ name: 'inspection[address_attributes][route]', type: 'text', disabled: true, required: true }
       .row
         .label City
-        %input#locality.field{ name:'inspection[address_attributes][city]', type:'text', disabled:"true"}
+        %input#locality.field{ name: 'inspection[address_attributes][city]', type: 'text', disabled: true, required: true }
       .row
         .field.width-20.margin-right-pct-5.float-left
           .label State
-          %input#administrative_area_level_1.field{ name:'inspection[address_attributes][state]', type:'text', disabled:"true"}
+          %input#administrative_area_level_1.field{ name: 'inspection[address_attributes][state]', type: 'text', disabled: true, required: true }
         .field.width-75.float-left
           .label Zip code
-          %input#postal_code.field{ name:'inspection[address_attributes][zip]', type:'text', disabled:"true"}
+          %input#postal_code.field{ name: 'inspection[address_attributes][zip]', type: 'text', disabled: true, required: true }
 .row
   .margin-bottom-10 Any address notes or instructions for when the inspector arrives? (e.g. suite number, floor, gate code, lock box combination, dog)
   .max-width-px-400

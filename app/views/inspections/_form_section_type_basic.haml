@@ -1,7 +1,7 @@
 .row
   .margin-bottom-10 What is the inspection type? *
   .field
-    = f.hidden_field :inspection_type_id
+    = f.hidden_field :inspection_type_id, required: true
   .max-width-px-400
     %select.inspection-supercategories{ name: 'supercategory' }
       %option{ value:'', disabled: true, selected: true } Select a property type
