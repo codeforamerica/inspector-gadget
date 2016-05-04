@@ -80,7 +80,10 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation, { except: %w[spatial_ref_sys] }
+    DatabaseCleaner.clean_with :truncation, { except: %w[spatial_ref_sys] }
     load "#{Rails.root}/db/seeds/inspectors.rb"
+    load "#{Rails.root}/db/seeds/inspection_types.rb"
 
     # inspector region GIS data isn't available on the test server
     unless config.exclusion_filter.rules[:ci_skip] == true

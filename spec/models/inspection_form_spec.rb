@@ -18,7 +18,7 @@ describe InspectionForm do
   end
 
   it 'creates multiple inspections given multiple inspection_type_ids' do
-    type_ids = create_list(:inspection_type, 2).map(&:id).join(",")
+    type_ids = InspectionType.commercial.order('random()').limit(2).pluck(:id).join(",")
     form = InspectionForm.new(inspection_params(type_ids: type_ids))
     expect(form.save).to be_truthy
     expect(form.inspections.count).to eq(2)
@@ -37,7 +37,7 @@ describe InspectionForm do
   end
 
   def inspection_params(type_ids: nil)
-    type_ids ||= create(:inspection_type).id
+    type_ids ||= InspectionType.commercial.order('random()').first.id
 
     {
       "permit_number"=>"BRMD12314",

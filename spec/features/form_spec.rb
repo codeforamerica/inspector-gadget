@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "submitting an inspection request form", :type => :feature do
 
   it "as a non-staff user" do
-    type = create(:inspection_type) # fabricator should create a "Commercial" inspection type
+    type = InspectionType.commercial.find_by(inspection_category: 'cell_sites', inspection_name: 'Framing / Attachments')
     visit '/inspections/new'
     within("#new_inspection") do
       fill_in 'inspection_permit_number', :with => 'BRM1234'
@@ -32,7 +32,7 @@ describe "submitting an inspection request form", :type => :feature do
   end
 
   it "as a staff user (express form)" do
-    type = create(:inspection_type) # fabricator should create a "Commercial" inspection type
+    type = InspectionType.commercial.find_by(inspection_category: 'cell_sites', inspection_name: 'Framing / Attachments')
     visit '/inspections/new_express'
     within("#new_inspection") do
       fill_in 'inspection_permit_number', :with => 'BRM1234'

@@ -1,26 +1,51 @@
-##### USERS
-User.delete_all
-InspectorProfile.delete_all
+##### INSPECTORS
 
-# Inspectors
-Inspector.create(name: "Engler").create_inspector_profile(inspector_type: 'residential')
-Inspector.create(name: "Lloyd").create_inspector_profile(inspector_type: 'residential')
-Inspector.create(name: "Morey").create_inspector_profile(inspector_type: 'residential')
-Inspector.create(name: "Ciarrelli").create_inspector_profile(inspector_type: 'residential')
-Inspector.create(name: "Reza").create_inspector_profile(inspector_type: 'residential')
-Inspector.create(name: "Flacks").create_inspector_profile(inspector_type: 'residential')
-Inspector.create(name: "Mann").create_inspector_profile(inspector_type: 'residential')
+inspector = Inspector.find_or_create_by(name: "Engler")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
 
-Inspector.create(name: "Aaker").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['photovoltaic'])
-Inspector.create(name: "Ingram").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['electric'])
-Inspector.create(name: "Varnes").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['electric'])
-Inspector.create(name: "Mechanical").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['mechanical'])
-Inspector.create(name: "Marquez").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['building'])
-Inspector.create(name: "Nicholls").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['building'])
-Inspector.create(name: "Plumbing").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['plumbing'])
-Inspector.create(name: "Joe").create_inspector_profile(inspector_type: 'commercial', inspection_categories: ['fire'])
+inspector = Inspector.find_or_create_by(name: "Lloyd")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
 
-# Customers
-# Customer.create(name: "Mark Rossetti", email: "markrossetti@codeforamerica.org")
-# Customer.create(name: "Patrick McDonnell", email: "patrick@codeforamerica.org")
-# Customer.create(name: "Lisa Ratner", email: "lisa@codeforamerica.org")
+inspector = Inspector.find_or_create_by(name: "Morey")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
+
+inspector = Inspector.find_or_create_by(name: "Ciarrelli")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
+
+inspector = Inspector.find_or_create_by(name: "Reza")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
+
+inspector = Inspector.find_or_create_by(name: "Flacks")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
+
+inspector = Inspector.find_or_create_by(name: "Mann")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['residential_general'])
+
+inspector = Inspector.find_or_create_by(name: "Aaker")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential').update_attributes(inspection_assignments: ['photovoltaic'])
+
+# ----------
+
+inspector = Inspector.find_or_create_by(name: "Ingram")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['electric', 'sign']) #'photovoltaic' for all areas
+
+inspector = Inspector.find_or_create_by(name: "Varnes")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['electric'])
+
+inspector = Inspector.find_or_create_by(name: "Mechanical")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['mechanical'])
+
+inspector = Inspector.find_or_create_by(name: "Marquez")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['building']) # roof, foundation, drywall
+
+inspector = Inspector.find_or_create_by(name: "Nicholls")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['building']) # roof, foundation, drywall
+
+inspector = Inspector.find_or_create_by(name: "Plumbing")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['plumbing'])
+
+inspector = Inspector.find_or_create_by(name: "Joe")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['fire'])
+
+inspector = Inspector.find_or_create_by(name: "PLANNING")
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial').update_attributes(inspection_assignments: ['planning'])
