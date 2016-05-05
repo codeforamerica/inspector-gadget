@@ -13,7 +13,7 @@ Assignment.delete_all
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Rough Electrical', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Rough Mechanical', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Rough Plumbing', assignment_categories: ['residential_general']},
-  {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Rough Hydro for Fire Sprinkler System', assignment_categories: ['fire']}, - Joe
+  {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Rough Hydro for Fire Sprinkler System', assignment_categories: ['fire']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Framing', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Insulation / Energy', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Drywall', assignment_categories: ['residential_general']},
@@ -23,7 +23,7 @@ Assignment.delete_all
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Electrical Final', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Plumbing Final', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Mechanical Final', assignment_categories: ['residential_general']},
-  {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Fire Final', assignment_categories: ['fire']}, - Joe
+  {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Fire Final', assignment_categories: ['fire']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Planning Final', assignment_categories: ['planning']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Building Final', assignment_categories: ['residential_general']},
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'roof', category_name: 'Roof', name: 'Pre-cover / Tear Off', assignment_categories: ['residential_general']},
@@ -177,7 +177,7 @@ Assignment.delete_all
   {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Planning Final', assignment_categories: ['electric']},
   {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Fire Final', assignment_categories: ['fire']},
   {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Electrical Release', assignment_categories: ['electric']},
-  {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Building Final', assignment_categories: ['building']}, # unassigned
+  {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Building Final', assignment_categories: ['building']},
 ].each do |it|
   type = InspectionType.find_or_create_by(
     inspection_supercategory: it[:supercategory],
