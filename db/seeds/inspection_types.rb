@@ -178,6 +178,10 @@ Assignment.delete_all
   {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Fire Final', assignment_categories: ['fire']},
   {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Electrical Release', assignment_categories: ['electric']},
   {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'cell_sites', category_name: 'Cell Sites', name: 'Building Final', assignment_categories: ['building']},
+
+  # one 'other' category for each supercategory, per city request
+  {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'other', category_name: 'Other', name: 'Other', comments: 'Please write in comments section below', assignment_categories: []},
+  {supercategory: 'commercial', supercategory_name: 'Commercial / Multifamily Residential / Condo', category: 'other', category_name: 'Other', name: 'Other', comments: 'Please write in comments section below', assignment_categories: []},
 ].each do |it|
   type = InspectionType.find_or_create_by(
     inspection_supercategory: it[:supercategory],
