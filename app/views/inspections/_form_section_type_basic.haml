@@ -1,4 +1,4 @@
-.row
+.row#inspection-type-basic
   .margin-bottom-10 What is the inspection type? *
   .max-width-px-400
     %select.inspection-supercategories{ name: 'supercategory' }
@@ -8,9 +8,9 @@
     %select.inspection-categories{ name: 'category' }
       -# options are inserted here by JS
   .max-width-px-400
-    %select.inspection-names{ name: 'name' }
+    %select#inspection-names.inspection-names{ style: "display:none;", placeholder: "Type here to choose inspection types", multiple: true }
       -# options are inserted here by JS
-  = f.hidden_field :inspection_type_id, required: true, "data-parsley-error-message" => "Please use all three dropdowns above to choose an inspection type."
+  = f.hidden_field :inspection_type_id, required: true
   .columns.small-12
     .inspection-type-comments.margin-bottom-10
 .row

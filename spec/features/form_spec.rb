@@ -18,7 +18,7 @@ describe "submitting an inspection request form", :type => :feature do
       wait_for_ajax
       select("#{type.inspection_category_name}", :from => 'category')
       wait_for_ajax
-      select("#{type.inspection_name}", :from => 'name', :match => :prefer_exact)
+      chosen_select("#{type.inspection_name}", from: 'inspection_names')
       
       # Google Places Autocomplete is *very* difficult to fake user interaction for
       page.execute_script("$('#street_number').val('333').removeAttr('disabled');")

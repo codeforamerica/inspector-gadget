@@ -1,8 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
 $(document).ready(function () {
-  if ( $('.inspection-new-express').length > 0 ) {
+  if ( $('#inspection-type-express').length > 0 ) {
     enableExpressInspectionDropdowns()
   }
 });
@@ -26,14 +23,19 @@ function enableExpressInspectionDropdowns () {
       $field.chosen({
         allow_single_deselect: true,
         no_results_text: 'No results matched',
-        width: '300px',
+        width: '400px',
       });
     })
   })
 
   $('.inspection-names').on('change', function () {
     $('#inspection_inspection_type_id').val( $(this).val() );
-    $('.inspection-type-comments').empty().text($(this).find(':selected').data('comments'))
-  })
+    $('.inspection-type-comments').html(function () {
+      var allComments = $.map( $('.inspection-names').children(':selected'), function (el) {
+        return $(el).data('comments');
+      });
+      return allComments.join('<br />');
+    }());
+  });
 
 }

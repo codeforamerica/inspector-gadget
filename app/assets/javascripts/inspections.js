@@ -1,8 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
 $(document).ready(function () {
-  if ( $('.inspection-new').length > 0 ) {
+  if ( $('#inspection-type-basic').length > 0 ) {
     enableInspectionDropdowns()
   }
 });
@@ -26,58 +23,33 @@ function enableInspectionDropdowns () {
     var supercategory = $('.inspection-supercategories').val()
     $.getJSON('/api/v1/inspection_types?supercategory='+supercategory+'&category='+this.value, function (inspection_types) {
 
-      // set up subsequent dropdown (names) with options
-      $('.inspection-names').show().html( $("<option value='', disabled='true', selected='true'>Select an inspection type</option>") ) // start with a blank
+      // set up multiselect (names) with options
+      var $field = $('.inspection-names')
+
+      if ($('.chosen-container').length) {
+        $field.chosen("destroy"); // only do this if the element is present - creates a phantom Chosen box if none exists
+      }
+
+      $field.show().html( $("<option>") ) // start with a blank
       $(inspection_types).each(function (index, type) {
-        $('.inspection-names').append( $("<option>", { value: type.id, html: type.inspection_name, "data-comments": type.comments }) )
+        $field.append( $("<option>", { value: type.id, html: (type.inspection_category_name+' - '+type.inspection_name), "data-comments": type.comments }) )
       })
+      $field.chosen({
+        allow_single_deselect: true,
+        no_results_text: 'No results matched',
+        width: '400px',
+      });
     })
   })
   
   $('.inspection-names').on('change', function () {
-    $('#inspection_inspection_type_id').val(this.value);
-    $('.inspection-type-comments').empty().text($(this).find(':selected').data('comments'))
-  })
-
-}
-
-
-// MAP (LEAFLET.JS)
-function launchMap () {
-
-  // set in .html.haml when ready to launch this feature
-  // var inspectionLocations = #{ @inspection_locations }
-  // var inspectorRegions = #{ @inspector_regions }
-
-  var customIcon = L.icon({
-    iconUrl: "#{image_path('marker-icon.png')}",
-    iconRetinaUrl: "#{image_path('marker-icon-2x.png')}",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [-3, -76],
-    shadowUrl: "#{image_path('marker-shadow.png')}",
-    shadowRetinaUrl: "#{image_path('marker-shadow.png')}",
-    shadowSize: [41, 41],
-    shadowAnchor: [20, 41]
+    $('#inspection_inspection_type_id').val( $(this).val() );
+    $('.inspection-type-comments').html(function () {
+      var allComments = $.map( $('.inspection-names').children(':selected'), function (el) { 
+        return $(el).data('comments');
+      });
+      return allComments.join('<br />');
+    }());
   });
 
-  var map = L.map('map').setView([33.7683, -118.1956], 12);
-
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.mapbox-streets-v6',
-    accessToken: "pk.eyJ1IjoiY29kZWZvcmFtZXJpY2EiLCJhIjoiSTZlTTZTcyJ9.3aSlHLNzvsTwK-CYfZsG_Q",
-  }).addTo(map);
-
-
-  inspectionLocations.forEach(function (location) {
-    L.marker(location, {icon: customIcon}).addTo(map)
-  })
-
-  inspectorRegions.forEach(function (region) {
-    var poly = L.polygon(JSON.parse(region).coordinates)
-    poly.addTo(map)
-    map.fitBounds(poly.getBounds());
-  })
 }
