@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420164204) do
+ActiveRecord::Schema.define(version: 20160504181646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,10 @@ ActiveRecord::Schema.define(version: 20160420164204) do
   end
 
   create_table "assignments", force: :cascade do |t|
-    t.integer  "inspector_id"
-    t.integer  "inspection_id"
-    t.datetime "scheduled_for"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "inspector_profile_id"
+    t.integer  "inspection_type_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "inspection_types", force: :cascade do |t|
@@ -65,10 +64,10 @@ ActiveRecord::Schema.define(version: 20160420164204) do
   create_table "inspector_profiles", force: :cascade do |t|
     t.integer   "inspector_id"
     t.string    "inspector_type"
-    t.text      "inspection_categories",                                                                  default: [],              array: true
-    t.datetime  "created_at",                                                                                          null: false
-    t.datetime  "updated_at",                                                                                          null: false
-    t.geography "inspection_region",     limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
+    t.text      "inspection_assignments",                                                                  default: [],              array: true
+    t.datetime  "created_at",                                                                                           null: false
+    t.datetime  "updated_at",                                                                                           null: false
+    t.geography "inspection_region",      limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
   end
 
   create_table "users", force: :cascade do |t|

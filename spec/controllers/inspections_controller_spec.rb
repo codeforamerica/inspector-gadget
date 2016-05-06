@@ -14,7 +14,7 @@ describe InspectionsController do
 
   it '#create with multiple inspection_type_ids should create multiple inspections' do
     allow(request).to receive(:referer).and_return('') # anything will do, just not `nil`
-    type_ids = create_list(:inspection_type, 2).map(&:id).join(",")
+    type_ids = InspectionType.commercial.order('random()').limit(2).pluck(:id).join(",")
     params = inspection_params(type_ids: type_ids)
 
     expect{ 
@@ -24,7 +24,7 @@ describe InspectionsController do
 
   it '#create should redirect to a confirmation page after creating multiple inspections' do
     allow(request).to receive(:referer).and_return('') # anything will do, just not `nil`
-    type_ids = create_list(:inspection_type, 2).map(&:id).join(",")
+    type_ids = InspectionType.commercial.order('random()').limit(2).pluck(:id).join(",")
     params = inspection_params(type_ids: type_ids)
 
     post :create, inspection: params
@@ -39,7 +39,7 @@ describe InspectionsController do
   end
 
   def inspection_params(type_ids: nil)
-    type_ids ||= create(:inspection_type).id
+    type_ids ||= InspectionType.commercial.order('random()').first.id
 
     {
       "permit_number"=>"BRMD12314",

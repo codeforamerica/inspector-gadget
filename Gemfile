@@ -39,14 +39,8 @@ gem 'geocoder'
 gem 'rgeo-geojson'
 gem 'rgeo-shapefile'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'faker'
-  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -57,7 +51,10 @@ end
 group :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'database_cleaner'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'codeclimate-test-reporter', require: false
 end

@@ -1,17 +1,18 @@
 addons:
-    code_climate:
-        repo_token: d33ce7aec28c807afa994903170bcc332db875587749a1e8ccfa066c2675213a
+  code_climate:
+    repo_token: d33ce7aec28c807afa994903170bcc332db875587749a1e8ccfa066c2675213a
 services:
-  - postgresql
+- postgresql
 
 before_install:
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+- "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
 before_script:
-  - psql -c 'create database inspector_gadget_test;' -U postgres
-  - psql -U postgres -c "create extension postgis"
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 1 # give xvfb some time to start
+- psql -c 'create database inspector_gadget_test;' -U postgres
+- psql -U postgres -c "create extension postgis"
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
+- sleep 1 # give xvfb some time to start
 
-script: bundle exec rspec --tag '~ci_skip'
+script:
+- bundle exec rspec --tag '~ci_skip'
