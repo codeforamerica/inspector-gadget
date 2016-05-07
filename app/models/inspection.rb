@@ -4,6 +4,8 @@ class Inspection < ActiveRecord::Base
   belongs_to :inspection_type
   accepts_nested_attributes_for :address
 
+  phony_normalize :contact_phone, default_country_code: 'US'
+
   validates :inspection_type_id, presence: true
 
   scope :residential, -> { joins(:inspection_type).where(inspection_types: {inspection_supercategory: 'residential'}) }

@@ -171,6 +171,10 @@ GEM
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1)
     pg (0.18.4)
+    phony (2.15.21)
+    phony_rails (0.14.0)
+      activesupport (>= 3.0)
+      phony (~> 2.12)
     puma (3.4.0)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -309,6 +313,7 @@ DEPENDENCIES
   newrelic_rpm
   paper_trail
   pg
+  phony_rails
   puma
   rails (= 4.2.6)
   rails_12factor
@@ -325,4 +330,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.12.1
+   1.12.2

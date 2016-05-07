@@ -39,7 +39,7 @@
             = inspection.contact_name
           .row
             %strong Contact #:
-            = inspection.contact_phone
+            = inspection.contact_phone.phony_formatted
           .row
             %strong Submitted at:
             = inspection.created_at.strftime('%b %e, %l:%M %p %Z')
