@@ -1,31 +1,64 @@
 -# inspections | AR Collection
 
-= form_tag("", method: 'get') do
-  = label_tag(:report_date, "Choose Date:")
+- content_for(:full_width) do
+
   .row
-    %input#inspection_requested_for_date.datepicker{ type:'text', name:'report_date', required:'true' }
-    :javascript
-      $('.datepicker').datepicker({
-        beforeShowDay: $.datepicker.noWeekends,
-      });
+    = form_tag("", method: 'get') do
+      = label_tag(:report_date, "Choose Date:")
+      %input#inspection_requested_for_date.datepicker{ type:'text', name:'report_date', required:'true' }
+      :javascript
+        $('.datepicker').datepicker({
+          beforeShowDay: $.datepicker.noWeekends,
+        });
 
-  = submit_tag("View")
+      = submit_tag("View")
 
-.row
-  %h3 Report for #{@report_date}
-  %h4 Inspections by Inspector
-  - @inspection_assignments.each do |assignment|
-    - inspector = assignment[0]
-    - inspections = assignment[1]
-    %h5= inspector.try(:name) || 'Unassigned'
+  .row
+    %h3 Report for #{@report_date}
+    %h4 Inspections by Inspector
+    - @inspection_assignments.each do |assignment|
+      - inspector = assignment[0]
+      - inspections = assignment[1]
+      %h5= inspector.try(:name) || 'Unassigned'
 
+      %table
+        %thead
+          %tr
+            %th Permit number
+            %th Contact name
+            %th Contact phone
+            %th Inspection type
+            %th Created at
+            %th Requested for
+            %th Address
+            %th Assigned to
+            %th
+            %th
+
+        %tbody
+          - inspections.each do |inspection|
+            %tr
+              %td= inspection.permit_number
+              %td= inspection.contact_name
+              %td= inspection.contact_phone.phony_formatted
+              %td= inspection.inspection_type.to_s
+              %td= inspection.created_at.strftime('%m-%e-%y %H:%M')
+              %td= inspection.requested_for_date.strftime('%m-%e-%y')
+              %td= inspection.address
+              %td= inspection.inspector.present? ? inspection.inspector.name : nil
+              %td
+                %div= link_to 'Edit', edit_inspection_path(inspection)
+                %div= link_to 'Delete', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    %br
+
+    %h4 All Inspections (#{@inspections.count})
     %table
       %thead
         %tr
           %th Permit number
           %th Contact name
           %th Contact phone
-          %th Contact email
           %th Inspection type
           %th Created at
           %th Requested for
@@ -36,52 +69,16 @@
           %th
 
       %tbody
-        - inspections.each do |inspection|
+        - @inspections.each do |inspection|
           %tr
             %td= inspection.permit_number
             %td= inspection.contact_name
             %td= inspection.contact_phone.phony_formatted
-            %td= inspection.contact_email
             %td= inspection.inspection_type.to_s
-            %td= inspection.created_at.strftime('%m-%e-%y %H:%M')
+            %td= inspection.created_at.strftime('%m-%e-%y %H:%M %Z ')
             %td= inspection.requested_for_date.strftime('%m-%e-%y')
             %td= inspection.address
             %td= inspection.inspector.present? ? inspection.inspector.name : nil
-            %td= link_to 'Show', inspection
-            %td= link_to 'Edit', edit_inspection_path(inspection)
-            %td= link_to 'Delete', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-  %br
-
-  %h4 All Inspections (#{@inspections.count})
-  %table
-    %thead
-      %tr
-        %th Permit number
-        %th Contact name
-        %th Contact phone
-        %th Contact email
-        %th Inspection type
-        %th Created at
-        %th Requested for
-        %th Address
-        %th Assigned to
-        %th
-        %th
-        %th
-
-    %tbody
-      - @inspections.each do |inspection|
-        %tr
-          %td= inspection.permit_number
-          %td= inspection.contact_name
-          %td= inspection.contact_phone.phony_formatted
-          %td= inspection.contact_email
-          %td= inspection.inspection_type.to_s
-          %td= inspection.created_at.strftime('%m-%e-%y %H:%M %Z ')
-          %td= inspection.requested_for_date.strftime('%m-%e-%y')
-          %td= inspection.address
-          %td= inspection.inspector.present? ? inspection.inspector.name : nil
-          %td= link_to 'Show', inspection
-          %td= link_to 'Edit', edit_inspection_path(inspection)
-          %td= link_to 'Delete', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td
+              %div= link_to 'Edit', edit_inspection_path(inspection)
+              %div= link_to 'Delete', inspection, :method => :delete, :data => { :confirm => 'Are you sure?' }
