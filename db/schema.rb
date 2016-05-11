@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504181646) do
+ActiveRecord::Schema.define(version: 20160511052955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
   enable_extension "postgis"
 
   create_table "addresses", force: :cascade do |t|
@@ -28,6 +29,8 @@ ActiveRecord::Schema.define(version: 20160504181646) do
     t.string    "street_number"
     t.string    "route"
   end
+
+  add_index "addresses", ["inspection_id"], name: "index_addresses_on_inspection_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "inspector_profile_id"
@@ -69,6 +72,8 @@ ActiveRecord::Schema.define(version: 20160504181646) do
     t.datetime  "updated_at",                                                                                           null: false
     t.geography "inspection_region",      limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
   end
+
+  add_index "inspector_profiles", ["inspector_id"], name: "index_inspector_profiles_on_inspector_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
