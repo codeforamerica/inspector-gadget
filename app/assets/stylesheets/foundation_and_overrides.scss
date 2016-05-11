@@ -52,7 +52,8 @@
 // @include motion-ui-animations;
 
 select,
-input[type='text'] {
+input[type='text'],
+textarea {
   box-shadow: none;
   border-color: black;
   height: 1.5rem;

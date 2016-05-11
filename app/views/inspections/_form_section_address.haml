@@ -24,7 +24,6 @@
           .label Zip code
           %input#postal_code.field{ name: 'inspection[address_attributes][zip]', type: 'text', disabled: true, required: true }
 .row
-  .margin-bottom-10 Any address notes or instructions for when the inspector arrives? (e.g. suite number, floor, gate code, lock box combination, dog)
+  .max-width-px-400.margin-bottom-10 Any address notes or instructions for when the inspector arrives? (e.g. suite number, floor, gate code, lock box combination, dog)
   .max-width-px-400
-    = f.label :address_notes
-    = f.text_field :address_notes
+    = f.text_area :address_notes
