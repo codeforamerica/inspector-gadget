@@ -9,7 +9,7 @@
     = inspection.contact_name
   %p
     %b Contact phone:
-    = inspection.contact_phone.phony_formatted
+    = inspection.contact_phone.phony_formatted(normalize: :US)
   %p
     %b Inspection type:
     = inspection.inspection_type.to_s

@@ -40,7 +40,7 @@
             %tr
               %td= inspection.permit_number
               %td= inspection.contact_name
-              %td= inspection.contact_phone.phony_formatted
+              %td= inspection.contact_phone.phony_formatted(normalize: :US)
               %td= inspection.inspection_type.to_s
               %td= inspection.created_at.strftime('%m-%e-%y %H:%M')
               %td= inspection.requested_for_date.strftime('%m-%e-%y')
@@ -73,7 +73,7 @@
           %tr
             %td= inspection.permit_number
             %td= inspection.contact_name
-            %td= inspection.contact_phone.phony_formatted
+            %td= inspection.contact_phone.phony_formatted(normalize: :US)
             %td= inspection.inspection_type.to_s
             %td= inspection.created_at.strftime('%m-%e-%y %H:%M %Z ')
             %td= inspection.requested_for_date.strftime('%m-%e-%y')
