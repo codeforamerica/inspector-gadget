@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "submitting an inspection request form", :type => :feature do
 
   it "as a non-staff user" do
-    type = InspectionType.commercial.find_by(inspection_category: 'cell_sites', inspection_name: 'Framing / Attachments')
+    type = InspectionType.commercial.find_by(inspection_category: 'plumbing', inspection_name: 'Water Heater')
     visit '/inspections/new'
     within("#new_inspection") do
       fill_in 'inspection_permit_number', :with => 'BRM1234'
@@ -14,9 +14,7 @@ describe "submitting an inspection request form", :type => :feature do
       select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 
-      select("Commercial", :from => 'supercategory') # should reference inspection type created by fabricator above
-      wait_for_ajax
-      select("#{type.inspection_category_name}", :from => 'category')
+      choose("Single-family / Duplex") # should reference inspection type created by fabricator above
       wait_for_ajax
       chosen_select("#{type.inspection_name}", from: 'inspection_names')
       
