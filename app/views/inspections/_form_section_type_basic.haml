@@ -1,17 +1,16 @@
-.row#inspection-type-basic
+.row#inspection-type-express
   .margin-bottom-10 What is the inspection type? *
   .max-width-px-400
-    %select.inspection-supercategories{ name: 'supercategory' }
-      %option{ value:'', disabled: true, selected: true } Select a property type
-      = options_for_select([['Single-family / Duplex', 'residential'], ['Three or more units: Multi-family Residential / Condo', 'commercial'], ['Commercial', 'commercial']])
-  .max-width-px-400
-    %select.inspection-categories{ name: 'category' }
-      -# options are inserted here by JS
+    %fieldset
+      - [['Single-family / Duplex', 'residential'], ['Three or more units: Multi-family Residential / Condo', 'commercial'], ['Commercial', 'commercial']].each do |sc|
+        %input{ type:'radio', class:"inspection-supercategories", name:"inspection-supercategories", value:sc[1], id:"inspection-supercategory-#{sc[1]}" }
+        %label{ for:"inspection-supercategory-#{sc[1]}" } #{sc[0]}
+        %br
   .max-width-px-400
     %select#inspection-names.inspection-names{ style: "display:none;", placeholder: "Type here to choose inspection types", multiple: true }
       -# options are inserted here by JS
-  = f.hidden_field :inspection_type_id, required: true
-  .columns.small-12
+  = f.hidden_field :inspection_type_id, required: true, "data-parsley-error-message" => "Please choose at least one inspection type."
+  .max-width-px-400
     .inspection-type-comments.margin-bottom-10
 .row
   .margin-bottom-10 Any details or clarification on the type of inspection required?

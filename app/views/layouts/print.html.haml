@@ -10,19 +10,9 @@
   - @inspections.each_slice(3) do |inspections|
     - inspections.each do |inspection|
       .inspection
-        .columns.small-12
-          .row
-            %div{style: "text-align:right;"}
-              %strong Inspector:
-              - if inspection.inspector.present?
-                = inspection.inspector["name"]
-              - else # space to write inspector's name by hand
-                ____________________
         .columns.small-8
-          .row
-            %div
-              %strong Address:
-              = inspection.address
+          .row.margin-bottom-10
+            %strong= inspection.address
           .row
             %strong Permit/App #:
             = inspection.permit_number
@@ -30,10 +20,17 @@
             %strong Inspection Type:
             = inspection.inspection_type
           .row
-            %strong Requested For Date:
+            %strong Requested for:
             = inspection.requested_for_date.to_date
             %i= inspection.requested_for_time
         .columns.small-4{style: "text-align:right;"}
+          .row.margin-bottom-10
+            %div{style: "text-align:right;"}
+              %strong Inspector:
+              - if inspection.inspector.present?
+                = inspection.inspector["name"]
+              - else # space to write inspector's name by hand
+                ____________________
           .row
             %strong Contact Name:
             = inspection.contact_name
