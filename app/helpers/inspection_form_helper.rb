@@ -1,5 +1,6 @@
 module InspectionFormHelper
-  def min_days_from_now
-    Time.zone.now.hour <= 15 ? 1 : 2 # cutoff to schedule next-day inspections is 3pm
+  def next_available_date
+    next_available = 1.business_day.after(0.business_hours.from_now)
+    next_available.to_date
   end
 end
