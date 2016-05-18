@@ -7,7 +7,7 @@ describe InspectionFormHelper do
     end
 
     it 'should return Thursday on a Wednesday before 3pm' do
-      Timecop.freeze( Time.zone.now.next_week(:wednesday).advance(hours: 12) ) do
+      Timecop.freeze( Time.zone.now.next_week(:wednesday).advance(hours: 14, minutes: 30) ) do
         expect( next_available_date.strftime('%A') ).to eq('Thursday');
       end
     end
@@ -18,14 +18,32 @@ describe InspectionFormHelper do
       end
     end
 
+    it 'should return Friday on a Wednesday at exactly 3pm' do
+      Timecop.freeze( Time.zone.now.next_week(:wednesday).advance(hours: 15) ) do
+        expect( next_available_date.strftime('%A') ).to eq('Friday');
+      end
+    end
+
     it 'should return Tuesday on a Saturday' do
-      Timecop.freeze( Time.zone.now.next_week(:saturday).advance(hours: 12) ) do
+      Timecop.freeze( Time.zone.now.next_week(:saturday).advance(hours: 14, minutes: 30) ) do
+        expect( next_available_date.strftime('%A') ).to eq('Tuesday');
+      end
+    end
+
+    it 'should return Tuesday on a Sunday before 3pm' do
+      Timecop.freeze( Time.zone.now.next_week(:sunday).advance(hours: 14, minutes: 30) ) do
+        expect( next_available_date.strftime('%A') ).to eq('Tuesday');
+      end
+    end
+
+    it 'should return Tuesday on a Sunday after 3pm' do
+      Timecop.freeze( Time.zone.now.next_week(:sunday).advance(hours: 16) ) do
         expect( next_available_date.strftime('%A') ).to eq('Tuesday');
       end
     end
 
     it 'should return Monday on a Friday before 3pm' do
-      Timecop.freeze( Time.zone.now.next_week(:friday).advance(hours: 12) ) do
+      Timecop.freeze( Time.zone.now.next_week(:friday).advance(hours: 14, minutes: 30) ) do
         expect( next_available_date.strftime('%A') ).to eq('Monday');
       end
     end

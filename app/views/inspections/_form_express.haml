@@ -15,10 +15,10 @@
     .row
       .margin-bottom-10 For which date would you like to schedule your inspection? *
       .max-width-px-400
-        %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true' }
+        %input#inspection_requested_for_date.datepicker{ type:'text', name:'inspection[requested_for_date]', required:'true', "data-parsley-mindate" => next_available_date.strftime("%m/%d/%Y") }
         :javascript
           $('.datepicker').datepicker({
-            minDate: #{Time.zone.now.hour <= 15 ? 1 : 2}, // cutoff to schedule next-day inspections is 3pm
+            minDate: #{ (next_available_date - Date.today).to_i },
             beforeShowDay: $.datepicker.noWeekends,
           });
       .margin-bottom-10 Preferred time of day:
