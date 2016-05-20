@@ -32,6 +32,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 gem 'business_time'
+gem 'holidays'
 gem 'phony_rails'
 
 gem 'rubyzip'

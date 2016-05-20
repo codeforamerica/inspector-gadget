@@ -132,6 +132,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    holidays (4.1.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -308,6 +309,7 @@ DEPENDENCIES
   geocoder
   groupdate
   haml-rails
+  holidays
   jquery-rails
   jquery-ui-sass-rails
   lodash-rails
