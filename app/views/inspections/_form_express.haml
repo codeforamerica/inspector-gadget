@@ -19,7 +19,15 @@
         :javascript
           $('.datepicker').datepicker({
             minDate: #{ (next_available_date - Date.today).to_i },
-            beforeShowDay: $.datepicker.noWeekends,
+            beforeShowDay: function (date) {
+              var notWeekend = $.datepicker.noWeekends(date)
+              if (notWeekend[0]) {
+                var notHoliday = ( $.inArray(date.getTime()/1000, #{ BusinessTime::Config.holidays.map{|h| h.to_time.to_i} }) === -1 )
+                return [notHoliday, '']
+              } else {
+                return notWeekend;
+              }
+            },
           });
       .margin-bottom-10 Preferred time of day:
       .max-width-px-400
