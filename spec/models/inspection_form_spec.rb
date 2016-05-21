@@ -36,6 +36,18 @@ describe InspectionForm do
     expect(form.save).to be_falsey
   end
 
+  it '#save should return false if requested_for_date is on a weekend' do
+    params = inspection_params.merge({"requested_for_date" => Date.today.next_week(:sunday)})
+    form = InspectionForm.new(params)
+    expect(form.save).to be_falsey
+  end
+
+  it "#save should return false if requested_for_date is on a holiday (New Year's Day)" do
+    params = inspection_params.merge({"requested_for_date" => Date.civil(Date.today.year+1, 1, 1)})
+    form = InspectionForm.new(params)
+    expect(form.save).to be_falsey
+  end
+
   def inspection_params(type_ids: nil)
     type_ids ||= InspectionType.commercial.order('random()').first.id
 
@@ -47,7 +59,7 @@ describe InspectionForm do
       "contact_email"=>"markrossetti@codeforamerica.org",
       "inspection_type_id"=>type_ids.to_s,
       "inspection_notes"=>"",
-      "requested_for_date"=>Date.tomorrow,
+      "requested_for_date"=>Date.today.next_week(:tuesday),
       "requested_for_time"=>"",
       "address_notes"=>"",
       "address_attributes"=>{
