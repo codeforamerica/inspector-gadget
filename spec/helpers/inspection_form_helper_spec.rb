@@ -25,26 +25,32 @@ describe InspectionFormHelper do
     end
 
     it 'should return Tuesday on a Saturday' do
-      Timecop.freeze( Time.zone.now.next_week(:saturday).advance(hours: 14, minutes: 30) ) do
+      Timecop.freeze( Date.civil(2016, 5, 21).to_time.in_time_zone.advance(hours: 14, minutes: 30) ) do
         expect( next_available_date.strftime('%A') ).to eq('Tuesday');
       end
     end
 
     it 'should return Tuesday on a Sunday before 3pm' do
-      Timecop.freeze( Time.zone.now.next_week(:sunday).advance(hours: 14, minutes: 30) ) do
+      Timecop.freeze( Date.civil(2016, 5, 22).to_time.in_time_zone.advance(hours: 14, minutes: 30) ) do
         expect( next_available_date.strftime('%A') ).to eq('Tuesday');
       end
     end
 
     it 'should return Tuesday on a Sunday after 3pm' do
-      Timecop.freeze( Time.zone.now.next_week(:sunday).advance(hours: 16) ) do
+      Timecop.freeze( Date.civil(2016, 5, 22).to_time.in_time_zone.advance(hours: 16) ) do
         expect( next_available_date.strftime('%A') ).to eq('Tuesday');
       end
     end
 
     it 'should return Monday on a Friday before 3pm' do
-      Timecop.freeze( Time.zone.now.next_week(:friday).advance(hours: 14, minutes: 30) ) do
+      Timecop.freeze( Date.civil(2016, 5, 20).to_time.in_time_zone.advance(hours: 14, minutes: 30) ) do
         expect( next_available_date.strftime('%A') ).to eq('Monday');
+      end
+    end
+
+    it 'should return Tuesday on a Friday before 3pm on a Memorial Day weekend' do
+      Timecop.freeze( Date.civil(2016, 5, 27).to_time.in_time_zone.advance(hours: 14, minutes: 30) ) do
+        expect( next_available_date.strftime('%A') ).to eq('Tuesday');
       end
     end
   end
