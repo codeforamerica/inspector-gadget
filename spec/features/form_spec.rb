@@ -6,11 +6,11 @@ describe "submitting an inspection request form", :type => :feature do
     type = InspectionType.commercial.find_by(inspection_category: 'plumbing', inspection_name: 'Water Heater')
     visit '/inspections/new'
     within("#new_inspection") do
-      fill_in 'inspection_permit_number', :with => 'BRM1234'
-      fill_in 'inspection_contact_email', :with => Faker::Internet.email
-      fill_in 'inspection_contact_name', :with => Faker::Name.name
-      fill_in 'inspection_contact_phone', :with => Faker::PhoneNumber.phone_number
-      fill_in 'inspection_requested_for_date', :with => Date.today.next_week(:tuesday).strftime("%m/%d/%Y")
+      fill_in 'inspection_permit_number', with: 'BRM1234'
+      fill_in 'inspection_contact_email', with: Faker::Internet.email
+      fill_in 'inspection_contact_name', with: Faker::Name.name
+      fill_in 'inspection_contact_phone', with: Faker::PhoneNumber.phone_number
+      fill_in 'inspection_requested_for_date', with: Date.today.next_week(:tuesday).strftime("%m/%d/%Y")
       select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 
@@ -33,11 +33,11 @@ describe "submitting an inspection request form", :type => :feature do
     type = InspectionType.commercial.find_by(inspection_category: 'cell_sites', inspection_name: 'Framing / Attachments')
     visit '/inspections/new_express'
     within("#new_inspection") do
-      fill_in 'inspection_permit_number', :with => 'BRM1234'
-      fill_in 'inspection_contact_email', :with => Faker::Internet.email
-      fill_in 'inspection_contact_name', :with => Faker::Name.name
-      fill_in 'inspection_contact_phone', :with => Faker::PhoneNumber.phone_number
-      fill_in 'inspection_requested_for_date', :with => Date.today.next_week(:tuesday).strftime("%m/%d/%Y")
+      fill_in 'inspection_permit_number', with: 'BRM1234'
+      fill_in 'inspection_contact_email', with: Faker::Internet.email
+      fill_in 'inspection_contact_name', with: Faker::Name.name
+      fill_in 'inspection_contact_phone', with: Faker::PhoneNumber.phone_number
+      fill_in 'inspection_requested_for_date', with: Date.today.next_week(:tuesday).strftime("%m/%d/%Y")
       select 'Morning 8-12pm', :from => 'inspection_requested_for_time'
       check('inspection_contact_phone_can_text')
 
