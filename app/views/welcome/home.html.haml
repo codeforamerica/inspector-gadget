@@ -5,12 +5,12 @@
         %a.expanded.button.button-schedule{ href: inspections_new_express_path } Schedule an Inspection
       .row.margin-bottom-30
         .columns.small-12.medium-4
-          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{1.business_day.ago.to_date}", target:'_blank' }
-            %span Print Yesterday's Inspections
+          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{last_inspection_day_date}", target:'_blank' }
+            %span Print Last Day's Inspections
           .text-center
-            %small= 1.business_day.ago.to_date.strftime('%b %d, %Y')
+            %small= last_inspection_day_date.strftime('%b %d, %Y')
             %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", 1.business_day.ago.to_date).count} requests
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", last_inspection_day_date).count} requests
         .columns.small-12.medium-4
           %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{Date.today}", target:'_blank' }
             %span Print Today's Inspections
@@ -19,12 +19,12 @@
             %br
             %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.today).count} requests
         .columns.small-12.medium-4
-          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{1.business_day.from_now.to_date}", target:'_blank' }
-            %span Print Tomorrow's Inspections
+          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{next_inspection_day_date}", target:'_blank' }
+            %span Print Next Day's Inspections
           .text-center
-            %small= 1.business_day.from_now.to_date.strftime('%b %d, %Y')
+            %small= next_inspection_day_date.strftime('%b %d, %Y')
             %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", 1.business_day.from_now.to_date).count} requests
+            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", next_inspection_day_date).count} requests
 
   .row
     %h3 # Inspections by Day
