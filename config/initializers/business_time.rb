@@ -17,6 +17,6 @@ observed_holidays = [
 
 # as long as the application is restarted at least once every 5 years,
 # this should be fine
-Holidays.between(Date.today, Date.today+5.years, :us).select{|holiday| observed_holidays.include? holiday[:name]}.each do |holiday|
+Holidays.between(Date.current, Date.current+5.years, :us, :observed).select{|holiday| observed_holidays.include? holiday[:name]}.each do |holiday|
   BusinessTime::Config.holidays << holiday[:date]
 end

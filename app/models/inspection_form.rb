@@ -30,15 +30,17 @@ class InspectionForm
     end
   end
 
-  validate :requested_for_date_must_not_be_weekend_or_holiday
-  def requested_for_date_must_not_be_weekend_or_holiday
-    if requested_for_date.present?
-      if BusinessTime::Config.holidays.include? requested_for_date
-        errors.add(:requested_for_date, "must not be a holiday")
-      end
-      if (requested_for_date.saturday? || requested_for_date.sunday?)
-        errors.add(:requested_for_date, "must not be a weekend")
-      end
+  validate :requested_for_date_must_not_be_weekend
+  def requested_for_date_must_not_be_weekend
+    if requested_for_date.present? && (requested_for_date.saturday? || requested_for_date.sunday?)
+      errors.add(:requested_for_date, "must not be a weekend")
+    end
+  end
+
+  validate :requested_for_date_must_not_be_holiday
+  def requested_for_date_must_not_be_holiday
+    if requested_for_date.present? && BusinessTime::Config.holidays.include?(requested_for_date)
+      errors.add(:requested_for_date, "must not be a holiday")
     end
   end
 
