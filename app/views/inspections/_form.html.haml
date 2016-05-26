@@ -14,20 +14,7 @@
   .row
     .margin-bottom-10 For which date would you like to schedule your inspection? *
     .max-width-px-400
-      %input#inspection_requested_for_date.datepicker{ type: 'text', name: 'inspection[requested_for_date]', required: true, "data-parsley-mindate" => next_available_date.strftime("%m/%d/%Y") }
-      :javascript
-        $('.datepicker').datepicker({
-          minDate: #{ (next_available_date - Date.today).to_i },
-          beforeShowDay: function (date) {
-            var notWeekend = $.datepicker.noWeekends(date)
-            if (notWeekend[0]) {
-              var notHoliday = ( $.inArray(date.getTime()/1000, #{ BusinessTime::Config.holidays.map{|h| h.to_time.to_i} }) === -1 )
-              return [notHoliday, '']
-            } else {
-              return notWeekend;
-            }
-          },
-        });
+      = render 'form_section_datepicker', f:f
       %div.margin-bottom-10
         Inspections requested before 3pm PST are scheduled by default for the next business day. Inspections may also be scheduled for future days.
     .margin-bottom-10 Preferred time of day:

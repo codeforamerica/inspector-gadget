@@ -1,0 +1,14 @@
+%input#inspection_requested_for_date.datepicker{ type: 'text', name: 'inspection[requested_for_date]', required: true, "data-parsley-mindate" => next_available_date.strftime("%m/%d/%Y") }
+:javascript
+  $('.datepicker').datepicker({
+    minDate: #{ (next_available_date - Date.current).to_i },
+    beforeShowDay: function (date) {
+      var notWeekend = $.datepicker.noWeekends(date)
+      if (notWeekend[0]) {
+        var notHoliday = ( $.inArray(date.getTime()/1000, #{ BusinessTime::Config.holidays.map{|h| h.in_time_zone.to_i} }) === -1 )
+        return [notHoliday, '']
+      } else {
+        return notWeekend;
+      }
+    },
+  });
