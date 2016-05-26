@@ -11,7 +11,6 @@ gem 'puma'
 
 gem 'pg'
 gem 'activerecord-postgis-adapter'
-gem 'paper_trail'
 
 gem 'sass-rails', '~> 5.0'
 gem 'foundation-rails'
