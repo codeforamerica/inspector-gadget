@@ -13,7 +13,7 @@ class InspectionsController < ApplicationController
   def confirmation
     @inspections = Inspection.where(id: params[:inspection_ids].split(',')) # 1,2 => [1,2]
 
-    if params[:express] == "true"
+    if params[:express] == 'true'
       render :confirmation_express
     else
       render :confirmation
@@ -25,7 +25,7 @@ class InspectionsController < ApplicationController
     @inspection = Inspection.new
     @inspection.build_address
   end
-  
+
   def new_express
     @inspection = Inspection.new
     @inspection.build_address
@@ -67,21 +67,32 @@ class InspectionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inspection
-      @inspection = Inspection.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_inspection
+    @inspection = Inspection.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def inspection_params
-      params.require(:inspection).permit(:id, :permit_number, :contact_name, :contact_phone, :contact_phone_can_text, :contact_email, :inspection_type_id, :inspection_notes, :requested_for_date, :requested_for_time, :address_notes,
-        {address_attributes: [:street_number, :route, :city, :state, :zip]}
-      ).tap do |whitelisted|
-        whitelisted[:requested_for_date] = Date.strptime(params["inspection"]["requested_for_date"], '%m/%d/%Y')
-      end
+  # Only allow a trusted parameter "white list" through.
+  def inspection_params
+    params.require(:inspection).permit(
+      :id,
+      :permit_number,
+      :contact_name,
+      :contact_phone,
+      :contact_phone_can_text,
+      :contact_email,
+      :inspection_type_id,
+      :inspection_notes,
+      :requested_for_date,
+      :requested_for_time,
+      :address_notes,
+      address_attributes: [:street_number, :route, :city, :state, :zip]
+    ).tap do |whitelisted|
+      whitelisted[:requested_for_date] = Date.strptime(params['inspection']['requested_for_date'], '%m/%d/%Y')
     end
+  end
 
-    def allow_iframing
-      response.headers.delete "X-Frame-Options"
-    end
+  def allow_iframing
+    response.headers.delete 'X-Frame-Options'
+  end
 end

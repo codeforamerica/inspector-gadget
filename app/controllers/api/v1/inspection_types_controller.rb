@@ -1,5 +1,4 @@
 class Api::V1::InspectionTypesController < ApplicationController
-
   def get
     respond_to do |f|
       f.json do
@@ -16,9 +15,8 @@ class Api::V1::InspectionTypesController < ApplicationController
 
   private
 
-    # Only allow a trusted parameter "white list" through.
-    def inspection_params
-      params.permit(:supercategory, :category)
-    end
-
+  # Only allow a trusted parameter "white list" through.
+  def inspection_params
+    params.permit(:supercategory, :category)
+  end
 end
