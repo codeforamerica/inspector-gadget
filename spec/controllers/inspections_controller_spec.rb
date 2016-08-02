@@ -17,7 +17,7 @@ describe InspectionsController do
     type_ids = InspectionType.commercial.order('random()').limit(2).pluck(:id).join(",")
     params = inspection_params(type_ids: type_ids)
 
-    expect{ 
+    expect{
       post :create, inspection: params
     }.to change{Inspection.count}.by(2)
   end
@@ -36,6 +36,26 @@ describe InspectionsController do
 
     post :create, inspection: inspection_params
     expect(response.redirect_url).to match(%r{http://test.host/inspections/confirmation\?express\=true\&inspection\_ids\=})
+  end
+
+  it '#should return ordered inspections by inspector name' do
+    inspections = [
+      create(:address, street_number: '4350', route: 'Sunfield Ave', city: 'Long Beach', state: 'CA', zip: '').inspection,  # Flacks
+      create(:address, street_number: '3067', route: 'Charlemagne', city: 'Long Beach', state: 'CA', zip: '').inspection,   # Ciarrelli
+      create(:address, street_number: '2326', route: 'Olive Ave', city: 'Long Beach', state: 'CA', zip: '').inspection      # Reza
+    ]
+
+    residential_inspection_type = InspectionType.residential.first
+    inspections.each do |i|
+      i.update_attributes(
+        requested_for_date: Date.tomorrow,
+        inspection_type: residential_inspection_type
+      )
+    end
+
+    get :print, date: Date.tomorrow
+    expect(assigns(:inspections).map{ |i| i.inspector.name }).to eq(['Ciarrelli', 'Flacks', 'Reza'])
+
   end
 
   def inspection_params(type_ids: nil)

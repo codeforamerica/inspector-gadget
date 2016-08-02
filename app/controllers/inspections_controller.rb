@@ -4,6 +4,7 @@ class InspectionsController < ApplicationController
 
   def print
     @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
+    @inspections.to_a.sort_by! {|i| i.inspector.try(:name) }
     render layout: 'print'
   end
 
