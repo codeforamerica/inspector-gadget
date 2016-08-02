@@ -38,6 +38,9 @@ gem 'geocoder'
 gem 'rgeo-geojson'
 gem 'rgeo-shapefile'
 
+gem 'devise'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+
 group :production do
   gem 'rails_12factor'
 end

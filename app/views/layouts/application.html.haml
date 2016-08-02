@@ -11,6 +11,10 @@
     = javascript_include_tag "https://www.google.com/jsapi", "chartkick"
     = csrf_meta_tags
   %body
+    - if notice
+      .notice = notice
+    - if alert
+      .alert = alert
     - if content_for(:full_width)
       = yield(:full_width)
     - else
