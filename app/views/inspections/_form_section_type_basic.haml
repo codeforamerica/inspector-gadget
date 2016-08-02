@@ -7,7 +7,7 @@
         %label{ for:"inspection-supercategory-#{sc[1]}" } #{sc[0]}
         %br
   .max-width-px-400
-    %select#inspection-names.inspection-names{ style: "display:none;", placeholder: "Type here to choose inspection types", multiple: true }
+    %select#inspection-names.inspection-names{ style: "display:none;", "data-placeholder": "Select Inspection Type(s) (multiple selections available)", multiple: true }
       -# options are inserted here by JS
   = f.hidden_field :inspection_type_id, required: true, "data-parsley-error-message" => "Please choose at least one inspection type."
   .max-width-px-400
