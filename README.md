@@ -1,10 +1,33 @@
 [![Code Climate](https://codeclimate.com/github/rossettistone/inspector-gadget/badges/gpa.svg)](https://codeclimate.com/github/rossettistone/inspector-gadget)
 [![Test Coverage](https://codeclimate.com/github/rossettistone/inspector-gadget/badges/coverage.svg)](https://codeclimate.com/github/rossettistone/inspector-gadget/coverage)
 
-Setup
-=====
 
-### Preparing the Database
+# Requirements
+
+- ruby v2.3.0
+- Postgres 9.5+ (w/ the PostGIS extension)
+- The right developer tools (if on OS X 10.11):
+	- `xcode-select --install` (had to reinstall XCode dev tools for some reason)
+	- `gem install nokogiri -v '1.6.7.2'`. If that fails to install, you can install with native extensions using `gem install nokogiri -v '1.6.7.2' -- --use-system-libraries`
+	- [capybara-webkit](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
+		- Has a dependency on Qt v5.5 at the time of writing
+		- `brew tap homebrew/versions`
+		-	`brew install qt55`
+		- Force Homebrew to symlink those binaries into your /usr/local/bin directory you can run: `brew link --force qt55`
+
+# Initial Setup
+
+- Copy GIS files to **/data/gis/**. At the moment, files are City GIS data that has not been made public yet.
+- `bundle install`
+- `rake db:setup`
+- `bundle exec rspec`
+
+## Seeding
+
+`bundle exec rake db:seed:inspectors`
+`bundle exec rake db:seed:inspection_types`
+
+## Preparing the Database
 
 `postgres 9.5`
 `postgis 2.2.x`
