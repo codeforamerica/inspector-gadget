@@ -24,8 +24,8 @@
 
 ## Seeding
 
-`bundle exec rake db:seed:inspectors`
-`bundle exec rake db:seed:inspection_types`
+- `bundle exec rake db:seed:inspectors`
+- `bundle exec rake db:seed:inspection_types`
 
 ## Preparing the Database
 
