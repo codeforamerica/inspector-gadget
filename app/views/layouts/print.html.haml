@@ -14,32 +14,32 @@
           .row.margin-bottom-10
             %strong= inspection.address
           .row
-            %strong Permit/App #:
-            = inspection.permit_number
+            Permit/App #:
+            %strong= inspection.permit_number
           .row
-            %strong Inspection Type:
-            = inspection.inspection_type
+            Inspection Type:
+            %strong= inspection.inspection_type
           .row
-            %strong Requested for:
-            = inspection.requested_for_date.to_date
+            Requested for:
+            %strong= inspection.requested_for_date.to_date
             %i= inspection.requested_for_time
         .columns.small-4{style: "text-align:right;"}
           .row.margin-bottom-10
             %div{style: "text-align:right;"}
-              %strong Inspector:
+              Inspector:
               - if inspection.inspector.present?
-                = inspection.inspector["name"]
+                %strong= inspection.inspector["name"]
               - else # space to write inspector's name by hand
                 ____________________
           .row
-            %strong Contact Name:
-            = inspection.contact_name
+            Contact Name:
+            %strong= inspection.contact_name
           .row
-            %strong Contact #:
-            = inspection.contact_phone.phony_formatted(normalize: :US)
+            Contact #:
+            %strong= inspection.contact_phone.phony_formatted(normalize: :US)
           .row
-            %strong Submitted at:
-            = inspection.created_at.strftime('%b %e, %l:%M %p %Z')
+            Submitted at:
+            %strong= inspection.created_at.strftime('%b %e, %l:%M %p %Z')
         .columns.small-12
           %strong Address notes:
           = inspection.address_notes
