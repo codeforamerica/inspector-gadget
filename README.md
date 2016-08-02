@@ -20,12 +20,13 @@
 - Copy GIS files to **/data/gis/**. At the moment, files are City GIS data that has not been made public yet.
 - `bundle install`
 - `rake db:setup`
-- `bundle exec rspec`
+- Make sure everything is working: `bundle exec rspec`
 
 ## Seeding
 
-- `bundle exec rake db:seed:inspectors`
-- `bundle exec rake db:seed:inspection_types`
+1. `bundle exec rake db:seed:inspectors`
+1. `bundle exec rake db:seed:inspection_types`
+1. `bundle exec rake import:inspector_regions`
 
 ## Preparing the Database
 
