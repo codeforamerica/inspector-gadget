@@ -1,45 +1,66 @@
 ActiveAdmin.register Inspection do
-
   permit_params :permit_number,
                 :contact_name,
                 :contact_phone,
                 :contact_email,
                 :requested_for_date,
+                :requested_for_time,
+                :contact_phone_can_text,
+                :inspection_type,
+                :inspection_notes,
+                :address_notes,
                 address_attributes: [
                   :street_number,
                   :route,
                   :city,
                   :state,
-                  :zip,
+                  :zip
                 ]
 
+  filter :permit_number
   filter :requested_for_date
 
   index do
     selectable_column
     id_column
+    column :permit_number
     column :contact_name
     column :contact_phone
-    column :contact_email
-    column :requested_for_date
+    column :inspection_type
+    column :created_at do |i|
+      i.created_at.strftime('%m-%d-%Y %H:%M %p %Z')
+    end
+    column :requested_for_date do |i|
+      i.requested_for_date.strftime('%m-%d-%y')
+    end
+    column :address
+    column :inspector do |i|
+      i.try(:inspector).try(:name)
+    end
     actions
   end
 
   show do
-    attributes_table_for inspection do
+    attributes_table do
       row :permit_number
       row :contact_name
       row :contact_phone
       row :contact_email
-      row :requested_for_date
+      row :requested_for_date do |i|
+        i.requested_for_date.strftime('%m-%d-%y')
+      end
       row :requested_for_time
-      row :created_at
+      row :created_at do |i|
+        i.created_at.strftime('%m-%d-%Y %H:%M %p %Z')
+      end
       row :contact_phone_can_text
+      row :inspection_type
       row :inspection_notes
-    end
-    attributes_table_for inspection.address do
-      row :city
-      row :zip
+      row :inspector do |i|
+        i.try(:inspector).try(:name)
+      end
+      row :address
+      row :address_notes
     end
   end
 
@@ -52,9 +73,10 @@ ActiveAdmin.register Inspection do
       f.input :requested_for_date
       f.input :requested_for_time
       f.input :contact_phone_can_text
+      f.input :inspection_type
       f.input :inspection_notes
+      f.input :address_notes
     end
-
     f.inputs 'Address' do
       f.has_many :address do |a|
         a.input :street_number
@@ -65,5 +87,9 @@ ActiveAdmin.register Inspection do
       end
     end
     f.actions
+  end
+
+  action_item :print_tomorrow, only: :index do
+    link_to "Print Tomorrow's Inspections", inspections_print_path(date: next_inspection_day_date)
   end
 end
