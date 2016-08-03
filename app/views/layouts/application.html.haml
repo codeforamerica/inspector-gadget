@@ -12,9 +12,9 @@
     = csrf_meta_tags
   %body
     - if notice
-      .notice = notice
+      .notice= notice
     - if alert
-      .alert = alert
+      .alert= alert
     - if content_for(:full_width)
       = yield(:full_width)
     - else

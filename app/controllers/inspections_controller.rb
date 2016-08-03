@@ -1,6 +1,7 @@
 class InspectionsController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
   before_action :allow_iframing, only: [:confirmation, :new]
+  protect_from_forgery except: :create
 
   def print
     @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
