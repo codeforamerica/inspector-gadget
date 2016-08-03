@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 
-
 gem 'rails', '4.2.7'
-gem 'rails_12factor'
 gem 'newrelic_rpm'
 gem 'bugsnag'
 
@@ -39,6 +37,10 @@ gem 'rubyzip'
 gem 'geocoder'
 gem 'rgeo-geojson'
 gem 'rgeo-shapefile'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'byebug'
