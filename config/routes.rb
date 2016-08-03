@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#home'
+  # root 'welcome#home'
+  root to: redirect('/admin')
 
   get 'inspections/new_express' => 'inspections#new_express'
   get 'inspections/confirmation' => 'inspections#confirmation'
