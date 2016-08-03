@@ -1,30 +1,17 @@
 .home
   .row.margin-top-30
-    .columns.small-10.small-offset-1.medium-8.medium-offset-2.large-10.large-offset-1
-      .columns.small-12.medium-10.medium-offset-1
-        %a.expanded.button.button-schedule{ href: inspections_new_express_path } Schedule an Inspection
-      .row.margin-bottom-30
-        .columns.small-12.medium-4
-          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{last_inspection_day_date}", target:'_blank' }
-            %span Print Last Day's Inspections
-          .text-center
-            %small= last_inspection_day_date.strftime('%b %d, %Y')
-            %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", last_inspection_day_date).count} requests
-        .columns.small-12.medium-4
-          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{Date.today}", target:'_blank' }
-            %span Print Today's Inspections
-          .text-center
-            %small= Date.today.strftime('%b %d, %Y')
-            %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", Date.today).count} requests
-        .columns.small-12.medium-4
-          %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{next_inspection_day_date}", target:'_blank' }
-            %span Print Next Day's Inspections
-          .text-center
-            %small= next_inspection_day_date.strftime('%b %d, %Y')
-            %br
-            %small #{Inspection.where("date_trunc('day', requested_for_date) = ?", next_inspection_day_date).count} requests
+    .columns.small-10.small-offset-1.medium-8.medium-offset-2.large-6.large-offset-3
+      %a.expanded.button.button-schedule{ href: inspections_new_express_path } Schedule an Inspection
+  .row
+    .columns.small-10.small-offset-1.medium-8.medium-offset-2.large-6.large-offset-3
+      %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{Date.today}", target:'_blank' }
+        - today_date = Date.today.strftime('%b %d, %Y')
+        %span= "Print Inspections for Today (#{today_date})"
+  .row
+    .columns.small-10.small-offset-1.medium-8.medium-offset-2.large-6.large-offset-3
+      %a.expanded.button.button-view.margin-bottom-0{ href: "#{inspections_print_path}?date=#{next_inspection_day_date}", target:'_blank' }
+        - next_day_date = next_inspection_day_date.strftime('%b %d, %Y')
+        %span= "Print Inspections for Next Day (#{next_day_date})"
 
   .row
     %h3 # Inspections by Day
@@ -32,7 +19,7 @@
 
   .row
     .columns.small-12.medium-6.medium-offset-3
-      %a.expanded.button.button-schedule{ href: "#{reports_daily_path}?report_date=#{Date.today}" } View Daily  Report
+      %a.expanded.button.button-schedule{ href: "#{reports_daily_path}?report_date=#{Date.today}" } View Daily Report
   .row
     .columns.small-12.medium-6.medium-offset-3
       %a.expanded.button.button-schedule{ href: "#{reports_period_path}" } View 30-Day Report
