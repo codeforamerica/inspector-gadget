@@ -13,10 +13,9 @@ Rails.application.routes.draw do
 
   get 'inspections/new_express' => 'inspections#new_express'
   get 'inspections/confirmation' => 'inspections#confirmation'
-  resources :inspections do
-  end
+  get 'inspections/new' => 'inspections#new'
+  post 'inspections' => 'inspections#create'
 
-  get 'reports/daily' => 'reports#daily'
   get 'reports/period' => 'reports#period'
 
   get 'inspections_print' => 'inspections#print'

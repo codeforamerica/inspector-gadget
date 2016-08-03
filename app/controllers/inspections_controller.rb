@@ -1,5 +1,4 @@
 class InspectionsController < ApplicationController
-  before_action :set_inspection, only: [:show, :edit, :update, :destroy]
   before_action :allow_iframing, only: [:confirmation, :new]
   protect_from_forgery except: :create
 
@@ -7,9 +6,6 @@ class InspectionsController < ApplicationController
     @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
     @inspections.to_a.sort_by! {|i| i.inspector.try(:name) || "" }
     render layout: 'print'
-  end
-
-  def show
   end
 
   def confirmation
@@ -49,30 +45,7 @@ class InspectionsController < ApplicationController
     end
   end
 
-  # GET /inspections/1/edit
-  def edit
-  end
-
-  # PATCH/PUT /inspections/1
-  def update
-    if @inspection.update(inspection_params)
-      redirect_to @inspection, notice: 'Inspection was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /inspections/1
-  def destroy
-    @inspection.destroy
-    redirect_to :back, notice: 'Inspection was successfully destroyed.'
-  end
-
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_inspection
-    @inspection = Inspection.find(params[:id])
-  end
 
   # Only allow a trusted parameter "white list" through.
   def inspection_params

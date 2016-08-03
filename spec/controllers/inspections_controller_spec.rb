@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 describe InspectionsController do
-  it '#show should return 200 for a valid inspection' do
-    get :show, id: create(:inspection).id
-    expect(response.response_code).to eq(200)
-  end
 
   it '#confirmation should 200 when visited with valid inspection params' do
     get :confirmation, inspection_ids: create_list(:inspection, 2).map(&:id).join(',') # inspection_ids=1,2
