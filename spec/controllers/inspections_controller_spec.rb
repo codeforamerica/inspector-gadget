@@ -51,7 +51,7 @@ describe InspectionsController do
     end
 
     get :print, date: Date.tomorrow
-    expected_results = [['Ciarrelli', 'Flacks', 'Reza'], '']
+    expected_results = [['Ciarrelli', 'Flacks', 'Reza'], ['', '', '']]
     expect(assigns(:inspections).map{ |i| i.inspector.try(:name) || '' }).to be_in(expected_results)
 
   end
