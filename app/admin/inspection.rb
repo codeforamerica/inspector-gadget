@@ -23,17 +23,31 @@ ActiveAdmin.register Inspection do
   index do
     selectable_column
     id_column
-    column :permit_number
+    column :permit_number do |i|
+      if i.permit_number # should *always* be there, but just in case...
+        i.permit_number.split('/').join(' ') # allows #s to split to multiple lines
+      end
+    end
     column :contact_name
-    column :contact_phone
+    column 'Phone' do |i|
+      i.contact_phone
+    end
     column :inspection_type
     column :created_at do |i|
       i.created_at.strftime('%m-%d-%Y %H:%M %p %Z')
     end
-    column :requested_for_date do |i|
+    column 'Requested For' do |i|
       i.requested_for_date.strftime('%m-%d-%y')
     end
-    column :address
+    column 'Address' do |i|
+      # abbreviate Long Beach addresses
+      # but show anything that's not LB, since that would be an error
+      if i.address # should always exist, but just in case...
+        if i.address.city == 'Long Beach' && i.address.state == 'CA'
+          [i.address.street_number, i.address.route].join(' ')
+        end
+      end
+    end
     column :inspector do |i|
       i.try(:inspector).try(:name)
     end
@@ -78,7 +92,7 @@ ActiveAdmin.register Inspection do
       f.input :address_notes
     end
     f.inputs 'Address' do
-      f.has_many :address do |a|
+      f.has_many :address, new_record: false do |a|
         a.input :street_number
         a.input :route
         a.input :city

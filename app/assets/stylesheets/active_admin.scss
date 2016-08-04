@@ -15,3 +15,20 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+// Custom column widths
+// Done with CSS per https://github.com/activeadmin/activeadmin/issues/4091
+.col-address { min-width: 175px; }
+.col-inspection_type { min-width: 200px; }
+
+// default fonts are just too tiny
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  font-size: 14px;
+}
