@@ -52,7 +52,7 @@ describe InspectionsController do
 
     get :print, date: Date.tomorrow
     expected_results = [['Ciarrelli', 'Flacks', 'Reza'], '']
-    expect(assigns(:inspections).map{ |i| i.inspector.name || '' }).to be_in(expected_results)
+    expect(assigns(:inspections).map{ |i| i.inspector.try(:name) || '' }).to be_in(expected_results)
 
   end
 
