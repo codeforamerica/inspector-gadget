@@ -41,16 +41,18 @@ describe InspectionsController do
       create(:address, street_number: '2326', route: 'Olive Ave', city: 'Long Beach', state: 'CA', zip: '').inspection      # Reza
     ]
 
+    tomorrow = Date.tomorrow
     residential_inspection_type = InspectionType.residential.first
     inspections.each do |i|
       i.update_attributes(
-        requested_for_date: Date.tomorrow,
+        requested_for_date: tomorrow,
         inspection_type: residential_inspection_type
       )
     end
 
     get :print, date: Date.tomorrow
-    expect(assigns(:inspections).map{ |i| i.inspector.name }).to eq(['Ciarrelli', 'Flacks', 'Reza'])
+    expected_results = [['Ciarrelli', 'Flacks', 'Reza'], '']
+    expect(assigns(:inspections).map{ |i| i.inspector.name || '' }).to be_in(expected_results)
 
   end
 
