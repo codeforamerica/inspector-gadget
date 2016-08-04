@@ -76,6 +76,23 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe '#get_monthly_reporting_start_date' do
+    it 'should return a date from 30 days ago' do
+      Timecop.travel( monday ) do
+        expect ( get_monthly_reporting_start_date.to_s ).should eq( "2016-04-23" )
+      end
+    end
+  end
+
+  describe '#get_monthly_reporting_end_date' do
+    it 'should return a date two business days from now' do
+      Timecop.travel( monday ) do
+        expect ( get_monthly_reporting_end_date.to_s ).should eq( "2016-05-25" )
+      end
+    end
+  end
+
 end
 
 # days below picked to avoid holiday weekends

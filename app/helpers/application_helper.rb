@@ -24,4 +24,20 @@ module ApplicationHelper
       return 1.business_day.from_now.to_date
     end
   end
+
+  def get_monthly_reporting_start_date
+    return Date.today - 1.month
+  end
+
+  def get_monthly_reporting_end_date
+    return 2.business_days.from_now.to_date
+  end
+
+  def inspections_by_day
+    start_date = get_monthly_reporting_start_date
+    end_date = get_monthly_reporting_end_date
+    requested_for_date_query = Inspection.where("requested_for_date > ? and requested_for_date < ?", start_date, end_date)
+    return requested_for_date_query.group_by_day(:requested_for_date).count
+  end
+
 end
