@@ -10,13 +10,10 @@ ActiveAdmin.register_page "Dashboard" do
 
         columns do
             column span: 3 do
-                link_to "Print Last Day's Inspections", "/inspections_print?date=#{ last_inspection_day_date }", class: "button"
+                link_to "Print Inspections for Today (#{Date.today})", "/inspections_print?date=#{ Date.today }", class: "button"
             end
             column span: 3 do
-                link_to "Print Today's Inspections", "/inspections_print?date=#{ Date.today }", class: "button"
-            end
-            column span: 3 do
-                link_to "Print Tomorrow's Inspections", "/inspections_print?date=#{ next_inspection_day_date }", class: "button"
+                link_to "Print Inspection for Next Day (#{next_inspection_day_date})", "/inspections_print?date=#{ next_inspection_day_date }", class: "button"
             end
         end
 
