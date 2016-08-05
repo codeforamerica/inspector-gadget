@@ -52,8 +52,37 @@ describe InspectionsController do
 
     get :print, date: Date.tomorrow
     expected_results = [['Ciarrelli', 'Flacks', 'Reza'], ['', '', '']]
-    expect(assigns(:inspections).map{ |i| i.inspector.try(:name) || '' }).to be_in(expected_results)
+    expect(assigns(:inspection_cards).map{ |i| i['inspector'] }).to be_in(expected_results)
+  end
 
+  it 'should combine residential inspections' do
+    residentials = [
+      create(:address, street_number: '4350', route: 'Sunfield Ave', city: 'Long Beach', state: 'CA', zip: '').inspection,
+      create(:address, street_number: '4350', route: 'Sunfield Ave', city: 'Long Beach', state: 'CA', zip: '').inspection
+    ]
+    commercials = [
+      create(:address, street_number: '4350', route: 'Sunfield Ave', city: 'Long Beach', state: 'CA', zip: '').inspection,
+      create(:address, street_number: '4350', route: 'Sunfield Ave', city: 'Long Beach', state: 'CA', zip: '').inspection
+    ]
+
+    residential_inspection_type = InspectionType.residential.first
+    residentials.each do |i|
+      i.update_attributes(
+        requested_for_date: Date.today,
+        inspection_type: residential_inspection_type
+      )
+    end
+
+    commercial_inspection_type = InspectionType.commercial.first
+    commercials.each do |i|
+      i.update_attributes(
+        requested_for_date: Date.today,
+        inspection_type: commercial_inspection_type
+      )
+    end
+
+    get :print, date: Date.today
+    expect(assigns(:inspection_cards).count).to eq(3) # residentials combined
   end
 
   def inspection_params(type_ids: nil)

@@ -3,8 +3,22 @@ class InspectionsController < ApplicationController
   protect_from_forgery except: :create
 
   def print
-    @inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
-    @inspections.to_a.sort_by! {|i| i.inspector.try(:name) || "" }
+    inspections = Inspection.where("date_trunc('day', requested_for_date) = ?", params[:date])
+    inspection_objs = inspections.map do |inspection|
+      inspection.attributes.tap do |i|
+        i["requested_for_date"] = inspection.requested_for_date.to_date
+        i["contact_phone"] = inspection.contact_phone.phony_formatted(normalize: :US)
+        i['created_at'] = inspection.created_at.strftime('%b %e, %l:%M %p %Z')
+        i['inspection_type'] = inspection.inspection_type.to_s
+        i['address'] = inspection.address.to_s
+        i["inspector"] = inspection.inspector.try(:name) || ''
+        i["inspection_supercategory"] = inspection.inspection_type.inspection_supercategory
+      end
+    end
+    inspection_objs.sort_by! {|i| i['inspector'] }
+    residential_inspections = inspection_objs.select{|i| i['inspection_supercategory'] == 'residential'}
+    commercial_inspections = inspection_objs.select{|i| i['inspection_supercategory'] == 'commercial'}
+    @inspection_cards = group_inspections(residential_inspections) + commercial_inspections
     render layout: 'print'
   end
 
@@ -46,6 +60,17 @@ class InspectionsController < ApplicationController
   end
 
   private
+
+  def group_inspections(inspections)
+    groups = inspections.group_by{|i| [i['requested_for_date'],i['address'],i['created_at']] }
+    consolidated_groups = groups.map do |group|
+      base_inspection = group[1][0]
+      base_inspection['inspection_types'] = group[1].map{|i| i['inspection_type']}
+      base_inspection
+    end
+
+    consolidated_groups
+  end
 
   # Only allow a trusted parameter "white list" through.
   def inspection_params
