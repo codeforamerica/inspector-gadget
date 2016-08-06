@@ -1,5 +1,12 @@
 ActiveAdmin.register User do
 
+  # exclude Inspector records from this view
+  controller do
+    def scoped_collection
+      end_of_association_chain.where(type: nil)
+    end
+  end
+
   permit_params :email, :password, :password_confirmation
 
 
