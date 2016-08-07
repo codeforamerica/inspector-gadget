@@ -33,10 +33,10 @@ ActiveAdmin.register Inspection do
       i.contact_phone
     end
     column :inspection_type
-    column :created_at do |i|
-      i.created_at.strftime('%m-%d-%Y %H:%M %p %Z')
+    column :created_at, sortable: :created_at do |i|
+      i.created_at.strftime('%m-%d-%Y %H:%M %p')
     end
-    column 'Requested For' do |i|
+    column 'Requested For', sortable: :requested_for_date do |i|
       i.requested_for_date.strftime('%m-%d-%y')
     end
     column 'Address' do |i|
