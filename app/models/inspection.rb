@@ -13,11 +13,12 @@ class Inspection < ActiveRecord::Base
   delegate :possible_inspectors, to: :inspection_type
 
   def inspector
-    inspectors = self.possible_inspectors
+    inspectors = self.possible_inspectors # list of inspectors that handle this inspection *type*
 
     if inspectors.count > 1
+      # of the possible inspectors, find which one handles this inspection *location*
       inspector = inspectors.joins(:inspector_profile)
-        .where("ST_IsEmpty(inspector_profiles.inspection_region::geometry) = false") # terrible hack to check if inspection_region is present
+        .where("ST_IsEmpty(inspector_profiles.inspection_region::geometry) = false") # hack to check if inspection_region is present - AR says some records are `nil` even when geo data is present
         .where("ST_Covers(inspector_profiles.inspection_region, ?)", self.address.try(:geo_location))
         .first
     else
