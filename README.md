@@ -49,7 +49,7 @@ To get a snapshot of the production database for use locally, use Heroku's `pg:p
 At time of writing, the following commands worked:
 ```bash
 $ dropdb inspector_gadget_development
-$ heroku pg:pull DATABASE_URL inspector_gadget_development
+$ heroku pg:pull DATABASE_URL inspector_gadget_development --app inspector-gadget-cfa
 ```
 
 ## Updating Inspector Regions
