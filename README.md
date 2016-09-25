@@ -2,26 +2,22 @@
 [![Code Climate](https://codeclimate.com/github/rossettistone/inspector-gadget/badges/gpa.svg)](https://codeclimate.com/github/rossettistone/inspector-gadget)
 [![Test Coverage](https://codeclimate.com/github/rossettistone/inspector-gadget/badges/coverage.svg)](https://codeclimate.com/github/rossettistone/inspector-gadget/coverage)
 
-
 # Requirements
+1. [Docker](https://www.docker.com/products/overview) v1.12.1
 
-- ruby v2.3.0
-- Postgres 9.5+ (w/ the PostGIS extension)
-- The right developer tools (if on OS X 10.11):
-	- `xcode-select --install` (had to reinstall XCode dev tools for some reason)
-	- `gem install nokogiri -v '1.6.7.2'`. If that fails to install, you can install with native extensions using `gem install nokogiri -v '1.6.7.2' -- --use-system-libraries`
-	- [capybara-webkit](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
-		- Has a dependency on Qt v5.5 at the time of writing
-		- `brew tap homebrew/versions`
-		-	`brew install qt55`
-		- Force Homebrew to symlink those binaries into your /usr/local/bin directory you can run: `brew link --force qt55`
+# Getting Started
 
-# Initial Setup
+1. Copy GIS files to **/data/gis/**. At the moment, files are City GIS data that has not been made public yet.
+1. Build the Docker image `docker build .`. This will build an image with the appropriately installed software.
+1. If necessary, configure the web and database containers in **docker-compose.yml** and run`docker-compose build`. This will build all the necessary containers.
+1. If necessary, configure the databse settings by modifying **config/database.yml**. With the settings in place, create and setup the database: `docker-compose run web rake db:setup`.
+1. Make sure eveything is working by running our tests: `docker-compose run web bundle exec rspec`. You can achieve this by running `User.create!({:email => "jane.doe@longbeach.gov", :password => "hunter2", :password_confirmation => "hunter2" })` on the rails console.
 
-- Copy GIS files to **/data/gis/**. At the moment, files are City GIS data that has not been made public yet.
-- `bundle install`
-- `rake db:setup`
-- Make sure everything is working: `bundle exec rspec`
+# Running the App
+
+- You can serve the app by running: `docker-compose up`
+- Tou can interact with a rails console by running: `docker-compose run web rails console`
+- In order to interact with the application in development, you will need to create a test user.
 
 ## Preparing the Database
 
