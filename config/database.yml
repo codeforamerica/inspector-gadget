@@ -12,6 +12,8 @@ default: &default
 development:
   <<: *default
   database: inspector_gadget_development
+  username: postgres
+  host: inspectorgadget_db_1
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,6 +21,8 @@ development:
 test:
   <<: *default
   database: inspector_gadget_test
+  username: postgres
+  host: inspectorgadget_db_1  
 
 production:
   <<: *default
