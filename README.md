@@ -8,8 +8,7 @@
 # Getting Started
 
 1. Copy GIS files to **/data/gis/**. At the moment, files are City GIS data that has not been made public yet.
-1. Build the Docker image `docker build .`. This will build an image with the appropriately installed software.
-1. If necessary, configure the web and database containers in **docker-compose.yml** and run`docker-compose build`. This will build all the necessary containers.
+1. If necessary, configure the web and database containers in **docker-compose.yml** and run`docker-compose build`. This will build all the necessary containers. You will also need to rebuild the container if you change the Gemfile.
 1. If necessary, configure the databse settings by modifying **config/database.yml**. With the settings in place, create and setup the database: `docker-compose run web rake db:setup`.
 1. Make sure eveything is working by running our tests: `docker-compose run web bundle exec rspec`.
 1. Follow the instructions from [Running the App](#running-the-app), [Perparing the Database](#preparing-the-database), and [Seeding](#seeding).
