@@ -11,5 +11,8 @@ services:
       - .:/inspector-gadget
     ports:
       - "3000:3000"
+    entrypoint: ./docker-entry.sh
+    environment:
+      - IS_DOCKER_CONTAINER=true    
     depends_on:
       - db

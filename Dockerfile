@@ -1,4 +1,5 @@
 FROM ruby:2.3.0
+MAINTAINER Alex.Chavez@longbeach.gov
 
 # the essentials
 RUN apt-get update -qq && apt-get install -y build-essential
@@ -11,9 +12,23 @@ RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 # for a JS runtime
 RUN apt-get install -y nodejs
 
-RUN mkdir /inspector-gadget
+# Configure the main working directory. This is the base 
+# directory used in any further RUN, COPY, and ENTRYPOINT 
+# commands.
+RUN mkdir -p /inspector-gadget
 WORKDIR /inspector-gadget
-ADD Gemfile /inspector-gadget/Gemfile
-ADD Gemfile.lock /inspector-gadget/Gemfile.lock
-RUN bundle install
-ADD . /inspector-gadget 
+
+# Define our entrypoint. docker-entry.sh ensures that
+# one one instance of our rails app is running.
+COPY docker-entry.sh ./
+ENTRYPOINT ["./docker-entry.sh"]
+
+# Copy the Gemfile as well as the Gemfile.lock and install 
+# the RubyGems. This is a separate step so the dependencies 
+# will be cached unless changes to one of those two files 
+# are made.
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler && bundle install 
+
+# Copy the main application.
+COPY . ./
