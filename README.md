@@ -11,13 +11,14 @@
 1. Build the Docker image `docker build .`. This will build an image with the appropriately installed software.
 1. If necessary, configure the web and database containers in **docker-compose.yml** and run`docker-compose build`. This will build all the necessary containers.
 1. If necessary, configure the databse settings by modifying **config/database.yml**. With the settings in place, create and setup the database: `docker-compose run web rake db:setup`.
-1. Make sure eveything is working by running our tests: `docker-compose run web bundle exec rspec`. You can achieve this by running `User.create!({:email => "jane.doe@longbeach.gov", :password => "hunter2", :password_confirmation => "hunter2" })` on the rails console.
+1. Make sure eveything is working by running our tests: `docker-compose run web bundle exec rspec`.
+1. Follow the instructions from [Running the App](#running-the-app), [Perparing the Database](#preparing-the-database), and [Seeding](#seeding).
 
 # Running the App
 
 - You can serve the app by running: `docker-compose up`
 - Tou can interact with a rails console by running: `docker-compose run web rails console`
-- In order to interact with the application in development, you will need to create a test user.
+- In order to interact with the application in development, you will need to create a test user. You can achieve this by running `User.create!({:email => "jane.doe@longbeach.gov", :password => "hunter2", :password_confirmation => "hunter2" })` on the rails console.
 
 ## Preparing the Database
 
