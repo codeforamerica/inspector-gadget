@@ -49,7 +49,7 @@ describe Inspection do
         # N.B. residential PV inspections are all assigned to one inspector, regardless of location
         inspection = create(:address, street_number: '1911', route: 'E 63rd St', city: 'Long Beach', state: 'CA', zip: '').inspection
         inspection.update_attributes(inspection_type: InspectionType.residential.find_by(inspection_category: 'photovoltaic') )
-        expect(inspection.inspector.try(:name)).to eq('Aaker')
+        expect(inspection.inspector.try(:name)).to eq('Outler')
       end
     end
 

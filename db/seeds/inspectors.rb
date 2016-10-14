@@ -54,7 +54,14 @@ new_password = Devise.friendly_token.first(12)
 inspector = Inspector.find_by(name: 'Aaker') ||
             Inspector.create(name: 'Aaker', email: "#{new_email}@example.com", password: new_password, password_confirmation: new_password)
 InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential')
-                .update_attributes(inspection_assignments: ['photovoltaic', 'building'])
+                .update_attributes(inspection_assignments: ['building'])
+
+new_email = Devise.friendly_token.first(6)
+new_password = Devise.friendly_token.first(12)
+inspector = Inspector.find_by(name: 'Outler') ||
+            Inspector.create(name: 'Outler', email: "#{new_email}@example.com", password: new_password, password_confirmation: new_password)
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential')
+                .update_attributes(inspection_assignments: ['photovoltaic'])
 
 # ----------
 
@@ -63,7 +70,7 @@ new_password = Devise.friendly_token.first(12)
 inspector = Inspector.find_by(name: 'Ingram') ||
             Inspector.create(name: 'Ingram', email: "#{new_email}@example.com", password: new_password, password_confirmation: new_password)
 InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'commercial')
-                .update_attributes(inspection_assignments: %w(electric sign)) # 'photovoltaic' for all areas
+                .update_attributes(inspection_assignments: %w(electric sign))
 
 new_email = Devise.friendly_token.first(6)
 new_password = Devise.friendly_token.first(12)
