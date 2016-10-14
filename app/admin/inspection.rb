@@ -18,7 +18,10 @@ ActiveAdmin.register Inspection do
                 ]
 
   filter :permit_number
+  filter :contact_name
+  filter :contact_phone
   filter :requested_for_date
+  filter :created_at
 
   index do
     selectable_column
