@@ -191,5 +191,44 @@ RSpec.configure do |config|
       }
     ]
   )
+  Geocoder::Lookup::Test.add_stub(
+    '2810 Eucalyptus Avenue, Long Beach, CA, 90806', [
+      {
+        'latitude'     => 33.808307,
+        'longitude'    => -118.196657,
+        'address'      => '2810 Eucalyptus Avenue, Long Beach, CA 90806, USA',
+        'state'        => 'Long Beach',
+        'state_code'   => 'CA',
+        'country'      => 'United States',
+        'country_code' => 'US'
+      }
+    ]
+  )
+  Geocoder::Lookup::Test.add_stub(
+    '5433 Lemon Avenue, Long Beach, CA, ', [
+      {
+        'latitude'     => 33.8550275,
+        'longitude'    => -118.179379,
+        'address'      => '5433 Lemon Ave, Long Beach, CA 90805, USA',
+        'state'        => 'Long Beach',
+        'state_code'   => 'CA',
+        'country'      => 'United States',
+        'country_code' => 'US'
+      }
+    ]
+  )
+  Geocoder::Lookup::Test.add_stub(
+    '1000 Marietta Ct, Long Beach, CA, ', [
+      {
+        'latitude'     => 33.7789851,
+        'longitude'    => -118.1833913,
+        'address'      => '1000 Marietta Ct, Long Beach, CA 90813, USA',
+        'state'        => 'Long Beach',
+        'state_code'   => 'CA',
+        'country'      => 'United States',
+        'country_code' => 'US'
+      }
+    ]
+  )
 
 end

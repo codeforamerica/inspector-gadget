@@ -49,22 +49,34 @@ describe Inspection do
         # N.B. residential PV inspections are all assigned to one inspector, regardless of location
         inspection = create(:address, street_number: '1911', route: 'E 63rd St', city: 'Long Beach', state: 'CA', zip: '').inspection
         inspection.update_attributes(inspection_type: InspectionType.residential.find_by(inspection_category: 'photovoltaic') )
-        expect(inspection.inspector.try(:name)).to eq('Aaker')
+        expect(inspection.inspector.try(:name)).to eq('Outler')
       end
     end
 
     context 'for a commercial inspection' do
 
-      xit 'returns the correct inspector' do # No GIS data available for this inspector
-        inspection = create(:address, street_number: '2640', route: 'Lakewood Blvd', city: 'Long Beach', state: 'CA', zip: '').inspection
-        inspection.inspection_type = InspectionType.commercial.order('random()').first
-        expect(inspection.inspector.name).to eq('Varnes')
+      it 'returns the correct inspector' do # No GIS data available for this inspector
+        inspection = create(:address, street_number: '5433', route: 'Lemon Avenue', city: 'Long Beach', state: 'CA', zip: '').inspection
+        inspection.inspection_type = InspectionType.commercial
+          .where(inspection_category: 'improvements_additions_new', inspection_name: 'Slab')
+          .order('random()').first
+        expect(inspection.inspector.name).to eq('Aaker') # north
       end
 
-      xit 'returns the correct inspector' do # Something fishy about the GIS data for this inspector. See https://github.com/rgeo/rgeo/issues/113
-        inspection = create(:address, street_number: '2020', route: 'W Pacific Coast Highway', city: 'Long Beach', state: 'CA', zip: '').inspection
-        inspection.inspection_type = InspectionType.commercial.order('random()').first
-        expect(inspection.inspector.name).to eq('Nicholls')
+      it 'returns the correct inspector' do # Something fishy about the GIS data for this inspector. See https://github.com/rgeo/rgeo/issues/113
+        inspection = create(:address, street_number: '1000', route: 'Marietta Ct', city: 'Long Beach', state: 'CA', zip: '').inspection
+        inspection.inspection_type = InspectionType.commercial
+          .where(inspection_category: 'improvements_additions_new', inspection_name: 'Slab')
+          .order('random()').first
+        expect(inspection.inspector.name).to eq('Nicholls') # south
+      end
+
+      it 'returns the correct inspector' do
+        inspection = create(:address, street_number: '2810', route: 'Eucalyptus Avenue', city: 'Long Beach', state: 'CA', zip: '90806').inspection
+        inspection.inspection_type = InspectionType.commercial
+          .where(inspection_category: 'improvements_additions_new', inspection_name: 'Slab')
+          .order('random()').first
+        expect(inspection.inspector.name).to eq('Marquez') # mid-city
       end
 
       it 'returns the correct inspector for a Pool - Gas Test inspection (plumbing)' do
