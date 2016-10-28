@@ -18,7 +18,7 @@ This will build all the necessary containers. You will also need to rebuild the 
 
 Make sure you have the `db` image running with:
 ```
-$ docker-compose up db
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db
 ``` 
 
 Configure the databse settings by modifying **config/database.yml**. With the settings in place, create and setup the database:
@@ -35,7 +35,7 @@ Next, Follow the instructions from [Running the App](#running-the-app), [Perpari
 
 # Running the App
 
-- You can serve the app by running: `docker-compose up`
+- You can serve the app (in development mode) by running: `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
 - You can interact with a rails console by running: `docker-compose run web rails console`
 - In order to interact with the application in development, you will need to create a test user. You can achieve this by running `User.create!({:email => "jane.doe@longbeach.gov", :password => "hunter2", :password_confirmation => "hunter2" })` on the rails console.
 
