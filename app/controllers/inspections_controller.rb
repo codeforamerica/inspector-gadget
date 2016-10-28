@@ -33,25 +33,30 @@ class InspectionsController < ApplicationController
   end
 
   # GET /inspections/new
-  def new
+  def new # customer-facing form
     @inspection = Inspection.new
-    @inspection.build_address
+    @inspection.build_address # Rails needs the associated Address model to exist in order to render form
   end
 
-  def new_express
+  def new_express # staff-facing form, with different layout based on their prefs
     @inspection = Inspection.new
-    @inspection.build_address
+    @inspection.build_address # Rails needs the associated Address model to exist in order to render form
   end
 
   # POST /inspections
   def create
-    # create one Inspection for each `inspection_type_id` submitted
+    # Form is sufficiently complex that handling the data
+    # was worth pulling into a separate module, `InspectionForm`.
+    # This does stuff like making one Inspection for each `inspection_type_id`
+    # and running a bunch of validations.
     form = InspectionForm.new(inspection_params)
 
     if form.save
       if URI(request.referer).path == '/inspections/new_express'
+        # send staff to the staff-facing confirmation page (note 'express' param)...
         redirect_to inspections_confirmation_path(inspection_ids: form.inspections.map(&:id).join(','), express: true), notice: 'Inspection was successfully created.'
       else
+        # ...and everyone else to the normal confirmation page
         redirect_to inspections_confirmation_path(inspection_ids: form.inspections.map(&:id).join(',')), notice: 'Inspection was successfully created.'
       end
     else
