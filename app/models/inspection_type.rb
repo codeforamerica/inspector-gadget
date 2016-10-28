@@ -7,7 +7,6 @@ class InspectionType < ActiveRecord::Base
   scope :commercial, -> { where(inspection_supercategory: 'commercial') }
 
   def possible_inspectors
-    # Inspector.joins(:inspector_profile).where(inspector_profiles: {inspector_id: self.inspector_profiles} )
     Inspector.where(id: self.inspector_profiles.pluck(:inspector_id) )
   end
 

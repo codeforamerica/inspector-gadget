@@ -40,6 +40,22 @@ Note that the above query has one small change from the query available on spati
 1. `bundle exec rake db:seed:inspection_types`
 1. `bundle exec rake import:inspector_regions`
 
+# Architecture Overview
+
+## How Inspections are Assigned to Inspectors
+
+When inspections are *viewed* (e.g. on the `/inspections_print` or `/reports` pages), the inspector for each inspection is displayed. This relationship is not stored in the database, though, but rather calculated on the fly, and involves enough steps/associations that it bears explaining here.
+
+1. An `Inspection` (see `models/inspection.rb`) calls its `inspector` method. This method gets a list of all inspectors that serve the `InspectionType` for that `Inspection` (e.g. all fire inspectors), then finds which of those inspectors is responsible for the GIS area where the `Inspection` is located.
+
+1. To get the list of inspectors for that `InspectionType`, the `Inspection` delegates delegates to a method on the `InspectionType` called `possible_inspectors`. 
+
+1. The `possible_inspectors` method uses an association called `inspector_profiles` to find all the inspectors for that `InspectionType`. A couple of things to note about this association:
+
+  - This association exists *through* the `assignments` table. This table is created by a seed task (`db/seeds/inspection_types.rb`) that contains one row for every pairing of an `InspectionType` and an inspector. This table is only ever built by a rake task, and only needs to be changed if the `InspectionType` assignments change in the app (e.g. if an inspector joins or leaves the City). For more info on building this table, see the "Updating Inspection Type Assignment Rules" section of this README.
+
+  - This association is with the `InspectorProfile` model, not the `Inspector` model. This is because the `Inspector` model is actually just an extension of the `User` class, and doesn't contain information specific to inspectors - that's stored on the `InspectorProfile` model, which each `Inspector` model `has_one` of.
+
 # Development and Maintenance Tasks
 
 ## Populating a Local Database
