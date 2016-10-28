@@ -2,6 +2,9 @@
   .margin-bottom-10 What is the inspection type? *
   .max-width-px-400
     %fieldset
+      -# 'Multi-family Residential / Condo' is actually the same as 'Commercial'
+      -# These are simply split out so that users select the right thing
+      -# Otherwise they often think that a condo would be a 'residental' property
       - [['Single-family / Duplex', 'residential'], ['Three or more units: Multi-family Residential / Condo', 'commercial'], ['Commercial', 'commercial']].each do |sc|
         %input{ type:'radio', class:"inspection-supercategories", name:"inspection-supercategories", value:sc[1], id:"inspection-supercategory-#{sc[1]}" }
         %label{ for:"inspection-supercategory-#{sc[1]}" } #{sc[0]}
