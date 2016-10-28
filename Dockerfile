@@ -16,6 +16,12 @@ RUN apt-get install -y sudo curl openssh-client git
 RUN curl https://toolbelt.heroku.com/install.sh | sh
 ENV PATH $PATH:/usr/local/heroku/bin
 
+# support for `rgeo` gem (for cartographic calculations)
+RUN apt-get install -y libgdal-dev
+RUN apt-get install -y libgeos-dev
+RUN apt-get install -y libproj-dev
+# RUN ruby-geos # might not need this
+
 # Configure the main working directory. This is the base 
 # directory used in any further RUN, COPY, and ENTRYPOINT 
 # commands.
