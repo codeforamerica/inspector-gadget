@@ -11,6 +11,10 @@ RUN apt-get install -y libxml2-dev libxslt1-dev
 RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 # for a JS runtime
 RUN apt-get install -y nodejs
+# Heroku toolbelt
+RUN apt-get install -y sudo curl openssh-client git
+RUN curl https://toolbelt.heroku.com/install.sh | sh
+ENV PATH $PATH:/usr/local/heroku/bin
 
 # Configure the main working directory. This is the base 
 # directory used in any further RUN, COPY, and ENTRYPOINT 
@@ -32,3 +36,9 @@ RUN gem install bundler && bundle install
 
 # Copy the main application.
 COPY . ./
+
+# Precompile Rails assets
+RUN bundle exec rake assets:precompile
+
+# CMD must be present or Heroku deploy will fail
+CMD bundle exec puma -C config/puma.rb
