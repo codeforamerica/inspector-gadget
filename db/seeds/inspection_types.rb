@@ -1,3 +1,7 @@
+# Each seed record has an `assignment_categories` field that defines which types 
+# of inspectors should handle that inspection. This field does not correspond
+# to a column on the InspectionType, but instead is used to create an Assignment
+# record for each possible inspector that could handle an inspection of that type.
 Assignment.delete_all
 [
   {supercategory: 'residential', supercategory_name: 'Single-family / Duplex', category: 'remodel_addition_new', category_name: 'Remodel / Addition / New', name: 'Location / Footing / Steel', assignment_categories: ['residential_general']},
