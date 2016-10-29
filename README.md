@@ -12,14 +12,14 @@ Copy GIS files to **/data/gis/**. At the moment, files are City GIS data that ha
 Configure the web and database containers in **docker-compose.yml** and run:
 ```
 $ docker-compose build
-````
+```
 
 This will build all the necessary containers. You will also need to rebuild the container if you change the Gemfile of Gemfile.lock files.
 
 Make sure you have the `db` image running with:
 ```
 $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db
-``` 
+```
 
 Configure the databse settings by modifying **config/database.yml**. With the settings in place, create and setup the database:
 ```
@@ -62,7 +62,7 @@ $ su postgres
 ```
 
 Next, run the following query directly against the database via `psql` to insert the projection information:
-```
+```sql
 INSERT into spatial_ref_sys (srid, auth_name, auth_srid, proj4text, srtext) values ( 102645, 'esri', 102645, '+proj=lcc +lat_1=34.03333333333333 +lat_2=35.46666666666667 +lat_0=33.5 +lon_0=-118 +x_0=2000000 +y_0=500000.0000000002 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs ', 'PROJCS["NAD_1983_StatePlane_California_V_FIPS_0405_Feet",GEOGCS["GCS_North_American_1983",DATUM["North_American_Datum_1983",SPHEROID["GRS_1980",6378137,298.257222101]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["False_Easting",6561666.666666666],PARAMETER["False_Northing",1640416.666666667],PARAMETER["Central_Meridian",-118],PARAMETER["Standard_Parallel_1",34.03333333333333],PARAMETER["Standard_Parallel_2",35.46666666666667],PARAMETER["Latitude_Of_Origin",33.5],UNIT["Foot_US",0.30480060960121924],AUTHORITY["EPSG","102645"]]');
 ```
 
@@ -84,7 +84,7 @@ To get a snapshot of the production database for use locally, use Heroku's `pg:p
 
 First, make sure the `db` image is running. You can accomplish this by running:
 ```
-$ docker-compose up db
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db
 ```
 
 Next, access the command line of the Inspector Gadget DB docker image:
