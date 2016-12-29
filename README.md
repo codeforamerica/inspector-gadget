@@ -101,28 +101,47 @@ When inspections are *viewed* (e.g. on the `/inspections_print` or `/reports` pa
 
 ## Populating a Local Database
 
-To get a snapshot of the production database for use locally, use Heroku's `pg:pull` feature, [documented here](https://devcenter.heroku.com/articles/heroku-postgres-import-export).
+Heroku provides a database import feature. Because importing an entire database is a major operation, and has the potential to overwrite or destroy data, the command line utility has several warnings before it begins work.
 
-First, make sure the `db` image is running. You can accomplish this by running:
-```
-$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db
+First, make sure the `web` container is up. You can accomplish this by running:
+```bash
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up web
 ```
 
-Next, access the command line of the Inspector Gadget DB docker image:
+Next, access the command line of the Inspector Gadget web container:
+```bash
+$ docker exec -it inspectorgadget_web_1 /bin/bash
 ```
+
+Next, login to Heroku with your account credentials:
+```bash
+$ heroku
+```
+
+Afterward, create a new backup of the current state of the database:
+```bash
+$ heroku pg:backups capture --app inspector-gadget-cfa
+```
+
+Download the dump to the project directory:
+```bash
+$ curl -o latest.dump `heroku pg:backups public-url --app inspector-gadget-cfa`
+```
+
+Close/terminate the web image bash session after downloading the dump.
+
+Next, access the command line of the Bizport DB docker image:
+```bash
 $ docker exec -it inspectorgadget_db_1 /bin/bash
 ```
 
-Switch to the `postgres` user:
-```
+Then restore from latest.dump with `pg_restore`:
+```bash
 $ su postgres
+$ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d inspector_gadget_development /inspector-gadget/latest.dump
 ```
 
-Pull data from our Heroku app's database into ours:
-```bash
-$ dropdb inspector_gadget_development
-$ heroku pg:pull DATABASE_URL inspector_gadget_development --app inspector-gadget-cfa
-```
+Close/terminate the inspectorgadget_db_1 image bash session. You are now ready to [start the web application](#running-the-app) with a copy of production data.
 
 ## Updating Inspector Regions
 
