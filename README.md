@@ -7,37 +7,16 @@
 
 # Getting Started
 
-Copy the `B_Insp_Com.zip`, `B_Insp_Ele.zip`, and `B_Insp_Res.zip` GIS shapefiles provided by the City GIS team to the `/data/gis` directory before seeding or running the app for the first time.
+Make sure to copy the `B_Insp_Com.zip`, `B_Insp_Ele.zip`, and `B_Insp_Res.zip` GIS shapefiles provided by the City GIS team to the `/data/gis` directory before running the app for the first time.
 
 Configure the web and database containers in **docker-compose.yml** and run:
 ```
 $ docker-compose build
 ```
 
-This will build all the necessary containers. You will also need to rebuild the container if you change the Gemfile of Gemfile.lock files.
+This will build all the necessary containers. **Please note that you will also need to rebuild the container if you change the Gemfile of Gemfile.lock files.**
 
-Make sure you have the `db` image running with:
-```
-$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db
-```
-
-Configure the databse settings by modifying **config/database.yml**. With the settings in place, create and setup the database:
-```
-$ docker-compose run web rake db:setup
-```
-
-Make sure eveything is working by running our tests:
-```
-$ docker-compose run web bundle exec rspec
-```
-
-Next, Follow the instructions from [Running the App](#running-the-app), [Perparing the Database](#preparing-the-database), and [Seeding](#seeding).
-
-# Running the App
-
-- You can serve the app (in development mode) by running: `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
-- You can interact with a rails console by running: `docker-compose run web rails console`
-- In order to interact with the application in development, you will need to create a test user. You can achieve this by running `User.create!({:email => "jane.doe@longbeach.gov", :password => "hunter2", :password_confirmation => "hunter2" })` on the rails console.
+Next, follow the instructions from the [Perparing the Database](#preparing-the-database) and [Seeding](#seeding) sections.
 
 ## Preparing the Database
 
@@ -48,7 +27,12 @@ The City of Long Beach uses a "state plane" coordinate projection system by defa
 
 First, spin up the DB docker image:
 ```
-$ docker-compose up db
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up db
+```
+
+Configure the databse settings by modifying `config/database.yml`. With the settings in place, create and setup the database:
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml run web rake db:setup
 ```
 
 Next, access the command line of the Inspector Gadget DB docker image:
@@ -62,19 +46,40 @@ $ su postgres
 ```
 
 Next, run the following query directly against the database via `psql` to insert the projection information:
+
+```bash
+$ psql
+$ \connect inspector_gadget_development
+```
+
 ```sql
 INSERT into spatial_ref_sys (srid, auth_name, auth_srid, proj4text, srtext) values ( 102645, 'esri', 102645, '+proj=lcc +lat_1=34.03333333333333 +lat_2=35.46666666666667 +lat_0=33.5 +lon_0=-118 +x_0=2000000 +y_0=500000.0000000002 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs ', 'PROJCS["NAD_1983_StatePlane_California_V_FIPS_0405_Feet",GEOGCS["GCS_North_American_1983",DATUM["North_American_Datum_1983",SPHEROID["GRS_1980",6378137,298.257222101]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["False_Easting",6561666.666666666],PARAMETER["False_Northing",1640416.666666667],PARAMETER["Central_Meridian",-118],PARAMETER["Standard_Parallel_1",34.03333333333333],PARAMETER["Standard_Parallel_2",35.46666666666667],PARAMETER["Latitude_Of_Origin",33.5],UNIT["Foot_US",0.30480060960121924],AUTHORITY["EPSG","102645"]]');
 ```
 
 Note that the above query has one small change from the query available on spatialreference.org: it removes a preceding "9" from the SRID `9102645` to make it `102645`. It seems as though the 9 was a remnant of darker times. This change was gleaned from this [Stack Exchange post](http://gis.stackexchange.com/questions/69864/postgis-is-rejecting-an-srid-code-for-my-projection-ive-found-a-nearly-identic).
 
+Repeat the above step for the `inspector_gadget_test` database. After running the above DDL INSERT statement, be sure to exit out of the postgres and container shells respectively.
+
 ## Seeding
 
 While the `db` image is running, populate the database with seeds via rake:
 
-1. `docker-compose run web bundle exec rake db:seed:inspectors`
-1. `docker-compose run web bundle exec rake db:seed:inspection_types`
-1. `docker-compose run web bundle exec rake import:inspector_regions`
+1. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml run web bundle exec rake db:seed:inspectors`
+1. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml run web bundle exec rake db:seed:inspection_types`
+1. `docker-compose -f docker-compose.yml -f docker-compose.dev.yml run web bundle exec rake import:inspector_regions`
+
+## Testing
+
+Make sure eveything is working by running our tests:
+```
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml run web bundle exec rspec
+```
+
+# Running the App
+
+- You can serve the app (in development mode) by running: `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+- You can interact with a rails console by running: `docker-compose run web rails console`
+- In order to interact with the application in development, you will need to create a test user. For example, you can achieve this by running something like `User.create!({:email => "jane.doe@longbeach.gov", :password => "hunter2", :password_confirmation => "hunter2" })` on the rails console to create your test user.
 
 # Architecture Overview
 
