@@ -15,8 +15,12 @@
 # Ignore raw data folder
 /data
 
+# Ignore misc files
 .DS_Store
 .byebug_history
+
+# Ignore postgres dump files
+*.dump
 
 # For Heroku
 .env
