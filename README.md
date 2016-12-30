@@ -7,8 +7,6 @@
 
 # Getting Started
 
-Make sure to copy the `B_Insp_Com.zip`, `B_Insp_Ele.zip`, and `B_Insp_Res.zip` GIS shapefiles provided by the City GIS team to the `/data/gis` directory before running the app for the first time.
-
 Configure the web and database containers in **docker-compose.yml** and run:
 ```
 $ docker-compose build
@@ -154,8 +152,7 @@ Because updating this data can have a major impact on the way the application pe
 
 ### Updating GIS Data
 
-Inspector GIS data is imported by running a rake task (defined in `lib/tasks/import.rake`) at the command line: `bundle exec rake import:inspector_regions`
-The task assumes that GIS relevant GIS data is stored in `data/gis/` as one or more zip files exported from ArcGIS. These zip files contain (among other things) a shapefile (`.shp`) that the RGeo gem can ingest and store in the database.
+Inspector GIS data is imported by running a rake task (defined in `lib/tasks/import.rake`) at the command line: `bundle exec rake import:inspector_regions`. The task assumes that the `B_Insp_Com.zip`, `B_Insp_Ele.zip`, and `B_Insp_Res.zip` source GIS data files are stored in `data/gis/` as one or more zip files exported from ArcGIS. These zip files contain (among other things) a shapefile (`.shp`) that the RGeo gem can ingest and store in the database. These files are provided by the City of Long Beach GIS team.
 
 Each layer of the shapefile must include an attribute called `INSPECTOR` with an inspector's last name. Name comparison is done with SQL `ILIKE`, so is not case sensitive.
 
