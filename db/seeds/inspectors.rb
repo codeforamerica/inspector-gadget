@@ -63,6 +63,13 @@ inspector = Inspector.find_by(name: 'Outler') ||
 InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential')
                 .update_attributes(inspection_assignments: ['photovoltaic'])
 
+new_email = Devise.friendly_token.first(6)
+new_password = Devise.friendly_token.first(12)
+inspector = Inspector.find_by(name: 'Temporary') ||
+            Inspector.create(name: 'Temporary', email: "#{new_email}@example.com", password: new_password, password_confirmation: new_password)
+InspectorProfile.find_or_create_by(inspector_id: inspector.id, inspector_type: 'residential')
+                .update_attributes(inspection_assignments: ['residential_general'])
+
 # ----------
 
 new_email = Devise.friendly_token.first(6)
