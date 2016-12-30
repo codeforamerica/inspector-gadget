@@ -36,7 +36,7 @@ describe Inspection do
       it 'returns the correct inspector' do
         inspection = create(:address, street_number: '2821', route: 'Daisy Ave', city: 'Long Beach', state: 'CA', zip: '').inspection
         inspection.update_attributes(inspection_type: general_residential_inspection_types )
-        expect(inspection.inspector.try(:name)).to eq('Mann')
+        expect(inspection.inspector.try(:name)).to eq('Reza')
       end
 
       it 'returns the correct inspector' do
