@@ -82,7 +82,7 @@ describe InspectionsController do
     end
 
     get :print, date: Date.today
-    expect(assigns(:inspection_cards).count).to eq(3) # residentials combined
+    expect(assigns(:inspection_cards).count).to eq(5) # residentials combined
   end
 
   def inspection_params(type_ids: nil)
