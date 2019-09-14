@@ -1,3 +1,7 @@
+## [UNMAINTAINED] This repository is not actively maintained, and issues, pull requests, and security warnings are not regularly reviewed or responded to. Any use of this repository is at your own risk, though you're always welcome to try filing an issue/PR on the off chance someone might see it! :-)
+
+## Note: This repo was the basis for a building inspection scheduling and planning tool launched in the City of Long Beach in 2016. While the City maintains (as of 2019-09-14) a *similar* tool based on this codebase, this codebase is no longer under development, and is entirely separate from the codebase used in production by the city.
+
 [![Build Status](https://travis-ci.org/rossettistone/inspector-gadget.svg?branch=master)](https://travis-ci.org/rossettistone/inspector-gadget)
 [![Code Climate](https://codeclimate.com/github/rossettistone/inspector-gadget/badges/gpa.svg)](https://codeclimate.com/github/rossettistone/inspector-gadget)
 [![Test Coverage](https://codeclimate.com/github/rossettistone/inspector-gadget/badges/coverage.svg)](https://codeclimate.com/github/rossettistone/inspector-gadget/coverage)
